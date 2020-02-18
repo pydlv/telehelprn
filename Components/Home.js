@@ -4,6 +4,8 @@ import {uuidv4} from '../util';
 import AWS from 'aws-sdk';
 import Video from 'react-native-video';
 
+import { RTCPeerConnection } from 'react-native-webrtc';
+
 const KVSWebRTC = require('amazon-kinesis-video-streams-webrtc');
 const SignalingClient = KVSWebRTC.SignalingClient;
 
@@ -161,5 +163,7 @@ export default class Home extends Component {
         });
 
         signalingClient.open();
+
+        console.log("Done.");
     }
 }
