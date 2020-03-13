@@ -7,10 +7,23 @@
  */
 
 import React from 'react';
-import {SafeAreaView, ScrollView, StatusBar, StyleSheet} from 'react-native';
+import {SafeAreaView, ScrollView, StatusBar, StyleSheet, Text} from 'react-native';
+
+import {
+    RTCPeerConnection,
+    RTCIceCandidate,
+    RTCSessionDescription,
+    RTCView,
+    MediaStream,
+    MediaStreamTrack,
+    mediaDevices,
+    registerGlobals
+} from 'react-native-webrtc';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import Home from './Components/Home';
+
+const configuration = {"iceServers": [{"url": "stun:stun.l.google.com:19302"}]};
+const pc = new RTCPeerConnection(configuration);
 
 const App: () => React$Node = () => {
   return (
@@ -20,7 +33,7 @@ const App: () => React$Node = () => {
           <ScrollView
               contentInsetAdjustmentBehavior="automatic"
               style={styles.scrollView}>
-            <Home />
+              <Text>Hello!</Text>
           </ScrollView>
         </SafeAreaView>
       </>
