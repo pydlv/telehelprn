@@ -31,6 +31,14 @@ allprojects {
             url("$rootDir/../node_modules/jsc-android/dist")
         }
 
+        configurations.all {
+          resolutionStrategy {
+            // START: RN version lockdown
+            force 'com.facebook.react:react-native:0.61.5'   //Your RN version should go here
+            // END: RN version lockdown
+          }
+        }
+
         google()
         jcenter()
         maven { url 'https://jitpack.io' }
