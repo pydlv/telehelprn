@@ -1,6 +1,6 @@
 // Generate random room name if needed
 if (!location.hash) {
-  location.hash = Math.floor(Math.random() * 0xFFFFFF).toString(16);
+    location.hash = Math.floor(Math.random() * 0xFFFFFF).toString(16);
 }
 const roomHash = location.hash.substring(1);
 
@@ -11,7 +11,7 @@ const roomName = 'observable-' + roomHash;
 const configuration = {
     iceServers: [
         {
-          urls: 'stun:stun.l.google.com:19302'
+            urls: 'stun:stun.l.google.com:19302'
         },
         {
             urls: ["turn:207.148.23.14:3478"],
@@ -27,139 +27,139 @@ let pc;
 const candidatesQueue = [];
 
 function processCandidatesQueueIfReady() {
-  if (pc.localDescription && pc.remoteDescription) {
-    console.log("Processed candidates.");
-    while (candidatesQueue.length > 0) {
-      const candidate = candidatesQueue.shift();
-      pc.addIceCandidate(
-          new RTCIceCandidate(candidate), 
-          onSuccess, 
-          onError
-      )
+    if (pc.localDescription && pc.remoteDescription) {
+        console.log("Processed candidates.");
+        while (candidatesQueue.length > 0) {
+            const candidate = candidatesQueue.shift();
+            pc.addIceCandidate(
+                new RTCIceCandidate(candidate),
+                onSuccess,
+                onError
+            )
+        }
+    } else {
+        console.log("Received candidate, but a description has not been set yet.");
+        // console.log("Local:", this.peer.localDescription);
+        // console.log("Remote:", this.peer.remoteDescription);
     }
-  } else {
-    console.log("Received candidate, but a description has not been set yet.");
-    // console.log("Local:", this.peer.localDescription);
-    // console.log("Remote:", this.peer.remoteDescription);
-  }
 }
 
-function onSuccess() {};
+function onSuccess() {}
 function onError(error) {
-  console.error(error);
-};
+    console.error(error);
+}
 
 drone.on('open', error => {
-  if (error) {
-    return console.error(error);
-  }
-  room = drone.subscribe(roomName);
-  room.on('open', error => {
     if (error) {
-      onError(error);
+        return console.error(error);
     }
-  });
-  // We're connected to the room and received an array of 'members'
-  // connected to the room (including us). Signaling server is ready.
-  room.on('members', members => {
-    console.log('MEMBERS', members);
-    // If we are the second user to connect to the room we will be creating the offer
-    const membersWithoutDebugger = members.filter(el => el.authData === undefined || !el.authData.user_is_from_scaledrone_debugger);
+    room = drone.subscribe(roomName);
+    room.on('open', error => {
+        if (error) {
+            onError(error);
+        }
+    });
+    // We're connected to the room and received an array of 'members'
+    // connected to the room (including us). Signaling server is ready.
+    room.on('members', members => {
+        console.log('MEMBERS', members);
+        // If we are the second user to connect to the room we will be creating the offer
+        const membersWithoutDebugger = members.filter(el => el.authData === undefined || !el.authData.user_is_from_scaledrone_debugger);
 
-    const isOfferer = true;
+        const isOfferer = true;
 
-    startWebRTC(isOfferer);
+        startWebRTC(isOfferer);
 
-    // pc.createOffer().then(localDescCreated).catch(onError);
-  });
+        // pc.createOffer().then(localDescCreated).catch(onError);
+    });
 });
 
 // Send signaling data via Scaledrone
 function sendMessage(message) {
-  drone.publish({
-    room: roomName,
-    message
-  });
+    drone.publish({
+        room: roomName,
+        message
+    });
 }
 
 function startWebRTC(isOfferer) {
-  pc = new RTCPeerConnection(configuration);
+    pc = new RTCPeerConnection(configuration);
 
-  // 'onicecandidate' notifies us whenever an ICE agent needs to deliver a
-  // message to the other peer through the signaling server
-  pc.onicecandidate = event => {
-    if (event.candidate) {
-      sendMessage({'candidate': event.candidate});
-    }
-  };
+    // 'onicecandidate' notifies us whenever an ICE agent needs to deliver a
+    // message to the other peer through the signaling server
+    pc.onicecandidate = event => {
+        if (event.candidate) {
+            sendMessage({'candidate': event.candidate});
+        }
+    };
 
-  // If user is offerer let the 'negotiationneeded' event create the offer
-  if (isOfferer) {
-    pc.onnegotiationneeded = () => {
-      console.log("Negotiation was needed.");
-      pc.createOffer().then(localDescCreated).catch(onError);
-    }
-  }
-
-  // When a remote stream arrives display it in the #remoteVideo element
-  pc.ontrack = event => {
-    console.log("Remote stream added.");
-    const stream = event.streams[0];
-    if (!remoteVideo.srcObject || remoteVideo.srcObject.id !== stream.id) {
-      remoteVideo.srcObject = stream;
-    }
-  };
-
-  navigator.mediaDevices.getUserMedia({
-    audio: true,
-    video: true,
-  }).then(stream => {
-    // Display your local video in #localVideo element
-    localVideo.srcObject = stream;
-    // Add your stream to be sent to the conneting peer
-    stream.getTracks().forEach(track => pc.addTrack(track, stream));
-  }, onError);
-
-  // Listen to signaling data from Scaledrone
-  room.on('data', (message, client) => {
-    // Message was sent by us
-    if (client.id === drone.clientId) {
-      return;
+    // If user is offerer let the 'negotiationneeded' event create the offer
+    if (isOfferer) {
+        pc.onnegotiationneeded = () => {
+            console.log("Negotiation was needed.");
+            pc.createOffer().then(localDescCreated).catch(onError);
+        }
     }
 
-    if (message.sdp) {
-      // This is called after receiving an offer or answer from another peer
-      pc.setRemoteDescription(new RTCSessionDescription(message.sdp), () => {
-        console.log("Received remote description.");
+    // When a remote stream arrives display it in the #remoteVideo element
+    pc.ontrack = event => {
+        console.log("Remote stream added.");
+        const stream = event.streams[0];
+        if (!remoteVideo.srcObject || remoteVideo.srcObject.id !== stream.id) {
+            remoteVideo.srcObject = stream;
+        }
+    };
 
-        // When receiving an offer lets answer it
-        if (pc.remoteDescription.type === 'offer') {
-          pc.createAnswer().then(localDescCreated).catch(onError);
+    navigator.mediaDevices.getUserMedia({
+        audio: true,
+        video: true,
+    }).then(stream => {
+        // Display your local video in #localVideo element
+        localVideo.srcObject = stream;
+        // Add your stream to be sent to the conneting peer
+        stream.getTracks().forEach(track => pc.addTrack(track, stream));
+    }, onError);
+
+    // Listen to signaling data from Scaledrone
+    room.on('data', (message, client) => {
+        // Message was sent by us
+        if (client.id === drone.clientId) {
+            return;
         }
 
-        processCandidatesQueueIfReady();
-      }, onError);
-    } else if (message.candidate) {
-      // Add the new ICE candidate to our connections remote description
-      candidatesQueue.push(message.candidate);
-      
-      processCandidatesQueueIfReady();
-      // pc.addIceCandidate(
-      //   new RTCIceCandidate(message.candidate), 
-      //   onSuccess, 
-      //   onError
-      // );
-    }
-  });
+        if (message.sdp) {
+            // This is called after receiving an offer or answer from another peer
+            pc.setRemoteDescription(new RTCSessionDescription(message.sdp), () => {
+                console.log("Received remote description.");
+
+                // When receiving an offer lets answer it
+                if (pc.remoteDescription.type === 'offer') {
+                    pc.createAnswer().then(localDescCreated).catch(onError);
+                }
+
+                processCandidatesQueueIfReady();
+            }, onError);
+        } else if (message.candidate) {
+            // Add the new ICE candidate to our connections remote description
+            candidatesQueue.push(message.candidate);
+
+            processCandidatesQueueIfReady();
+            // pc.addIceCandidate(
+            //   new RTCIceCandidate(message.candidate),
+            //   onSuccess,
+            //   onError
+            // );
+        }
+    });
 }
 
 function localDescCreated(desc) {
-  pc.setLocalDescription(
-    desc,
-    () => {
-      console.log("Received local description.");
-      sendMessage({'sdp': pc.localDescription});
-    },
-    onError
-  );
+    pc.setLocalDescription(
+        desc,
+        () => {
+            console.log("Received local description.");
+            sendMessage({'sdp': pc.localDescription});
+        },
+        onError
+    );
 }
