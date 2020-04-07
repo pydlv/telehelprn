@@ -25,9 +25,16 @@ const isFront = true; // Use Front camera?
 const clientId = uuidv4();
 
 const configuration = {
-    iceServers: [{
-        urls: 'stun:stun.l.google.com:19302' // Google's public STUN server
-    }]
+    iceServers: [
+        {
+          urls: 'stun:stun.l.google.com:19302'
+        },
+        {
+            urls: ["turn:207.148.23.14:3478"],
+            "username":"someuser",
+            "credential":"somepassword"
+        }
+    ]
 };
 
 function onSuccess() {
@@ -48,8 +55,14 @@ export default class Home extends Component {
         this.startWebRTC = this.startWebRTC.bind(this);
         this.startListeningToSignals = this.startListeningToSignals.bind(this);
         this.localDescCreated = this.localDescCreated.bind(this);
+        this.negotiate = this.negotiate.bind(this);
+        this.processCandidatesQueueIfReady = this.processCandidatesQueueIfReady.bind(this);
 
         this.drone = new Scaledrone('S2ktEkKPVRBiKCka');
+        this.candidatesQueue = [];
+
+        this.isOfferer = false;
+        this.peerWantsOfferer = false;
 
         this.setupRoom();
 
@@ -62,9 +75,27 @@ export default class Home extends Component {
         };
     }
 
+    processCandidatesQueueIfReady() {
+        if (this.peer.localDescription && this.peer.remoteDescription) {
+            console.log("Processing ICE candidates.");
+            while (this.candidatesQueue.length > 0) {
+                const candidate = this.candidatesQueue.shift();
+                this.peer.addIceCandidate(
+                    new RTCIceCandidate(candidate),
+                    onSuccess,
+                    onError
+                )
+            }
+        } else {
+            console.log("Received candidate, but a description has not been set yet.");
+            // console.log("Local:", this.peer.localDescription);
+            // console.log("Remote:", this.peer.remoteDescription);
+        }
+    }
+
     setupRoom() {
         this.roomHash = uuidv4();
-        this.roomName = 'observable-de0798';
+        this.roomName = 'observable-59ab74';
 
         this.room = this.drone.subscribe(this.roomName);
 
@@ -72,6 +103,7 @@ export default class Home extends Component {
             if (error) {
                 return onError(error);
             }
+            console.info("Scaledrone ID:", this.drone.clientId);
         });
 
         this.room.on('members', (members) => {
@@ -80,7 +112,10 @@ export default class Home extends Component {
             //     this.room.unsubscribe();
             // }
 
-            const isOfferer = members.length === 2;
+            const membersWithoutDebugger = members.filter(el => el.authData === undefined || !el.authData.user_is_from_scaledrone_debugger);
+
+            const isOfferer = false;
+
             this.startWebRTC(isOfferer);
             this.startListeningToSignals();
         });
@@ -106,12 +141,11 @@ export default class Home extends Component {
 
         // only offerer handles negotiation needed
         if (isOfferer) {
-            peer.onnegotiationneeded = () => {
-                peer.createOffer().then(this.localDescCreated).catch(onError);
-            }
+            peer.onnegotiationneeded = this.negotiate;
         }
 
         peer.onaddstream = (event) => {
+            console.log("Remote stream added.");
             this.setState({
                 remoteStreamURL: event.stream.toURL()
             });
@@ -162,30 +196,50 @@ export default class Home extends Component {
 
             if (message.sdp) {
                 // Called after receiving offer or answer from peer
-                this.peer.setRemoteDescription(new RTCSessionDescription(message.sdp), () => {
+                this.peer.setRemoteDescription(
+                    new RTCSessionDescription(message.sdp)
+                ).then(() => {
+                    console.log("Received remote description.");
+
                     // Received offer, so answer it
                     if (this.peer.remoteDescription.type === 'offer') {
-                        this.peer.createAnswer().then(localDescCreated).catch(onError);
+                        this.peer.createAnswer().then(this.localDescCreated).catch(onError);
                     }
-                }, onError);
+
+                    this.processCandidatesQueueIfReady();
+                }).catch(onError);
             } else if (message.candidate) {
-                this.peer.addIceCandidate(
-                    new RTCIceCandidate(message.candidate),
-                    onSuccess,
-                    onError
-                );
+                this.candidatesQueue.push(message.candidate);
+                this.processCandidatesQueueIfReady();
+
+                // this.peer.addIceCandidate(
+                //     new RTCIceCandidate(message.candidate),
+                //     onSuccess,
+                //     onError
+                // );
             }
         });
     }
 
+    negotiate() {
+        console.log("Negotiation was needed.");
+        this.peer.createOffer().then(this.localDescCreated).catch(onError);
+    }
+
     localDescCreated(desc) {
         this.peer.setLocalDescription(
-            desc,
-            () => this.sendMessage({
-                'sdp': this.peer.localDescription
-            }),
-            onError
-        );
+            desc
+        ).then(() => {
+            console.log("Received local description.");
+
+            this.sendMessage({
+                    'sdp': this.peer.localDescription
+                }
+            );
+
+            this.processCandidatesQueueIfReady();
+        }
+        ).catch(onError);
     }
 
     componentWillUnmount() {
