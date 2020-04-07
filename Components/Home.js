@@ -37,10 +37,6 @@ const configuration = {
     ]
 };
 
-function onSuccess() {
-
-}
-
 function onError(error) {
     console.error(error);
 }
@@ -62,7 +58,6 @@ export default class Home extends Component {
         this.candidatesQueue = [];
 
         this.isOfferer = false;
-        this.peerWantsOfferer = false;
 
         this.setupRoom();
 
@@ -114,9 +109,12 @@ export default class Home extends Component {
 
             const membersWithoutDebugger = members.filter(el => el.authData === undefined || !el.authData.user_is_from_scaledrone_debugger);
 
-            const isOfferer = false;
+            if (membersWithoutDebugger.length > 1) {
+                this.sendMessage("don't want offerer");
+                this.alreadyDeferredOfferer = true;
+            }
 
-            this.startWebRTC(isOfferer);
+            this.startWebRTC();
             this.startListeningToSignals();
         });
     }
@@ -128,7 +126,7 @@ export default class Home extends Component {
         });
     }
 
-    startWebRTC(isOfferer) {
+    startWebRTC() {
         const peer = new RTCPeerConnection(configuration);
 
         peer.onicecandidate = (event) => {
@@ -138,11 +136,6 @@ export default class Home extends Component {
                 });
             }
         };
-
-        // only offerer handles negotiation needed
-        if (isOfferer) {
-            peer.onnegotiationneeded = this.negotiate;
-        }
 
         peer.onaddstream = (event) => {
             console.log("Remote stream added.");
@@ -211,12 +204,21 @@ export default class Home extends Component {
             } else if (message.candidate) {
                 this.candidatesQueue.push(message.candidate);
                 this.processCandidatesQueueIfReady();
-
-                // this.peer.addIceCandidate(
-                //     new RTCIceCandidate(message.candidate),
-                //     onSuccess,
-                //     onError
-                // );
+            } else if (message === "don't want offerer") {
+                // Basically if we said we don't want to be the offerer, and then our peer comes back to us
+                // and says that they also don't want to be the offerer, we will become the offerer.
+                if (this.isOfferer || this.alreadyDeferredOfferer) {
+                    this.sendMessage("is offerer");
+                    this.isOfferer = true;
+                    this.peer.onnegotiationneeded = this.negotiate;
+                    this.negotiate();
+                } else {
+                    this.sendMessage("don't want offerer");
+                }
+            } else if (message === "is offerer") {
+                console.log("Peer is claiming offerer role.");
+            } else {
+                console.log("Received unknown message:", message);
             }
         });
     }
