@@ -4,8 +4,8 @@ if (!location.hash) {
 }
 const roomHash = location.hash.substring(1);
 
-// TODO: Replace with your own channel ID
-const drone = new ScaleDrone('S2ktEkKPVRBiKCka');
+let drone;
+
 // Room name needs to be prefixed with 'observable-'
 const roomName = 'observable-' + roomHash;
 const configuration = {
@@ -24,7 +24,12 @@ const configuration = {
 let room;
 let pc;
 
+let localStream = null;
+
 const candidatesQueue = [];
+
+let alreadyDeferredOfferer = false;
+let isOfferer = false;
 
 function processCandidatesQueueIfReady() {
     if (pc.localDescription && pc.remoteDescription) {
@@ -39,8 +44,6 @@ function processCandidatesQueueIfReady() {
         }
     } else {
         console.log("Received candidate, but a description has not been set yet.");
-        // console.log("Local:", this.peer.localDescription);
-        // console.log("Remote:", this.peer.remoteDescription);
     }
 }
 
@@ -48,29 +51,33 @@ function onSuccess() {}
 function onError(error) {
     console.error(error);
 }
-
-drone.on('open', error => {
-    if (error) {
-        return console.error(error);
-    }
-    room = drone.subscribe(roomName);
-    room.on('open', error => {
+setupLocalVideo().then(() => {
+    drone = new ScaleDrone('S2ktEkKPVRBiKCka');
+    drone.on('open', error => {
         if (error) {
-            onError(error);
+            return console.error(error);
         }
-    });
-    // We're connected to the room and received an array of 'members'
-    // connected to the room (including us). Signaling server is ready.
-    room.on('members', members => {
-        console.log('MEMBERS', members);
-        // If we are the second user to connect to the room we will be creating the offer
-        const membersWithoutDebugger = members.filter(el => el.authData === undefined || !el.authData.user_is_from_scaledrone_debugger);
+        room = drone.subscribe(roomName);
+        room.on('open', error => {
+            if (error) {
+                onError(error);
+            }
+        });
+        // We're connected to the room and received an array of 'members'
+        // connected to the room (including us). Signaling server is ready.
+        room.on('members', members => {
+            console.log('MEMBERS', members);
+            // If we are the second user to connect to the room we will be creating the offer
+            const membersWithoutDebugger = members.filter(el => el.authData === undefined || !el.authData.user_is_from_scaledrone_debugger);
 
-        const isOfferer = true;
+            if (membersWithoutDebugger.length > 1) {
+                sendMessage("don't want offerer");
+                alreadyDeferredOfferer = true;
+            }
 
-        startWebRTC(isOfferer);
-
-        // pc.createOffer().then(localDescCreated).catch(onError);
+            startWebRTC();
+            startListeningToSignals();
+        });
     });
 });
 
@@ -82,7 +89,12 @@ function sendMessage(message) {
     });
 }
 
-function startWebRTC(isOfferer) {
+function negotiate() {
+    console.log("Negotiation was needed.");
+    pc.createOffer().then(localDescCreated).catch(onError);
+}
+
+function startWebRTC() {
     pc = new RTCPeerConnection(configuration);
 
     // 'onicecandidate' notifies us whenever an ICE agent needs to deliver a
@@ -93,14 +105,6 @@ function startWebRTC(isOfferer) {
         }
     };
 
-    // If user is offerer let the 'negotiationneeded' event create the offer
-    if (isOfferer) {
-        pc.onnegotiationneeded = () => {
-            console.log("Negotiation was needed.");
-            pc.createOffer().then(localDescCreated).catch(onError);
-        }
-    }
-
     // When a remote stream arrives display it in the #remoteVideo element
     pc.ontrack = event => {
         console.log("Remote stream added.");
@@ -110,16 +114,21 @@ function startWebRTC(isOfferer) {
         }
     };
 
-    navigator.mediaDevices.getUserMedia({
+    localStream.getTracks().forEach(track => pc.addTrack(track, localStream));
+}
+
+function setupLocalVideo() {
+    return navigator.mediaDevices.getUserMedia({
         audio: true,
         video: true,
     }).then(stream => {
         // Display your local video in #localVideo element
+        localStream = stream;
         localVideo.srcObject = stream;
-        // Add your stream to be sent to the conneting peer
-        stream.getTracks().forEach(track => pc.addTrack(track, stream));
     }, onError);
+}
 
+function startListeningToSignals() {
     // Listen to signaling data from Scaledrone
     room.on('data', (message, client) => {
         // Message was sent by us
@@ -144,11 +153,34 @@ function startWebRTC(isOfferer) {
             candidatesQueue.push(message.candidate);
 
             processCandidatesQueueIfReady();
-            // pc.addIceCandidate(
-            //   new RTCIceCandidate(message.candidate),
-            //   onSuccess,
-            //   onError
-            // );
+        } else if (message === "don't want offerer") {
+            // Basically if we said we don't want to be the offerer, and then our peer comes back to us
+            // and says that they also don't want to be the offerer, we will become the offerer.
+            if (pc.localDescription || pc.remoteDescription || isOfferer) {
+                // We had already connected before so we need to restart
+                console.log("Restarting ice.");
+                pc.close();
+                startWebRTC();
+                isOfferer = false;
+                alreadyDeferredOfferer = true;
+                sendMessage("don't want offerer");
+                // sendMessage("is offerer");
+                // isOfferer = true;
+                // pc.restartIce();
+                // negotiate();
+            } else if (alreadyDeferredOfferer) {
+                sendMessage("is offerer");
+                isOfferer = true;
+                pc.onnegotiationneeded = negotiate;
+                negotiate();
+            } else {
+                sendMessage("don't want offerer");
+                alreadyDeferredOfferer = true;
+            }
+        } else if (message === "is offerer") {
+            console.log("Peer is claiming offerer role.");
+        } else {
+            console.log("Received unknown message:", message);
         }
     });
 }

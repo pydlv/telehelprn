@@ -2,18 +2,9 @@
 // and https://www.scaledrone.com/blog/webrtc-tutorial-simple-video-chat
 
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Dimensions, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
-import {
-    RTCPeerConnection,
-    RTCIceCandidate,
-    RTCSessionDescription,
-    RTCView,
-    MediaStream,
-    MediaStreamTrack,
-    mediaDevices,
-    registerGlobals
-} from 'react-native-webrtc';
+import {mediaDevices, RTCIceCandidate, RTCPeerConnection, RTCSessionDescription, RTCView} from 'react-native-webrtc';
 
 import strings from '../strings';
 import {uuidv4} from '../util';
@@ -41,27 +32,31 @@ function onError(error) {
     console.error(error);
 }
 
-export default class Home extends Component {
+export default class VideoSession extends Component {
     constructor(props) {
         super(props);
 
         // Method bindings
         this.setupRoom = this.setupRoom.bind(this);
         this.sendMessage = this.sendMessage.bind(this);
-        this.startWebRTC = this.startWebRTC.bind(this);
+        this.initializeRTCPeer = this.initializeRTCPeer.bind(this);
         this.startListeningToSignals = this.startListeningToSignals.bind(this);
         this.localDescCreated = this.localDescCreated.bind(this);
         this.negotiate = this.negotiate.bind(this);
         this.processCandidatesQueueIfReady = this.processCandidatesQueueIfReady.bind(this);
-
-        this.drone = new Scaledrone('S2ktEkKPVRBiKCka');
-        this.candidatesQueue = [];
-
-        this.isOfferer = false;
-
-        this.setupRoom();
+        this.setupLocalVideo = this.setupLocalVideo.bind(this);
+        this.handleDisconnectPress = this.handleDisconnectPress.bind(this);
 
         this.localStream = null;
+        this.setupLocalVideo().then(() => {
+            this.drone = new Scaledrone('S2ktEkKPVRBiKCka');
+            this.candidatesQueue = [];
+
+            this.alreadyDeferredOfferer = false;
+            this.isOfferer = false;
+
+            this.setupRoom();
+        });
 
         this.state = {
             connected: false,
@@ -76,10 +71,8 @@ export default class Home extends Component {
             while (this.candidatesQueue.length > 0) {
                 const candidate = this.candidatesQueue.shift();
                 this.peer.addIceCandidate(
-                    new RTCIceCandidate(candidate),
-                    onSuccess,
-                    onError
-                )
+                    new RTCIceCandidate(candidate)
+                ).catch(onError)
             }
         } else {
             console.log("Received candidate, but a description has not been set yet.");
@@ -90,7 +83,7 @@ export default class Home extends Component {
 
     setupRoom() {
         this.roomHash = uuidv4();
-        this.roomName = 'observable-59ab74';
+        this.roomName = 'observable-123456';
 
         this.room = this.drone.subscribe(this.roomName);
 
@@ -114,7 +107,7 @@ export default class Home extends Component {
                 this.alreadyDeferredOfferer = true;
             }
 
-            this.startWebRTC();
+            this.initializeRTCPeer();
             this.startListeningToSignals();
         });
     }
@@ -126,7 +119,7 @@ export default class Home extends Component {
         });
     }
 
-    startWebRTC() {
+    initializeRTCPeer() {
         const peer = new RTCPeerConnection(configuration);
 
         peer.onicecandidate = (event) => {
@@ -144,8 +137,14 @@ export default class Home extends Component {
             });
         };
 
+        peer.addStream(this.localStream);
+
+        this.peer = peer;
+    }
+
+    setupLocalVideo() {
         // Setup Camera & Audio
-        mediaDevices.enumerateDevices().then(sourceInfos => {
+        return mediaDevices.enumerateDevices().then(sourceInfos => {
             let videoSourceId;
             for (let i = 0; i < sourceInfos.length; i++) {
                 const sourceInfo = sourceInfos[i];
@@ -172,12 +171,9 @@ export default class Home extends Component {
                         localStreamURL: stream.toURL()
                     });
                     this.localStream = stream;
-                    peer.addStream(stream);
                 })
                 .catch(onError);
         });
-
-        this.peer = peer;
     }
 
     startListeningToSignals() {
@@ -207,13 +203,22 @@ export default class Home extends Component {
             } else if (message === "don't want offerer") {
                 // Basically if we said we don't want to be the offerer, and then our peer comes back to us
                 // and says that they also don't want to be the offerer, we will become the offerer.
-                if (this.isOfferer || this.alreadyDeferredOfferer) {
+                if (this.peer.localDescription || this.peer.remoteDescription || this.isOfferer) {
+                    // We had already connected before so we need to restart
+                    console.log("Restarting ice.");
+                    this.peer.close();
+                    this.initializeRTCPeer();
+                    this.alreadyDeferredOfferer = true;
+                    this.isOfferer = false;
+                    this.sendMessage("don't want offerer");
+                } else if (this.alreadyDeferredOfferer) {
                     this.sendMessage("is offerer");
                     this.isOfferer = true;
                     this.peer.onnegotiationneeded = this.negotiate;
                     this.negotiate();
                 } else {
                     this.sendMessage("don't want offerer");
+                    this.alreadyDeferredOfferer = true;
                 }
             } else if (message === "is offerer") {
                 console.log("Peer is claiming offerer role.");
@@ -246,8 +251,12 @@ export default class Home extends Component {
 
     componentWillUnmount() {
         // Leave room and close connection to scaledrone
-        this.room.unsubscribe();
-        this.drone.close();
+        if (this.room) {
+            this.room.unsubscribe();
+        }
+        if (this.drone) {
+            this.drone.close();
+        }
     }
 
     render() {
@@ -257,7 +266,7 @@ export default class Home extends Component {
                 <View>
                     <View>
                         <View>
-                            <Text> {this.state.localStreamURL }</Text>
+                            <Text>{this.state.localStreamURL }</Text>
                             { this.state.localStreamURL &&
                             <RTCView
                                 streamURL={this.state.localStreamURL}
@@ -276,22 +285,21 @@ export default class Home extends Component {
                 </View>
                 <View style={ this.state.connected ? styles.onlineCircle : styles.offlineCircle}/>
                 <View>
-                    {/*<TouchableOpacity onPress={this.handleConnect} disabled={this.state.offer_received}>*/}
+                    {/*{this.peer &&*/}
+                    {/*<TouchableOpacity onPress={this.handleDisconnectPress}*/}
+                    {/*                  disabled={this.peer.connectionState === "connected"}>*/}
                     {/*    <Text>*/}
-                    {/*        Connect*/}
+                    {/*        Disconnect*/}
                     {/*    </Text>*/}
                     {/*</TouchableOpacity>*/}
-                    { // Offer received and offer not answered
-                        // (this.state.offer_received && !this.state.offer_answered) &&
-                        // <TouchableOpacity onPress={this.handleAnswer}>
-                        //     <Text>
-                        //         Answer
-                        //     </Text>
-                        // </TouchableOpacity>
-                    }
+                    {/*}*/}
                 </View>
             </View>
         );
+    }
+
+    handleDisconnectPress() {
+
     }
 }
 

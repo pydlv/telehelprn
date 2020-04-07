@@ -1,12 +1,12 @@
 import React from 'react';
 import {View} from 'react-native';
-import Home from './Components/Home';
+import VideoSession from './Components/VideoSession';
 
 const App: () => React$Node = () => {
     return (
         <>
             <View>
-                <Home />
+                <VideoSession />
             </View>
         </>
     );
