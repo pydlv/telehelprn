@@ -158,7 +158,7 @@ export default class VideoSession extends Component {
                     mandatory: {
                         minWidth: 100, // Provide your own width, height and frame rate here
                         minHeight: 100,
-                        minFrameRate: 30
+                        minFrameRate: 10
                     },
                     facingMode: (isFront ? "user" : "environment"),
                     optional: (videoSourceId ? [{sourceId: videoSourceId}] : [])
@@ -262,38 +262,29 @@ export default class VideoSession extends Component {
     render() {
         return (
             <View>
-                <Text>{strings.appName}</Text>
-                <View>
-                    <View>
-                        <View>
-                            <Text>{this.state.localStreamURL }</Text>
-                            { this.state.localStreamURL &&
-                            <RTCView
-                                streamURL={this.state.localStreamURL}
-                                style={styles.rtcView}
-                            />
-                            }
-                        </View>
-                    </View>
-                    <View>
-                        <View>
-                            { this.state.remoteStreamURL &&
-                            <RTCView streamURL={this.state.remoteStreamURL} style={styles.rtcView}/>
-                            }
-                        </View>
-                    </View>
-                </View>
-                <View style={ this.state.connected ? styles.onlineCircle : styles.offlineCircle}/>
-                <View>
-                    {/*{this.peer &&*/}
-                    {/*<TouchableOpacity onPress={this.handleDisconnectPress}*/}
-                    {/*                  disabled={this.peer.connectionState === "connected"}>*/}
-                    {/*    <Text>*/}
-                    {/*        Disconnect*/}
-                    {/*    </Text>*/}
-                    {/*</TouchableOpacity>*/}
-                    {/*}*/}
-                </View>
+                {/*<Text>{strings.appName}</Text>*/}
+                {/*<Text>{this.state.localStreamURL }</Text>*/}
+                { this.state.remoteStreamURL &&
+                <RTCView
+                    streamURL={this.state.remoteStreamURL}
+                    style={styles.remoteRtcView}/>
+                }
+                { this.state.localStreamURL &&
+                <RTCView
+                    streamURL={this.state.localStreamURL}
+                    style={styles.localRtcView}
+                />
+                }
+                {/*<View>*/}
+                {/*    {this.peer &&*/}
+                {/*    <TouchableOpacity onPress={this.handleDisconnectPress}*/}
+                {/*                      disabled={this.peer.connectionState === "connected"}>*/}
+                {/*        <Text>*/}
+                {/*            Disconnect*/}
+                {/*        </Text>*/}
+                {/*    </TouchableOpacity>*/}
+                {/*    }*/}
+                {/*</View>*/}
             </View>
         );
     }
@@ -304,29 +295,12 @@ export default class VideoSession extends Component {
 }
 
 const styles = StyleSheet.create({
-    // container: {
-    //     flex: 1,
-    //     backgroundColor: '#fff',
-    //     alignItems: 'center',
-    //     justifyContent: 'flex-start'
-    // },
-    // bottomView: {
-    //     height: 20,
-    //     flex: 1,
-    //     bottom: 80,
-    //     position: 'absolute',
-    //     alignItems: 'center'
-    // },
-    // connect: {
-    //     fontSize: 30
-    // },
-    // video: {
-    //     flex: 1,
-    //     flexDirection: 'row',
-    //     position: 'relative',
-    //     backgroundColor: '#eee',
-    //     alignSelf: 'stretch'
-    // },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'flex-start'
+    },
     onlineCircle: {
         width: 20,
         height: 20,
@@ -342,32 +316,23 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: '#333'
     },
-    // callerVideo: {
-    //     flex: 0.5,
-    //     backgroundColor: '#faa',
-    //     alignItems: 'center',
-    //     justifyContent: 'center',
-    //     flexDirection: 'column'
-    // },
-    // calleeVideo: {
-    //     flex: 0.5,
-    //     backgroundColor: '#aaf',
-    //     alignItems: 'center',
-    //     justifyContent: 'center',
-    //     flexDirection: 'column'
-    // },
-    // videoWidget: {
-    //     position: 'relative',
-    //     flex: 0.5,
-    //     backgroundColor: '#fff',
-    //     width: dimensions.width / 2,
-    //     borderWidth: 1,
-    //     borderColor: '#eee'
-    // },
-    rtcView: {
-        width: 150,
-        height: 150,
+
+    remoteRtcView: {
+        height: '100%',
+        width: '100%',
         backgroundColor: '#f00',
-        borderColor: '#000'
+        borderColor: '#000',
+        zIndex: -1
+    },
+
+    localRtcView: {
+        position: "absolute",
+        top: 0,
+        left: "50%",
+        height: '50%',
+        width: '50%',
+        backgroundColor: '#001dff',
+        borderColor: '#000',
+        zIndex: 2
     }
 });
