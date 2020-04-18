@@ -1,15 +1,20 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {View} from 'react-native';
-import VideoSession from './Components/VideoSession';
+import Login from "./Components/Login";
+import { AuthenticationContext } from "./contexts";
 
-const App: () => React$Node = () => {
-    return (
-        <>
-            <View>
-                <VideoSession />
-            </View>
-        </>
-    );
+export default class App extends Component {
+
+    render() {
+        return (
+            <>
+                {/*<React.StrictMode>*/}
+                <View>
+                    <Login/>
+                    {/*<VideoSession />*/}
+                </View>
+                {/*</React.StrictMode>*/}
+            </>
+        );
+    }
 };
-
-export default App;

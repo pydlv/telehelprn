@@ -2,11 +2,9 @@
 // and https://www.scaledrone.com/blog/webrtc-tutorial-simple-video-chat
 
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
 import {mediaDevices, RTCIceCandidate, RTCPeerConnection, RTCSessionDescription, RTCView} from 'react-native-webrtc';
-
-import strings from '../strings';
 import {uuidv4} from '../util';
 
 import Scaledrone from 'scaledrone-react-native';
