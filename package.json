@@ -11,10 +11,17 @@
     "postinstall": ".\\android\\gradlew clean -p .\\android"
   },
   "dependencies": {
+    "autobind-decorator": "^2.4.0",
     "axios": "^0.19.2",
+    "build-url": "^2.0.0",
     "react": "16.9.0",
     "react-native": "0.61.5",
+    "react-native-config": "^1.0.0",
     "react-native-elements": "^1.2.7",
+    "react-native-gesture-handler": "^1.6.1",
+    "react-native-reanimated": "^1.8.0",
+    "react-native-router-flux": "^4.2.0",
+    "react-native-screens": "^2.5.0",
     "react-native-vector-icons": "^6.6.0",
     "react-native-webrtc": "^1.75.3",
     "react-redux": "^7.2.0",
@@ -23,6 +30,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
+    "@babel/plugin-proposal-decorators": "^7.8.3",
     "@babel/runtime": "^7.8.4",
     "@react-native-community/eslint-config": "^0.0.7",
     "babel-jest": "^25.1.0",
