@@ -1,10 +1,12 @@
 import React, {Component} from "react";
-import {View, StyleSheet} from "react-native";
-import {Button, Divider, Input, Text} from "react-native-elements";
+import {StyleSheet, View} from "react-native";
+import {Button, Input, Text} from "react-native-elements";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import strings from "../strings";
 import {boundMethod} from "autobind-decorator";
 import api from "../api";
+import globalStyles from "../globalStyles";
+import {Actions} from "react-native-router-flux";
 
 export default class Login extends Component {
     constructor() {
@@ -73,14 +75,17 @@ export default class Login extends Component {
                 console.error(error);
             }
         }).finally(() => {
-            this.setState({loading: false});
+            this.setState({
+                password: "",
+                loading: false
+            });
         });
     }
 
     render() {
         return (
-            <View style={styles.container}>
-                <Text h1>{ strings.appName }</Text>
+            <View style={globalStyles.container}>
+                <Text h1>{strings.appName}</Text>
 
                 <Input
                     placeholder={strings.pages.login.email}
@@ -89,6 +94,7 @@ export default class Login extends Component {
                             name='user'
                             size={24}
                             color='black'
+                            style={{marginRight: 8}}
                         />
                     }
                     containerStyle={styles.smallMargin}
@@ -105,18 +111,20 @@ export default class Login extends Component {
                             name='lock'
                             size={24}
                             color='black'
+                            style={{marginRight: 10}}
                         />
                     }
                     containerStyle={styles.smallMargin}
                     disabled={this.state.loading}
                     onChangeText={this.handlePassword}
                     errorMessage={this.state.passwordValidationError}
+                    value={this.state.password}
                 />
 
                 <Button
                     title={strings.pages.login.login.toUpperCase()}
                     containerStyle={styles.loginButton}
-                    disabled={this.state.loading}
+                    disabled={this.state.loading || !this.state.email || !this.state.password}
                     onPress={this.tryLogin}
                 />
 
@@ -126,28 +134,14 @@ export default class Login extends Component {
                     title={strings.pages.login.signup.toUpperCase()}
                     containerStyle={styles.signupButton}
                     disabled={this.state.loading}
+                    onPress={Actions.signUp}
                 />
-
-                {/*<View style={{*/}
-                {/*    borderBottomColor: 'black',*/}
-                {/*    borderBottomWidth: StyleSheet.hairlineWidth,*/}
-                {/*    alignSelf: 'stretch',*/}
-                {/*    marginTop: -35*/}
-                {/*}} />*/}
             </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        width: "100%",
-        height: "100%"
-    },
-
     loginButton: {
         width: "40%",
         marginTop: 15
