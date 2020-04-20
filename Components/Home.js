@@ -1,8 +1,9 @@
 import React, {Component} from "react";
 import {View} from "react-native";
 import {Text} from "react-native-elements";
+import {connect} from "react-redux";
 
-export default class Home extends Component {
+class Home extends Component {
     render() {
         return (
             <View>
@@ -11,3 +12,11 @@ export default class Home extends Component {
         );
     }
 }
+
+function mapStateToProps(state) {
+    return {
+
+    };
+}
+
+export default connect(mapStateToProps)(Home);

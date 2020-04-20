@@ -5,15 +5,15 @@ const login = {
     or: "OR",
     signup: "Sign Up",
     invalidEmailFormat: "That is not a valid email format.",
-    doesNotMeetPasswordRequirements: "That is not a valid password. Passwords must be at least 6 characters long.",
-    userDoesNotExist: "There is not user with that email address.",
+    userDoesNotExist: "There is not a user with that email address.",
     passwordIsIncorrect: "That password is incorrect."
 }
 
 const signUp = {
     headerText: "Sign Up",
     signUpButton: "Submit",
-    confirmPassword: "Confirm Password"
+    confirmPassword: "Confirm Password",
+    doesNotMeetPasswordRequirements: "That is not a valid password. Passwords must be at least 6 characters long."
 }
 
 export default {

@@ -6,6 +6,7 @@ import {Button, Input, Text} from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 import {boundMethod} from "autobind-decorator";
 import {StyleSheet} from "react-native";
+import api from "../api";
 
 export default class SignUp extends Component {
     constructor(props) {
@@ -49,6 +50,24 @@ export default class SignUp extends Component {
                 ? "The passwords do not match."
                 : null
         });
+    }
+
+    @boundMethod
+    doSignUp() {
+        if (!this.state.email || !this.state.password) {
+            return;
+        }
+
+        api.signUp(this.state.email, this.state.password)
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                const {response} = error;
+
+                console.log(response.status, response.data);
+                console.error(error);
+            })
     }
 
     render() {
@@ -117,7 +136,7 @@ export default class SignUp extends Component {
                         !this.state.passwordConfirm ||
                         this.state.password !== this.state.passwordConfirm
                     }
-                    // onPress={this.doSignup}
+                    onPress={this.doSignUp}
                 />
             </View>
         );

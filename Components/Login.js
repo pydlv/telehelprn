@@ -7,8 +7,10 @@ import {boundMethod} from "autobind-decorator";
 import api from "../api";
 import globalStyles from "../globalStyles";
 import {Actions} from "react-native-router-flux";
+import {connect, useDispatch} from "react-redux";
+import {ACTION_TYPES, createAction} from "../redux/actions";
 
-export default class Login extends Component {
+class Login extends Component {
     constructor() {
         super();
 
@@ -37,9 +39,6 @@ export default class Login extends Component {
             return;
         }
 
-        console.log("Trying login.");
-        console.log("Email:", this.state.email);
-
         this.setState({
             loading: true,
             emailValidationError: null,
@@ -47,7 +46,7 @@ export default class Login extends Component {
         });
 
         api.login(this.state.email, this.state.password).then((response) => {
-            console.log("Response", response);
+            this.props.setToken(response.token);
         }).catch((error) => {
             const {response} = error;
 
@@ -161,3 +160,11 @@ const styles = StyleSheet.create({
         fontSize: 24
     }
 });
+
+function mapDispatchToProps(dispatch) {
+    return {
+        setToken: (token) => dispatch(createAction(ACTION_TYPES.STORE_TOKEN, token))
+    };
+}
+
+export default connect(null, mapDispatchToProps)(Login);
