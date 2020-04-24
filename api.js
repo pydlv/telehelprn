@@ -37,8 +37,63 @@ export async function signUp(email, password) {
     return result.data;
 }
 
+class AuthenticatedAPI {
+    constructor(token) {
+        this.token = token;
 
-export default {
-    login,
-    signUp
+        this.instance = axios.create({
+            headers: {
+                common: {
+                    session: this.token
+                }
+            }
+        });
+    }
+
+    async signOut() {
+        const url = hostUrl({
+            path: "/signout"
+        });
+
+        const result = await this.instance.post(url);
+
+        return result.data;
+    }
+
+    async editProfile(firstName, lastName, birthDate) {
+        const url = hostUrl({
+            path: "/editprofile"
+        });
+
+        const result = await this.instance.post(url, {
+            first_name: firstName,
+            last_name: lastName,
+            birthday: birthDate
+        });
+
+        return result.data;
+    }
+
+
+    async getProfile() {
+        const url = hostUrl({
+            path: "/getprofile"
+        });
+
+        const result = await this.instance.get(url);
+
+        return result.data;
+    }
+}
+
+let authedAPI = null;
+
+export function setAuthedAPI(token) {
+    authedAPI = new AuthenticatedAPI(token);
+
+    return authedAPI;
+}
+
+export function getAuthedAPI() {
+    return authedAPI;
 }

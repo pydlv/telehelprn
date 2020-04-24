@@ -6,9 +6,12 @@ import {Button, Input, Text} from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 import {boundMethod} from "autobind-decorator";
 import {StyleSheet} from "react-native";
-import api from "../api";
+import * as api from "../api";
+import {ACTION_TYPES, createAction} from "../redux/actions";
+import {connect} from "react-redux";
+import {loadProfile} from "../common";
 
-export default class SignUp extends Component {
+class SignUp extends Component {
     constructor(props) {
         super(props);
 
@@ -60,13 +63,27 @@ export default class SignUp extends Component {
 
         api.signUp(this.state.email, this.state.password)
             .then((response) => {
-                console.log(response);
+                api.setAuthedAPI(response.token);
+                this.props.setToken(response.token);
+                loadProfile(this.props.dispatch);
             })
             .catch((error) => {
                 const {response} = error;
 
-                console.log(response.status, response.data);
-                console.error(error);
+                if (response !== undefined) {
+                    if (response.status === 400) {
+                        if (response.data.error === "User already exists.") {
+                            this.setState({
+                                emailValidationError: strings.pages.signUp.userAlreadyExists
+                            });
+                            return;
+                        }
+
+                        console.log("Got unknown 400:", response.data.error, response.data.errors);
+                    }
+                }
+
+                return Promise.reject(error);
             })
     }
 
@@ -158,3 +175,12 @@ const styles = StyleSheet.create({
         margin: 5
     }
 });
+
+function mapDispatchToProps(dispatch) {
+    return {
+        setToken: (token) => dispatch(createAction(ACTION_TYPES.STORE_TOKEN, token)),
+        dispatch
+    };
+}
+
+export default connect(null, mapDispatchToProps)(SignUp);

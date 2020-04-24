@@ -4,11 +4,12 @@ import {Button, Input, Text} from "react-native-elements";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import strings from "../strings";
 import {boundMethod} from "autobind-decorator";
-import api from "../api";
+import * as api from "../api";
 import globalStyles from "../globalStyles";
 import {Actions} from "react-native-router-flux";
-import {connect, useDispatch} from "react-redux";
+import {connect} from "react-redux";
 import {ACTION_TYPES, createAction} from "../redux/actions";
+import common, {loadProfile} from "../common";
 
 class Login extends Component {
     constructor() {
@@ -46,11 +47,15 @@ class Login extends Component {
         });
 
         api.login(this.state.email, this.state.password).then((response) => {
+            api.setAuthedAPI(response.token);
             this.props.setToken(response.token);
+            loadProfile(this.props.dispatch);
         }).catch((error) => {
             const {response} = error;
 
-            console.log(response.data);
+            if (response === undefined) {
+                console.error(error);
+            }
 
             if (response.status === 400) {
                 if ("errors" in response.data) {
@@ -73,7 +78,7 @@ class Login extends Component {
             } else {
                 console.error(error);
             }
-        }).finally(() => {
+
             this.setState({
                 password: "",
                 loading: false
@@ -163,7 +168,8 @@ const styles = StyleSheet.create({
 
 function mapDispatchToProps(dispatch) {
     return {
-        setToken: (token) => dispatch(createAction(ACTION_TYPES.STORE_TOKEN, token))
+        setToken: (token) => dispatch(createAction(ACTION_TYPES.STORE_TOKEN, token)),
+        dispatch
     };
 }
 

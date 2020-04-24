@@ -5,7 +5,7 @@ export default StyleSheet.create({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        width: "100%",
+        width: "95%",
         height: "100%"
     }
 });
