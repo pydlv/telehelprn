@@ -14,7 +14,17 @@ export function loadProfile(dispatch) {
             setBirthDate(response.birth_date);
         })
         .catch((error) => {
-            console.log(dispatch);
             console.error(error);
         })
+}
+
+
+export function loadProvider(dispatch) {
+    const setProvider = provider => dispatch(createAction(ACTION_TYPES.SET_PROVIDER, provider));
+
+    getAuthedAPI()
+        .getProvider()
+        .then((response) => {
+            setProvider(response.provider)
+        });
 }

@@ -9,7 +9,6 @@ const login = {
     passwordIsIncorrect: "That password is incorrect."
 }
 
-
 const signUp = {
     headerText: "Sign Up",
     signUpButton: "Submit",
@@ -18,22 +17,26 @@ const signUp = {
     userAlreadyExists: "An account with that email address already exists."
 }
 
-
 const editProfile = {
-    instructionText: "Please complete your profile to continue.",
+    headerText: "Edit Profile",
     firstName: "First Name",
     lastName: "Last Name",
     birthDateLabel: "Please provide your date of birth.",
-    submit: "Submit",
+    submit: "Save",
     firstNameError: "Please enter a first name no longer than 30 characters.",
     lastNameError: "Please enter a last name no longer than 30 characters."
 }
 
-
 const home = {
-    greetingText: "Hello, %s!"
+    greetingText: "Hello, %s!",
+    yourProviderCardHeader: "Your Therapist",
+    noProviderSelected: "You have not selected a provider yet.",
+    selectProviderButton: "Select Provider"
 }
 
+const selectProvider = {
+    headerText: "Select Provider"
+}
 
 export default {
     appName: 'Teletherapy',
@@ -41,6 +44,7 @@ export default {
         login,
         signUp,
         editProfile,
-        home
+        home,
+        selectProvider
     }
 };

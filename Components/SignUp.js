@@ -63,7 +63,7 @@ class SignUp extends Component {
 
         api.signUp(this.state.email, this.state.password)
             .then((response) => {
-                api.setAuthedAPI(response.token);
+                api.createAuthedAPI(response.token);
                 this.props.setToken(response.token);
                 loadProfile(this.props.dispatch);
             })

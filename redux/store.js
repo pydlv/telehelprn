@@ -1,11 +1,15 @@
 import { createStore } from "redux";
 import { ACTION_TYPES } from "./actions";
+import { persistStore, persistReducer } from 'redux-persist';
+// import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const originalState = {
     token: null,
     firstName: null,
     lastName: null,
-    birthDate: null
+    birthDate: null,
+    provider: undefined
 };
 
 function myReducer(state = originalState, action) {
@@ -34,17 +38,30 @@ function myReducer(state = originalState, action) {
                 birthDate: action.payload
             }
 
+        case ACTION_TYPES.SET_PROVIDER:
+            return {
+                ...state,
+                provider: action.payload
+            }
+
         case ACTION_TYPES.RESET_STORE:
             return originalState;
 
         default:
-            if (!action.type.startsWith("@@redux/INIT")) {
+            if (!action.type.startsWith("@@redux/INIT") && !action.type.startsWith("persist")) {
                 console.warn("Received unknown action or fell through to default in reducer. Type:", action.type);
             }
             return state;
     }
 }
 
-const store = createStore(myReducer, {});
+const persistConfig = {
+    key: 'root',
+    storage: AsyncStorage,
+    // stateReconciler: autoMergeLevel2
+};
 
-export default store;
+const persistedReducer = persistReducer(persistConfig, myReducer);
+
+export const store = createStore(persistedReducer);
+export const persistor = persistStore(store);

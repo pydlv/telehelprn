@@ -44,7 +44,7 @@ class AuthenticatedAPI {
         this.instance = axios.create({
             headers: {
                 common: {
-                    session: this.token
+                    session: this.token // todo: Make sure this is a secure place for it
                 }
             }
         });
@@ -74,10 +74,29 @@ class AuthenticatedAPI {
         return result.data;
     }
 
-
     async getProfile() {
         const url = hostUrl({
             path: "/getprofile"
+        });
+
+        const result = await this.instance.get(url);
+
+        return result.data;
+    }
+
+    async getProvider() {
+        const url = hostUrl({
+            path: "/getprovider"
+        });
+
+        const result = await this.instance.get(url);
+
+        return result.data;
+    }
+
+    async listProviders() {
+        const url = hostUrl({
+            path: "/listproviders"
         });
 
         const result = await this.instance.get(url);
@@ -88,12 +107,12 @@ class AuthenticatedAPI {
 
 let authedAPI = null;
 
-export function setAuthedAPI(token) {
+export function createAuthedAPI(token): AuthenticatedAPI {
     authedAPI = new AuthenticatedAPI(token);
 
     return authedAPI;
 }
 
-export function getAuthedAPI() {
+export function getAuthedAPI(): AuthenticatedAPI {
     return authedAPI;
 }

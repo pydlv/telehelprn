@@ -9,7 +9,7 @@ import globalStyles from "../globalStyles";
 import {Actions} from "react-native-router-flux";
 import {connect} from "react-redux";
 import {ACTION_TYPES, createAction} from "../redux/actions";
-import common, {loadProfile} from "../common";
+import {loadProfile} from "../common";
 
 class Login extends Component {
     constructor() {
@@ -47,7 +47,7 @@ class Login extends Component {
         });
 
         api.login(this.state.email, this.state.password).then((response) => {
-            api.setAuthedAPI(response.token);
+            api.createAuthedAPI(response.token);
             this.props.setToken(response.token);
             loadProfile(this.props.dispatch);
         }).catch((error) => {

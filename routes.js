@@ -5,12 +5,17 @@ import SignUp from "./Components/SignUp";
 import {useSelector} from "react-redux";
 import Home from "./Components/Home";
 import EditProfile from "./Components/EditProfile";
+import {createAuthedAPI} from "./api";
+import ProviderList from "./Components/ProviderList";
 
 const Routes = () => {
     const token = useSelector(state => state.token);
 
     const needsLogin = !token;
-    const needEditProfile = useSelector(state => !state.firstName || !state.lastName || !state.birthDate);
+
+    if (token !== null) {
+        createAuthedAPI(token);
+    }
 
     return (
         <Router>
@@ -20,8 +25,9 @@ const Routes = () => {
                     <Scene key="signUp" component={SignUp}/>
                 </Scene>
                 <Scene key="postAuth" initial={!needsLogin}>
-                    <Scene key="editProfile" component={EditProfile} initial={needEditProfile} />
-                    <Scene key="home" component={Home} initial={!needEditProfile}/>
+                    <Scene key="home" component={Home} initial={true}/>
+                    <Scene key="editProfile" component={EditProfile} />
+                    <Scene key="providerList" component={ProviderList} />
                 </Scene>
             </Scene>
         </Router>
