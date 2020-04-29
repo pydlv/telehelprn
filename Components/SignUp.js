@@ -11,6 +11,13 @@ import {ACTION_TYPES, createAction} from "../redux/actions";
 import {connect} from "react-redux";
 import {loadProfile} from "../common";
 
+
+function isValidEmail(text)
+{
+    return /\S+@\S+\.\S+/.test(text);
+}
+
+
 class SignUp extends Component {
     constructor(props) {
         super(props);
@@ -20,8 +27,8 @@ class SignUp extends Component {
             email: "",
             password: "",
             passwordConfirm: "",
-            emailValidationError: null,
-            passwordValidationError: null,
+            emailValidationError: "",
+            passwordValidationError: "",
             passwordConfirmValidationError: ""
         }
     }
@@ -29,6 +36,11 @@ class SignUp extends Component {
     @boundMethod
     handleEmail(text) {
         this.setState({email: text});
+    }
+
+    @boundMethod
+    emailBlur() {
+        this.validateEmail();
     }
 
     @boundMethod
@@ -41,8 +53,26 @@ class SignUp extends Component {
     }
 
     @boundMethod
+    onPasswordBlur() {
+        this.setState({
+            passwordValidationError: this.state.password.length < 6 ?
+                strings.pages.signUp.doesNotMeetPasswordRequirements
+                : ""
+        });
+
+        this.checkPasswordConfirm();
+    }
+
+    @boundMethod
     handlePasswordConfirm(text) {
         this.setState({passwordConfirm: text}, this.checkPasswordConfirm);
+    }
+
+    @boundMethod
+    validateEmail() {
+        this.setState({
+            emailValidationError: isValidEmail(this.state.email) ? "" : strings.pages.signUp.invalidEmail
+        })
     }
 
     @boundMethod
@@ -50,7 +80,7 @@ class SignUp extends Component {
         this.setState({
             passwordConfirmValidationError:
                 this.state.password !== this.state.passwordConfirm && this.state.passwordConfirm
-                ? "The passwords do not match."
+                ? strings.pages.signUp.noPasswordMatch
                 : null
         });
     }
@@ -76,6 +106,16 @@ class SignUp extends Component {
                             this.setState({
                                 emailValidationError: strings.pages.signUp.userAlreadyExists
                             });
+                            return;
+                        } else if ("email" in response.data.errors) {
+                            this.setState({
+                                emailValidationError: strings.pages.signUp.invalidEmail
+                            });
+                            return;
+                        } else if ("password" in response.data.errors) {
+                            this.setState({
+                                passwordValidationError: strings.pages.signUp.doesNotMeetPasswordRequirements
+                            })
                             return;
                         }
 
@@ -106,6 +146,7 @@ class SignUp extends Component {
                     disabled={this.state.loading}
                     onChangeText={this.handleEmail}
                     errorMessage={this.state.emailValidationError}
+                    onBlur={this.emailBlur}
                 />
 
                 <Input
@@ -123,7 +164,7 @@ class SignUp extends Component {
                     disabled={this.state.loading}
                     onChangeText={this.handlePassword}
                     errorMessage={this.state.passwordValidationError}
-                    onBlur={this.checkPasswordConfirm}
+                    onBlur={this.onPasswordBlur}
                 />
 
                 <Input
@@ -151,7 +192,8 @@ class SignUp extends Component {
                         !this.state.email ||
                         !this.state.password ||
                         !this.state.passwordConfirm ||
-                        this.state.password !== this.state.passwordConfirm
+                        this.state.password !== this.state.passwordConfirm ||
+                        !isValidEmail(this.state.email)
                     }
                     onPress={this.doSignUp}
                 />

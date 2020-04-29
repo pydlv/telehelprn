@@ -25,7 +25,7 @@ class Home extends Component {
 
     @boundMethod
     signOut() {
-        getAuthedAPI().signOut().then(() => {
+        getAuthedAPI().signOut().finally(() => {
             this.props.resetStore();
         });
     }
@@ -79,7 +79,7 @@ class Home extends Component {
                         </View>
                         : <View>
                             <Text style={{marginBottom: 10}}>
-                                You have selected a provider.
+                                Your provider is {this.props.provider.name}.
                             </Text>
                         </View>
                     }

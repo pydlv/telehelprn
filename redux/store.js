@@ -1,6 +1,6 @@
-import { createStore } from "redux";
-import { ACTION_TYPES } from "./actions";
-import { persistStore, persistReducer } from 'redux-persist';
+import {createStore} from "redux";
+import {ACTION_TYPES} from "./actions";
+import {persistReducer, persistStore} from 'redux-persist';
 // import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -9,7 +9,7 @@ const originalState = {
     firstName: null,
     lastName: null,
     birthDate: null,
-    provider: undefined
+    provider: null
 };
 
 function myReducer(state = originalState, action) {
@@ -57,8 +57,7 @@ function myReducer(state = originalState, action) {
 
 const persistConfig = {
     key: 'root',
-    storage: AsyncStorage,
-    // stateReconciler: autoMergeLevel2
+    storage: AsyncStorage
 };
 
 const persistedReducer = persistReducer(persistConfig, myReducer);

@@ -94,6 +94,18 @@ class AuthenticatedAPI {
         return result.data;
     }
 
+    async setProvider(uuid) {
+        const url = hostUrl({
+            path: "/setprovider"
+        });
+
+        const result = await this.instance.post(url, {
+            uuid
+        });
+
+        return result.data;
+    }
+
     async listProviders() {
         const url = hostUrl({
             path: "/listproviders"

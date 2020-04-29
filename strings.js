@@ -14,7 +14,9 @@ const signUp = {
     signUpButton: "Submit",
     confirmPassword: "Confirm Password",
     doesNotMeetPasswordRequirements: "That is not a valid password. Passwords must be at least 6 characters long.",
-    userAlreadyExists: "An account with that email address already exists."
+    userAlreadyExists: "An account with that email address already exists.",
+    noPasswordMatch: "The passwords do not match.",
+    invalidEmail: "That is not a valid email address."
 }
 
 const editProfile = {
@@ -35,7 +37,14 @@ const home = {
 }
 
 const selectProvider = {
-    headerText: "Select Provider"
+    headerText: "Select Provider",
+    confirmRequestProviderTitle: "Confirm Action",
+    confirmRequestProviderSubtitle: "Please confirm that you would like to request %s to become your provider."
+}
+
+const prompts = {
+    cancel: "Cancel",
+    confirm: "Confirm"
 }
 
 export default {
@@ -46,5 +55,6 @@ export default {
         editProfile,
         home,
         selectProvider
-    }
+    },
+    prompts
 };
