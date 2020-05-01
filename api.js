@@ -37,6 +37,21 @@ export async function signUp(email, password) {
     return result.data;
 }
 
+const createFormData = (photo, body={}) => {
+    const data = new FormData();
+    data.append("file", {
+        name: photo.filename !== undefined ? photo.filename : "file",
+        uri: Platform.OS === 'android' ? photo.uri : photo.uri.replace('file://', ''),
+        type: "image/jpeg"
+    });
+
+    Object.keys(body).forEach(key => {
+        data.append(key, body[key]);
+    });
+
+    return data;
+};
+
 class AuthenticatedAPI {
     constructor(token) {
         this.token = token;
@@ -123,6 +138,22 @@ class AuthenticatedAPI {
         });
 
         const result = await this.instance.get(url);
+
+        return result.data;
+    }
+
+    async uploadProfilePicture(photo) {
+        const formData = createFormData(photo);
+
+        const url = hostUrl({
+            path: "/upload-profile-picture"
+        });
+
+        const result = await this.instance.post(url, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        });
 
         return result.data;
     }

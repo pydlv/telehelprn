@@ -19,7 +19,8 @@ export function loadProfile(dispatch) {
                 firstName: response.first_name,
                 lastName: response.last_name,
                 birthDate: response.birth_date,
-                bio: response.bio
+                bio: response.bio,
+                profileImageS3: response.profile_image_s3
             };
 
             setProfile(storeProfile);

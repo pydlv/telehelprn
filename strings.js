@@ -27,7 +27,8 @@ const editProfile = {
     bioLabel: "Bio (shown on your profile):",
     submit: "Save",
     firstNameError: "Please enter a first name no longer than 30 characters.",
-    lastNameError: "Please enter a last name no longer than 30 characters."
+    lastNameError: "Please enter a last name no longer than 30 characters.",
+    profilePicture: "Profile Picture"
 }
 
 const home = {

@@ -8,6 +8,7 @@ import strings from "../strings";
 import {Actions} from "react-native-router-flux";
 import {sprintf} from "sprintf-js";
 import {boundMethod} from "autobind-decorator";
+import ProfilePicture from "./ProfilePicture";
 
 class ProviderProfile extends Component {
     constructor(props) {
@@ -17,6 +18,8 @@ class ProviderProfile extends Component {
             fullName: null,
             firstName: null,
             lastName: null,
+            bio: null,
+            profileImageS3: null
         }
     }
 
@@ -48,7 +51,8 @@ class ProviderProfile extends Component {
                     fullName: response.full_name,
                     firstName: response.first_name,
                     lastName: response.last_name,
-                    bio: response.bio
+                    bio: response.bio,
+                    profileImageS3: response.profile_image_s3
                 })
             });
     }
@@ -58,8 +62,15 @@ class ProviderProfile extends Component {
             <View style={{flex: 1}}>
                 <HeaderWithBackButton />
                 <View style={styles.containerStyle}>
-                    <Text style={styles.providerName} h4>{this.state.fullName}</Text>
-                    <Text>Therapist</Text>
+                    <View style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                        <View>
+                            <Text style={styles.providerName} h4>{this.state.fullName}</Text>
+                            <Text>Therapist</Text>
+                        </View>
+                        <ProfilePicture
+                            imageURL={this.state.profileImageS3}
+                        />
+                    </View>
                     <Button
                         title={strings.pages.providerProfile.selectProvider}
                         containerStyle={styles.selectProviderButton}

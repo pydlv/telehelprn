@@ -9,7 +9,7 @@ import globalStyles from "../globalStyles";
 import {Actions} from "react-native-router-flux";
 import {connect} from "react-redux";
 import {ACTION_TYPES, createAction} from "../redux/actions";
-import {loadProfile, setLogin} from "../common";
+import {setLogin} from "../common";
 
 class Login extends Component {
     constructor() {

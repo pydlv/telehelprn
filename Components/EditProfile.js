@@ -1,9 +1,7 @@
-import {ScrollView, TextInput, View} from "react-native";
+import {ActivityIndicator, ScrollView, StyleSheet, TextInput, View} from "react-native";
 import React, {Component} from "react";
-import globalStyles from "../globalStyles";
-import {Button, Input, Text} from "react-native-elements";
+import {Button, Image, Input, Text} from "react-native-elements";
 import {TextInputMask} from "react-native-masked-text";
-import {StyleSheet} from "react-native";
 import strings from "../strings";
 import {boundMethod} from "autobind-decorator";
 import {getAuthedAPI} from "../api";
@@ -12,6 +10,10 @@ import {Actions} from "react-native-router-flux";
 import {connect} from "react-redux";
 import HeaderWithBackButton from "./HeaderWithBackButton";
 import {loadProfile} from "../common";
+import {S3_HOST} from "../consts";
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import ImagePicker from 'react-native-image-picker';
+import ProfilePicture from "./ProfilePicture";
 
 const dateRegex = /(0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])[- \/.](19|20)\d\d/;
 
@@ -43,13 +45,14 @@ class EditProfile extends Component {
             firstNameValid: false,
             lastNameValid: false,
             birthDateValid: false,
-            bio: ""
+            bio: "",
+            profileImageS3: null
         }
     }
 
     componentDidMount(): void {
         loadProfile(this.props.dispatch).then(() => {
-            const {firstName, lastName, birthDate, bio} = this.props.profile;
+            const {firstName, lastName, birthDate, bio, profileImageS3} = this.props.profile;
 
             const firstNameValid = isFirstNameValid(firstName);
             const lastNameValid = isLastNameValid(lastName);
@@ -62,7 +65,8 @@ class EditProfile extends Component {
                 firstNameValid,
                 lastNameValid,
                 birthDateValid,
-                bio
+                bio,
+                profileImageS3
             });
         });
     }
@@ -128,13 +132,31 @@ class EditProfile extends Component {
         });
     }
 
+    @boundMethod
+    onSelectProfilePicturePressed() {
+        ImagePicker.showImagePicker((response) => {
+            if (response.didCancel) {
+                // console.log('User cancelled image picker');
+            } else if (response.error) {
+                console.error('ImagePicker Error: ', response.error);
+            } else if (response.customButton) {
+                // console.log('User tapped custom button: ', response.customButton);
+            } else {
+                const source = {uri: response.uri};
+                getAuthedAPI()
+                    .uploadProfilePicture(source)
+                    .then((response) => {
+                        Actions.editProfile();
+                    });
+            }
+        })
+    }
+
     render() {
         return (
             <ScrollView>
-                <HeaderWithBackButton />
+                <HeaderWithBackButton headerText={strings.pages.editProfile.headerText} />
                 <View style={{marginLeft: 10, marginRight: 10, marginTop: 10 }}>
-                    <Text h3>{strings.pages.editProfile.headerText}</Text>
-
                     {/* First name */}
                     <Input
                         placeholder={strings.pages.editProfile.firstName}
@@ -152,7 +174,7 @@ class EditProfile extends Component {
                     />
 
                     {/* Birth date */}
-                    <Text style={styles.birthDateLabel}>
+                    <Text style={styles.textLabel}>
                         {strings.pages.editProfile.birthDateLabel}
                     </Text>
                     <TextInputMask
@@ -167,7 +189,7 @@ class EditProfile extends Component {
                     />
 
                     {/* Bio */}
-                    <Text style={styles.birthDateLabel}>
+                    <Text style={styles.textLabel}>
                         {strings.pages.editProfile.bioLabel}
                     </Text>
                     <TextInput
@@ -177,6 +199,21 @@ class EditProfile extends Component {
                         onChangeText={this.handleBioInput}
                         value={this.state.bio}
                     />
+
+                    {/* Profile image */}
+                    <Text style={styles.textLabel}>
+                        {strings.pages.editProfile.profilePicture}
+                    </Text>
+                    <View style={{display: "flex", flexDirection: "row"}}>
+                        <ProfilePicture
+                            imageURL={this.state.profileImageS3}
+                        />
+                        <Button
+                            title="Choose Picture"
+                            containerStyle={styles.choosePictureButton}
+                            onPress={this.onSelectProfilePicturePressed}
+                        />
+                    </View>
 
                     <Button
                         title={strings.pages.editProfile.submit}
@@ -203,7 +240,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10
     },
 
-    birthDateLabel: {
+    textLabel: {
         alignSelf: "flex-start",
         marginTop: 10,
         marginLeft: 10
@@ -221,6 +258,11 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderColor: "gray",
         paddingHorizontal: 10,
+        alignSelf: "center"
+    },
+
+    choosePictureButton: {
+        marginLeft: 40,
         alignSelf: "center"
     }
 });
