@@ -8,19 +8,22 @@ import {getAuthedAPI} from "../api";
 import Icon from "react-native-vector-icons/FontAwesome";
 import strings from "../strings";
 import {sprintf} from "sprintf-js";
-import {loadProvider} from "../common";
+import {loadProfile, loadProvider} from "../common";
 import {Actions} from "react-native-router-flux";
 
 class Home extends Component {
     componentDidMount(): void {
-        // Make sure the profile is completed
-        if (!this.props.isProfileComplete) {
+        loadProfile(this.props.dispatch);
+        loadProvider(this.props.dispatch);
+
+        const {profile} = this.props;
+        const isProfileComplete = profile && profile.firstName && profile.lastName && profile.birthDate;
+
+        if (profile !== null && !isProfileComplete) {
+            // Profile is loaded, but our profile is not complete. Redirect user to edit profile.
             // Set timeout 0 due to this bug https://github.com/aksonov/react-native-router-flux/issues/1125
             setTimeout(()=>Actions.editProfile(), 0);
-            return; // No need to continue to fetch the provider.
         }
-
-        loadProvider(this.props.dispatch);
     }
 
     @boundMethod
@@ -35,7 +38,7 @@ class Home extends Component {
             <View>
                 <Header
                     placement="left"
-                    centerComponent={{ text: sprintf(strings.pages.home.greetingText, this.props.firstName), style: { color: '#fff', fontSize: 24 } }}
+                    centerComponent={{ text: sprintf(strings.pages.home.greetingText, this.props.profile && this.props.profile.firstName), style: { color: '#fff', fontSize: 24 } }}
                     rightComponent={
                         <View style={{display: "flex", flexDirection: "row"}}>
                             <Button
@@ -79,8 +82,13 @@ class Home extends Component {
                         </View>
                         : <View>
                             <Text style={{marginBottom: 10}}>
-                                Your provider is {this.props.provider.name}.
+                                Your provider is {this.props.provider.fullName}.
                             </Text>
+                            <Button
+                                buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                                title={strings.pages.home.changeProviderButton.toUpperCase()}
+                                onPress={Actions.providerList}
+                            />
                         </View>
                     }
                 </Card>
@@ -91,10 +99,8 @@ class Home extends Component {
 
 function mapStateToProps(state) {
     return {
-        fullName: state.firstName + ' ' + state.lastName,
-        firstName: state.firstName,
+        profile: state.profile,
         provider: state.provider,
-        isProfileComplete: state.firstName && state.lastName && state.birthDate,
         token: state.token
     };
 }

@@ -60,7 +60,7 @@ class AuthenticatedAPI {
         return result.data;
     }
 
-    async editProfile(firstName, lastName, birthDate) {
+    async editProfile(firstName, lastName, birthDate, bio) {
         const url = hostUrl({
             path: "/editprofile"
         });
@@ -68,7 +68,8 @@ class AuthenticatedAPI {
         const result = await this.instance.post(url, {
             first_name: firstName,
             last_name: lastName,
-            birthday: birthDate
+            birthday: birthDate,
+            bio
         });
 
         return result.data;
@@ -84,9 +85,9 @@ class AuthenticatedAPI {
         return result.data;
     }
 
-    async getProvider() {
+    async getAssignedProvider() {
         const url = hostUrl({
-            path: "/getprovider"
+            path: "/getassignedprovider"
         });
 
         const result = await this.instance.get(url);
@@ -94,9 +95,9 @@ class AuthenticatedAPI {
         return result.data;
     }
 
-    async setProvider(uuid) {
+    async assignProvider(uuid) {
         const url = hostUrl({
-            path: "/setprovider"
+            path: "/assignprovider"
         });
 
         const result = await this.instance.post(url, {
@@ -109,6 +110,16 @@ class AuthenticatedAPI {
     async listProviders() {
         const url = hostUrl({
             path: "/listproviders"
+        });
+
+        const result = await this.instance.get(url);
+
+        return result.data;
+    }
+
+    async getProvider(uuid) {
+        const url = hostUrl({
+            path: `/getprovider/${uuid}`,
         });
 
         const result = await this.instance.get(url);

@@ -1,47 +1,39 @@
 import {createStore} from "redux";
 import {ACTION_TYPES} from "./actions";
 import {persistReducer, persistStore} from 'redux-persist';
-// import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const originalState = {
     token: null,
-    firstName: null,
-    lastName: null,
-    birthDate: null,
-    provider: null
+    profile: null,
+    provider: null,
+    accountType: null
 };
 
 function myReducer(state = originalState, action) {
     switch (action.type) {
-        case ACTION_TYPES.STORE_TOKEN:
+        case ACTION_TYPES.SET_TOKEN:
             return {
                 ...state,
                 token: action.payload
             };
 
-        case ACTION_TYPES.SET_FIRST_NAME:
+        case ACTION_TYPES.SET_PROFILE:
             return {
                 ...state,
-                firstName: action.payload
-            }
-
-        case ACTION_TYPES.SET_LAST_NAME:
-            return {
-                ...state,
-                lastName: action.payload
-            }
-
-        case ACTION_TYPES.SET_BIRTH_DATE:
-            return {
-                ...state,
-                birthDate: action.payload
+                profile: action.payload
             }
 
         case ACTION_TYPES.SET_PROVIDER:
             return {
                 ...state,
                 provider: action.payload
+            }
+
+        case ACTION_TYPES.SET_ACCOUNT_TYPE:
+            return {
+                ...state,
+                accountType: action.payload
             }
 
         case ACTION_TYPES.RESET_STORE:

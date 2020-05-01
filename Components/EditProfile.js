@@ -1,4 +1,4 @@
-import {View} from "react-native";
+import {ScrollView, TextInput, View} from "react-native";
 import React, {Component} from "react";
 import globalStyles from "../globalStyles";
 import {Button, Input, Text} from "react-native-elements";
@@ -42,28 +42,29 @@ class EditProfile extends Component {
             lastNameError: null,
             firstNameValid: false,
             lastNameValid: false,
-            birthDateValid: false
+            birthDateValid: false,
+            bio: ""
         }
     }
 
     componentDidMount(): void {
-        loadProfile(this.props.dispatch);
+        loadProfile(this.props.dispatch).then(() => {
+            const {firstName, lastName, birthDate, bio} = this.props.profile;
 
-        const {firstName, lastName, birthDate} = this.props;
+            const firstNameValid = isFirstNameValid(firstName);
+            const lastNameValid = isLastNameValid(lastName);
+            const birthDateValid = isBirthDateValid(birthDate);
 
-        const firstNameValid = isFirstNameValid(firstName);
-        const lastNameValid = isLastNameValid(lastName);
-        const birthDateValid = isBirthDateValid(birthDate);
-
-        this.setState({
-            firstName,
-            lastName,
-            birthDate,
-            firstNameValid,
-            lastNameValid,
-            birthDateValid
+            this.setState({
+                firstName,
+                lastName,
+                birthDate,
+                firstNameValid,
+                lastNameValid,
+                birthDateValid,
+                bio
+            });
         });
-
     }
 
     @boundMethod
@@ -95,6 +96,13 @@ class EditProfile extends Component {
         });
     }
 
+    @boundMethod
+    handleBioInput(text) {
+        this.setState({
+            bio: text
+        });
+    }
+
     get submitButtonDisabled() {
         return !this.state.firstNameValid || !this.state.lastNameValid || !this.state.birthDateValid;
     }
@@ -104,11 +112,17 @@ class EditProfile extends Component {
         getAuthedAPI().editProfile(
             this.state.firstName,
             this.state.lastName,
-            this.state.birthDate
+            this.state.birthDate,
+            this.state.bio
         ).then((response) => {
-            this.props.setFirstName(response.first_name);
-            this.props.setLastName(response.last_name);
-            this.props.setBirthDate(response.birth_date);
+            const profile = {
+                firstName: response.first_name,
+                lastName: response.last_name,
+                birthDate: response.birth_date,
+                bio: response.bio
+            }
+
+            this.props.setProfile(profile);
 
             Actions.home();
         });
@@ -116,7 +130,7 @@ class EditProfile extends Component {
 
     render() {
         return (
-            <View>
+            <ScrollView>
                 <HeaderWithBackButton />
                 <View style={{marginLeft: 10, marginRight: 10, marginTop: 10 }}>
                     <Text h3>{strings.pages.editProfile.headerText}</Text>
@@ -152,6 +166,18 @@ class EditProfile extends Component {
                         style={styles.maskedDateInput}
                     />
 
+                    {/* Bio */}
+                    <Text style={styles.birthDateLabel}>
+                        {strings.pages.editProfile.bioLabel}
+                    </Text>
+                    <TextInput
+                        multiline={true}
+                        style={styles.multiLineInput}
+                        placeholder="Lorem ipsum dolor..."
+                        onChangeText={this.handleBioInput}
+                        value={this.state.bio}
+                    />
+
                     <Button
                         title={strings.pages.editProfile.submit}
                         containerStyle={styles.submitButton}
@@ -159,7 +185,7 @@ class EditProfile extends Component {
                         onPress={this.submit}
                     />
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 }
@@ -185,22 +211,29 @@ const styles = StyleSheet.create({
 
     submitButton: {
         marginTop: 10
+    },
+
+    multiLineInput: {
+        width: "95%",
+        color: 'black',
+        fontSize: 18,
+        minHeight: 40,
+        borderBottomWidth: 1,
+        borderColor: "gray",
+        paddingHorizontal: 10,
+        alignSelf: "center"
     }
 });
 
 function mapStateToProps(state) {
     return {
-        firstName: state.firstName,
-        lastName: state.lastName,
-        birthDate: state.birthDate
+        profile: state.profile
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        setFirstName: (firstName) => dispatch(createAction(ACTION_TYPES.SET_FIRST_NAME, firstName)),
-        setLastName: (lastName) => dispatch(createAction(ACTION_TYPES.SET_LAST_NAME, lastName)),
-        setBirthDate: (birthDate) => dispatch(createAction(ACTION_TYPES.SET_BIRTH_DATE, birthDate)),
+        setProfile: profile => dispatch(createAction(ACTION_TYPES.SET_PROFILE, profile)),
         dispatch
     }
 }

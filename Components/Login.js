@@ -9,7 +9,7 @@ import globalStyles from "../globalStyles";
 import {Actions} from "react-native-router-flux";
 import {connect} from "react-redux";
 import {ACTION_TYPES, createAction} from "../redux/actions";
-import {loadProfile} from "../common";
+import {loadProfile, setLogin} from "../common";
 
 class Login extends Component {
     constructor() {
@@ -47,9 +47,7 @@ class Login extends Component {
         });
 
         api.login(this.state.email, this.state.password).then((response) => {
-            api.createAuthedAPI(response.token);
-            this.props.setToken(response.token);
-            loadProfile(this.props.dispatch);
+            setLogin(this.props.dispatch, response.token, response.account_type);
         }).catch((error) => {
             const {response} = error;
 
@@ -168,7 +166,7 @@ const styles = StyleSheet.create({
 
 function mapDispatchToProps(dispatch) {
     return {
-        setToken: (token) => dispatch(createAction(ACTION_TYPES.STORE_TOKEN, token)),
+        setToken: (token) => dispatch(createAction(ACTION_TYPES.SET_TOKEN, token)),
         dispatch
     };
 }

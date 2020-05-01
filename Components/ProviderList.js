@@ -13,21 +13,9 @@ import {sprintf} from "sprintf-js";
 
 class ProviderListItem extends Component {
     @boundMethod
-    onConfirm() {
-        getAuthedAPI()
-            .setProvider(this.props.uuid)
-            .then(() => {
-                Actions.home()
-            })
-    }
-
-    @boundMethod
     onTap() {
-        Actions.push("confirmPrompt", {
-            title: strings.pages.selectProvider.confirmRequestProviderTitle,
-            subtitle: sprintf(strings.pages.selectProvider.confirmRequestProviderSubtitle, this.props.name),
-            onConfirm: this.onConfirm,
-            onCancel: () => {}
+        Actions.push("viewProvider", {
+            uuid: this.props.uuid
         });
     }
 
@@ -38,7 +26,7 @@ class ProviderListItem extends Component {
                 onPress={this.onTap}
             >
                 <View style={styles.providerListItemView}>
-                    <Text style={{fontWeight: "600"}}>{this.props.name}, {this.props.uuid}</Text>
+                    <Text style={{fontWeight: "600"}}>{this.props.name}</Text>
                     <Icon
                         name="chevron-right"
                     />
@@ -85,7 +73,7 @@ class ProviderList extends Component {
                             <ListItem
                                 key={i}
                                 Component={ProviderListItem}
-                                name={provider.name}
+                                name={provider.full_name}
                                 uuid={provider.uuid}
                             />
                         ))}

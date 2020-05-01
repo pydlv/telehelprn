@@ -8,6 +8,7 @@ import EditProfile from "./Components/EditProfile";
 import {createAuthedAPI} from "./api";
 import ProviderList from "./Components/ProviderList";
 import ConfirmPrompt from "./Components/ConfirmPrompt";
+import ProviderProfile from "./Components/ProviderProfile";
 
 const Routes = () => {
     const token = useSelector(state => state.token);
@@ -30,6 +31,7 @@ const Routes = () => {
                     <Scene key="editProfile" component={EditProfile} />
                     <Scene key="providerList" component={ProviderList} />
                     <Scene key="confirmPrompt" component={ConfirmPrompt} />
+                    <Scene key="viewProvider" component={ProviderProfile} />
                 </Scene>
             </Scene>
         </Router>

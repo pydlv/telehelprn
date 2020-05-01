@@ -24,6 +24,7 @@ const editProfile = {
     firstName: "First Name",
     lastName: "Last Name",
     birthDateLabel: "Please provide your date of birth.",
+    bioLabel: "Bio (shown on your profile):",
     submit: "Save",
     firstNameError: "Please enter a first name no longer than 30 characters.",
     lastNameError: "Please enter a last name no longer than 30 characters."
@@ -33,13 +34,20 @@ const home = {
     greetingText: "Hello, %s!",
     yourProviderCardHeader: "Your Therapist",
     noProviderSelected: "You have not selected a provider yet.",
-    selectProviderButton: "Select Provider"
+    selectProviderButton: "Select Provider",
+    changeProviderButton: "Change Provider"
 }
 
 const selectProvider = {
     headerText: "Select Provider",
+}
+
+const providerProfile = {
+    selectProvider: "Select as Your Provider",
     confirmRequestProviderTitle: "Confirm Action",
-    confirmRequestProviderSubtitle: "Please confirm that you would like to request %s to become your provider."
+    confirmRequestProviderSubtitle: "Please confirm that you would like to request %s to become your provider.",
+    bioHeader: "About",
+    noBio: "This user has not set a bio yet."
 }
 
 const prompts = {
@@ -54,7 +62,8 @@ export default {
         signUp,
         editProfile,
         home,
-        selectProvider
+        selectProvider,
+        providerProfile
     },
     prompts
 };

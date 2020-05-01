@@ -1,15 +1,15 @@
 import React, {Component} from "react";
-import {View} from "react-native";
+import {StyleSheet, View} from "react-native";
 import globalStyles from "../globalStyles";
 import strings from "../strings";
 import {Button, Input, Text} from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 import {boundMethod} from "autobind-decorator";
-import {StyleSheet} from "react-native";
 import * as api from "../api";
 import {ACTION_TYPES, createAction} from "../redux/actions";
 import {connect} from "react-redux";
-import {loadProfile} from "../common";
+import {setLogin} from "../common";
+import {AccountType} from "../consts";
 
 
 function isValidEmail(text)
@@ -93,9 +93,7 @@ class SignUp extends Component {
 
         api.signUp(this.state.email, this.state.password)
             .then((response) => {
-                api.createAuthedAPI(response.token);
-                this.props.setToken(response.token);
-                loadProfile(this.props.dispatch);
+                setLogin(this.props.dispatch, response.token, AccountType.user);
             })
             .catch((error) => {
                 const {response} = error;
@@ -220,7 +218,7 @@ const styles = StyleSheet.create({
 
 function mapDispatchToProps(dispatch) {
     return {
-        setToken: (token) => dispatch(createAction(ACTION_TYPES.STORE_TOKEN, token)),
+        setToken: (token) => dispatch(createAction(ACTION_TYPES.SET_TOKEN, token)),
         dispatch
     };
 }

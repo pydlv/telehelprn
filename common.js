@@ -1,29 +1,47 @@
-import {getAuthedAPI} from "./api";
+import {createAuthedAPI, getAuthedAPI} from "./api";
 import {ACTION_TYPES, createAction} from "./redux/actions";
 
-export function loadProfile(dispatch) {
-    const setFirstName = firstName => dispatch(createAction(ACTION_TYPES.SET_FIRST_NAME, firstName));
-    const setLastName = lastName => dispatch(createAction(ACTION_TYPES.SET_LAST_NAME, lastName));
-    const setBirthDate = birthDate => dispatch(createAction(ACTION_TYPES.SET_BIRTH_DATE, birthDate));
+export function setLogin(dispatch, token, accountType) {
+    createAuthedAPI(token);
 
-    getAuthedAPI()
+    dispatch(createAction(ACTION_TYPES.SET_TOKEN, token));
+    dispatch(createAction(ACTION_TYPES.SET_ACCOUNT_TYPE, accountType));
+}
+
+export function loadProfile(dispatch) {
+    const setProfile = profile => dispatch(createAction(ACTION_TYPES.SET_PROFILE, profile));
+
+
+    return getAuthedAPI()
         .getProfile()
         .then((response) => {
-            setFirstName(response.first_name);
-            setLastName(response.last_name);
-            setBirthDate(response.birth_date);
+            const storeProfile = {
+                firstName: response.first_name,
+                lastName: response.last_name,
+                birthDate: response.birth_date,
+                bio: response.bio
+            };
+
+            setProfile(storeProfile);
         })
         .catch((error) => {
             console.error(error);
         })
 }
 
-
 export function loadProvider(dispatch) {
-    const setProvider = provider => dispatch(createAction(ACTION_TYPES.SET_PROVIDER, provider));
+    const setProvider = provider => {
+        const newProvider = provider && {
+            uuid: provider.uuid,
+            fullName: provider.full_name,
+            firstName: provider.first_name,
+            lastName: provider.last_name
+        }
+        dispatch(createAction(ACTION_TYPES.SET_PROVIDER, newProvider));
+    }
 
     getAuthedAPI()
-        .getProvider()
+        .getAssignedProvider()
         .then((response) => {
             setProvider(response.provider)
         });
