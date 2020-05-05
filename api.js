@@ -157,6 +157,44 @@ class AuthenticatedAPI {
 
         return result.data;
     }
+
+    async getAvailabilitySchedules(uuid=null) {
+        const url = hostUrl({
+            path: "/get-availability-schedules" + (uuid ? `/${uuid}` : "")
+        });
+
+        const result = await this.instance.get(url);
+
+        return result.data;
+    }
+
+    async deleteScheduleByUUID(uuid) {
+        const url = hostUrl({
+            path: "/availability-schedules/delete"
+        });
+
+        const result = await this.instance.post(url, {
+            uuid
+        });
+
+        return result.data;
+    }
+
+    async createAvailabilitySchedule(daysOfWeek, startTime, endTime) {
+        const url = hostUrl({
+            path: "/availability-schedules/create"
+        });
+
+        const result = await this.instance.post(url, {
+            start_date: null,
+            end_date: null,
+            days_of_week: daysOfWeek,
+            start_time: startTime,
+            end_time: endTime
+        });
+
+        return result.data;
+    }
 }
 
 let authedAPI = null;

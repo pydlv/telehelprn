@@ -1,6 +1,6 @@
-import {ActivityIndicator, ScrollView, StyleSheet, TextInput, View} from "react-native";
+import {StyleSheet, TextInput, View} from "react-native";
 import React, {Component} from "react";
-import {Button, Image, Input, Text} from "react-native-elements";
+import {Button, Input, Text} from "react-native-elements";
 import {TextInputMask} from "react-native-masked-text";
 import strings from "../strings";
 import {boundMethod} from "autobind-decorator";
@@ -8,10 +8,7 @@ import {getAuthedAPI} from "../api";
 import {ACTION_TYPES, createAction} from "../redux/actions";
 import {Actions} from "react-native-router-flux";
 import {connect} from "react-redux";
-import HeaderWithBackButton from "./HeaderWithBackButton";
 import {loadProfile} from "../common";
-import {S3_HOST} from "../consts";
-import Icon from 'react-native-vector-icons/FontAwesome5';
 import ImagePicker from 'react-native-image-picker';
 import ProfilePicture from "./ProfilePicture";
 
@@ -146,7 +143,7 @@ class EditProfile extends Component {
                 getAuthedAPI()
                     .uploadProfilePicture(source)
                     .then((response) => {
-                        Actions.editProfile();
+                        Actions.refresh({key: Math.random()});
                     });
             }
         })
@@ -154,8 +151,7 @@ class EditProfile extends Component {
 
     render() {
         return (
-            <ScrollView>
-                <HeaderWithBackButton headerText={strings.pages.editProfile.headerText} />
+            <View>
                 <View style={{marginLeft: 10, marginRight: 10, marginTop: 10 }}>
                     {/* First name */}
                     <Input
@@ -222,7 +218,7 @@ class EditProfile extends Component {
                         onPress={this.submit}
                     />
                 </View>
-            </ScrollView>
+            </View>
         );
     }
 }

@@ -19,8 +19,13 @@ const signUp = {
     invalidEmail: "That is not a valid email address."
 }
 
+const settings = {
+    headerText: "Settings",
+    profileSettings: "Profile",
+    providerSettings: "Provider Settings"
+};
+
 const editProfile = {
-    headerText: "Edit Profile",
     firstName: "First Name",
     lastName: "Last Name",
     birthDateLabel: "Please provide your date of birth.",
@@ -56,6 +61,17 @@ const prompts = {
     confirm: "Confirm"
 }
 
+const providerSettings = {
+    yourAvailabilitySchedule: "Your Availability Schedule:",
+    addNewSchedule: "Add new schedule:",
+    selectDaysOfWeek: "Select Days:",
+    selectedStartTime: "Selected start time: %s",
+    changeStartTime: "Change",
+    selectedEndTime: "Selected end time: %s",
+    changeEndTime: "Change",
+    submitButton: "Create Schedule"
+};
+
 export default {
     appName: 'Teletherapy',
     pages: {
@@ -64,7 +80,9 @@ export default {
         editProfile,
         home,
         selectProvider,
-        providerProfile
+        providerProfile,
+        settings,
+        providerSettings
     },
     prompts
 };

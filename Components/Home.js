@@ -22,7 +22,7 @@ class Home extends Component {
         if (profile !== null && !isProfileComplete) {
             // Profile is loaded, but our profile is not complete. Redirect user to edit profile.
             // Set timeout 0 due to this bug https://github.com/aksonov/react-native-router-flux/issues/1125
-            setTimeout(()=>Actions.editProfile(), 0);
+            setTimeout(()=>Actions.settings(), 0);
         }
     }
 
@@ -49,7 +49,7 @@ class Home extends Component {
                                         color="white"
                                     />
                                 }
-                                onPress={Actions.editProfile}
+                                onPress={Actions.settings}
                                 containerStyle={{marginRight:10}}
                             />
                             <Button

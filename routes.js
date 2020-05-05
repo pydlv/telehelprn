@@ -4,11 +4,11 @@ import Login from "./Components/Login";
 import SignUp from "./Components/SignUp";
 import {useSelector} from "react-redux";
 import Home from "./Components/Home";
-import EditProfile from "./Components/EditProfile";
 import {createAuthedAPI} from "./api";
 import ProviderList from "./Components/ProviderList";
 import ConfirmPrompt from "./Components/ConfirmPrompt";
 import ProviderProfile from "./Components/ProviderProfile";
+import Settings from "./Components/Settings";
 
 const Routes = () => {
     const token = useSelector(state => state.token);
@@ -28,7 +28,7 @@ const Routes = () => {
                 </Scene>
                 <Scene key="postAuth" initial={!needsLogin}>
                     <Scene key="home" component={Home} initial={true}/>
-                    <Scene key="editProfile" component={EditProfile} />
+                    <Scene key="settings" component={Settings} />
                     <Scene key="providerList" component={ProviderList} />
                     <Scene key="confirmPrompt" component={ConfirmPrompt} />
                     <Scene key="viewProvider" component={ProviderProfile} />
