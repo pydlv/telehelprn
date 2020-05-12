@@ -1,4 +1,4 @@
-import {AvailabilitySchedule} from "../Components/ProviderSettings";
+import {AvailabilitySchedule} from "../util";
 
 it("schedule overlap test", () => {
     const t1 = AvailabilitySchedule.fromServerObject({

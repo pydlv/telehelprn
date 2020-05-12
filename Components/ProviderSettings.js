@@ -9,54 +9,8 @@ import DateTimePicker from "react-native-modal-datetime-picker";
 import {boundMethod} from "autobind-decorator";
 import {sprintf} from "sprintf-js";
 import {Actions} from "react-native-router-flux";
-
-export class AvailabilitySchedule {
-    constructor(uuid, startDate, endDate, startTime, endTime, daysOfWeek) {
-        this.uuid = uuid;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.daysOfWeek = daysOfWeek;
-    }
-
-    static fromServerObject(obj) {
-        const startDate = moment.utc(obj.start_date, "YYYY-MM-DD");
-        const endDate = moment.utc(obj.end_date, "YYYY-MM-DD");
-        const startTime = moment.utc(obj.start_time, "H:m");
-        const endTime = moment.utc(obj.end_time, "H:m");
-        const daysOfWeek = obj.days_of_week;
-        const uuid = obj.uuid;
-
-        return new AvailabilitySchedule(uuid, startDate, endDate, startTime, endTime, daysOfWeek);
-    }
-
-    overlaps(other): boolean {
-        if (this.startDate < other.endDate && other.startDate <= this.endDate) {
-            // The two schedules are active over the same dates
-            if (this.daysOfWeek & other.daysOfWeek) {
-                // The two schedules share the same days of week, so now we must validate the times.
-                if (this.startTime < other.endTime && other.startTime < this.endTime) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-}
-
-function daysOfWeekString(dowInt) {
-    let result = [];
-    if (dowInt & DayOfWeek.Monday) result.push("Mon");
-    if (dowInt & DayOfWeek.Tuesday) result.push("Tue");
-    if (dowInt & DayOfWeek.Wednesday) result.push("Wed");
-    if (dowInt & DayOfWeek.Thursday) result.push("Thu");
-    if (dowInt & DayOfWeek.Friday) result.push("Fri");
-    if (dowInt & DayOfWeek.Saturday) result.push("Sat");
-    if (dowInt & DayOfWeek.Sunday) result.push("Sun");
-    return result.join(", ");
-}
+import {AvailabilitySchedule, daysOfWeekString, shiftDowFlagByDelta} from "../util";
+import ScheduleViewer from "./ScheduleViewer";
 
 class ProviderSettings extends Component {
     constructor(props) {
@@ -91,26 +45,13 @@ class ProviderSettings extends Component {
             });
     }
 
+    @boundMethod
     deleteSchedule(uuid) {
         getAuthedAPI()
             .deleteScheduleByUUID(uuid)
             .then(() => {
                 Actions.refresh({tabIndex: 1, key: Math.random()});
             })
-    }
-
-    renderScheduleRow(uuid, days, startTime, endTime) {
-        return (
-            <View style={styles.row} key={uuid}>
-                <Text style={styles.cell}>{days}</Text>
-                <Text style={styles.cell}>{startTime} - {endTime}</Text>
-                <Button
-                    title="Delete"
-                    buttonStyle={{backgroundColor: "red"}}
-                    onPress={() => this.deleteSchedule(uuid)}
-                />
-            </View>
-        );
     }
 
     onDayPressed(key) {
@@ -169,31 +110,33 @@ class ProviderSettings extends Component {
             (sunday && DayOfWeek.Sunday)
         ;
 
-        const startTime = moment(this.state.startTime).format("HH:mm");
-        const endTime = moment(this.state.endTime).format("HH:mm");
+        const startTime = moment(this.state.startTime);
+        const endTime = moment(this.state.endTime);
+        const startTimeUTC = startTime.clone().utc();
+        const endTimeUTC = endTime.clone().utc();
+
+        // We have to adjust the week dates, since converting to UTC may overflow or underflow the day of week
+        const delta = startTimeUTC.date() - startTime.date();
+
+        const daysOfWeekUTC = shiftDowFlagByDelta(dowFlag, delta);
 
         getAuthedAPI()
-            .createAvailabilitySchedule(dowFlag, startTime, endTime)
+            .createAvailabilitySchedule(daysOfWeekUTC, startTimeUTC.format("HH:mm"), endTimeUTC.format("HH:mm"))
             .then((response) => {
                 Actions.refresh({tabIndex: 1, key: Math.random()});
             })
-            .catch(error => console.error(error));
     }
 
     render() {
         return (
             <ScrollView style={{margin: 15}}>
                 <Text h4>{strings.pages.providerSettings.yourAvailabilitySchedule}</Text>
-                {this.state.schedules !== undefined &&
-                    this.state.schedules.map((schedule) => {
-                        const days = daysOfWeekString(schedule.daysOfWeek);
-                        const start = schedule.startTime.format("h:mm a");
-                        const end = schedule.endTime.format("h:mm a");
-                        const uuid = schedule.uuid;
 
-                        return this.renderScheduleRow(uuid, days, start, end);
-                    })
-                }
+                <ScheduleViewer
+                    schedules={this.state.schedules}
+                    showDelete={true}
+                    onDeletePress={this.deleteSchedule}
+                />
 
                 <View style={{marginTop: 20}}>
                     {/* days of the week */}
@@ -259,21 +202,6 @@ class ProviderSettings extends Component {
 }
 
 const styles = StyleSheet.create({
-    row: {
-        flex: 1,
-        alignSelf: 'stretch',
-        flexDirection: 'row',
-        marginTop: 20,
-        alignItems: "center"
-    },
-
-    cell: {
-        flex: 1,
-        alignItems: "flex-end",
-        textAlign: "left",
-        marginRight: 20
-    },
-
     formInput: {
         marginTop: 10,
         marginBottom: 10

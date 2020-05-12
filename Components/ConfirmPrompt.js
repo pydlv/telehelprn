@@ -91,4 +91,9 @@ ConfirmPrompt.propTypes = {
     onCancel: PropTypes.func
 }
 
+ConfirmPrompt.defaultProps = {
+    onConfirm: () => {},
+    onCancel: () => {}
+}
+
 export default ConfirmPrompt;

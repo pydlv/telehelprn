@@ -9,6 +9,7 @@ import ProviderList from "./Components/ProviderList";
 import ConfirmPrompt from "./Components/ConfirmPrompt";
 import ProviderProfile from "./Components/ProviderProfile";
 import Settings from "./Components/Settings";
+import AppointmentScheduler from "./Components/AppointmentScheduler";
 
 const Routes = () => {
     const token = useSelector(state => state.token);
@@ -32,6 +33,7 @@ const Routes = () => {
                     <Scene key="providerList" component={ProviderList} />
                     <Scene key="confirmPrompt" component={ConfirmPrompt} />
                     <Scene key="viewProvider" component={ProviderProfile} />
+                    <Scene key="appointmentScheduler" component={AppointmentScheduler} />
                 </Scene>
             </Scene>
         </Router>

@@ -41,7 +41,8 @@ const home = {
     yourProviderCardHeader: "Your Therapist",
     noProviderSelected: "You have not selected a provider yet.",
     selectProviderButton: "Select Provider",
-    changeProviderButton: "Change Provider"
+    changeProviderButton: "Change Provider",
+    yourProviderIs: "Your provider is: %s"
 }
 
 const selectProvider = {
@@ -56,13 +57,27 @@ const providerProfile = {
     noBio: "This user has not set a bio yet."
 }
 
+const appointmentCard = {
+    titleText: "Your Next Appointment",
+    noAppointment: "You do not have an appointment.",
+    scheduleOneNow: "Schedule Now",
+    joinSession: "Join Session",
+    changeOrCancel: "Cancel Appointment",
+    youHaveAnAppointment: "You have an appointment:",
+    startTime: "Start time:",
+    endTime: "End time:",
+    youWillBeAbleToJoinIn: "You will be able to join the session in %s.",
+    cancelConfirmTitle: "Cancel Appointment",
+    cancelConfirmSubtitle: "Are you sure you would like to cancel your appointment for %s?"
+}
+
 const prompts = {
     cancel: "Cancel",
     confirm: "Confirm"
 }
 
 const providerSettings = {
-    yourAvailabilitySchedule: "Your Availability Schedule:",
+    yourAvailabilitySchedule: "Your schedules:",
     addNewSchedule: "Add new schedule:",
     selectDaysOfWeek: "Select Days:",
     selectedStartTime: "Selected start time: %s",
@@ -70,7 +85,14 @@ const providerSettings = {
     selectedEndTime: "Selected end time: %s",
     changeEndTime: "Change",
     submitButton: "Create Schedule"
-};
+}
+
+const appointmentScheduler = {
+    headerText: "Schedule Appointment",
+    yourProvidersSchedule: "Your provider's schedule:",
+    confirmAppointment: "Confirm Appointment",
+    confirmSubtitle: "Please confirm that you would like to schedule an appointment for %s."
+}
 
 export default {
     appName: 'Teletherapy',
@@ -82,7 +104,9 @@ export default {
         selectProvider,
         providerProfile,
         settings,
-        providerSettings
+        providerSettings,
+        appointmentCard,
+        appointmentScheduler
     },
     prompts
 };

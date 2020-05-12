@@ -1,6 +1,7 @@
 import Config from "react-native-config";
 import axios from "axios";
 import buildUrl from "build-url";
+import moment from "moment";
 
 const partial = (func, ...args) => (...rest) => func(...args, ...rest);
 
@@ -191,6 +192,53 @@ class AuthenticatedAPI {
             days_of_week: daysOfWeek,
             start_time: startTime,
             end_time: endTime
+        });
+
+        return result.data;
+    }
+
+    async getMyAppointments() {
+        const url = hostUrl({
+            path: "/get-my-appointments"
+        });
+
+        const result = await this.instance.get(url);
+
+        return result.data;
+    }
+
+    async getAvailableAppointments(startDate, endDate) {
+        const url = hostUrl({
+            path: "/get-available-appointments"
+        });
+
+        const result = await this.instance.post(url, {
+            start_date: startDate.clone().format("YYYY-MM-DD"),
+            end_date: endDate.clone().format("YYYY-MM-DD")
+        });
+
+        return result.data;
+    }
+
+    async scheduleAppointment(time) {
+        const url = hostUrl({
+            path: "/schedule-appointment"
+        });
+
+        const result = await this.instance.post(url, {
+            time: time.toISOString()
+        });
+
+        return result.data;
+    }
+
+    async cancelAppointment(uuid) {
+        const url = hostUrl({
+            path: "/cancel-appointment"
+        });
+
+        const result = await this.instance.post(url, {
+            uuid
         });
 
         return result.data;

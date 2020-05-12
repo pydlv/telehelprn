@@ -8,7 +8,7 @@ import App from '../App';
 
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
-import {AvailabilitySchedule} from "../Components/ProviderSettings";
+import {AvailabilitySchedule} from "../util";
 
 it('renders correctly', () => {
   renderer.create(<App />);
