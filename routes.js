@@ -10,6 +10,7 @@ import ConfirmPrompt from "./Components/ConfirmPrompt";
 import ProviderProfile from "./Components/ProviderProfile";
 import Settings from "./Components/Settings";
 import AppointmentScheduler from "./Components/AppointmentScheduler";
+import VideoSession from "./Components/VideoSession";
 
 const Routes = () => {
     const token = useSelector(state => state.token);
@@ -27,13 +28,14 @@ const Routes = () => {
                     <Scene key="login" component={Login} initial={true} init={true}/>
                     <Scene key="signUp" component={SignUp}/>
                 </Scene>
-                <Scene key="postAuth" initial={!needsLogin}>
-                    <Scene key="home" component={Home} initial={true}/>
+                <Scene key="postAuth" initial={!needsLogin} >
+                    <Scene key="home" component={Home} initial={true} />
                     <Scene key="settings" component={Settings} />
                     <Scene key="providerList" component={ProviderList} />
                     <Scene key="confirmPrompt" component={ConfirmPrompt} />
                     <Scene key="viewProvider" component={ProviderProfile} />
                     <Scene key="appointmentScheduler" component={AppointmentScheduler} />
+                    <Scene key="videoSession" component={VideoSession} type="reset" />
                 </Scene>
             </Scene>
         </Router>

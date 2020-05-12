@@ -67,8 +67,8 @@ class Home extends Component {
                         </View>
                     }
                 />
-                {this.props.accountType === AccountType.User &&
-                    <View>
+                <View>
+                    {this.props.accountType === AccountType.User &&
                         <Card
                             title={strings.pages.home.yourProviderCardHeader}
                             titleStyle={{alignSelf: "flex-start"}}
@@ -96,9 +96,11 @@ class Home extends Component {
                                 </View>
                             }
                         </Card>
-                        {this.props.provider && <NextAppointmentCard />}
-                    </View>
-                }
+                    }
+                    {(this.props.provider || this.props.accountType === AccountType.Provider) &&
+                        <NextAppointmentCard />
+                    }
+                </View>
             </ScrollView>
         );
     }

@@ -7,6 +7,7 @@ import {getAuthedAPI} from "../api";
 import {Actions} from "react-native-router-flux";
 import moment from "moment";
 import {boundMethod} from "autobind-decorator";
+import {AccountType} from "../consts";
 
 const APPOINTMENT_TIME_FORMAT = "dddd, MMMM Do, LT";
 
@@ -100,10 +101,17 @@ class NextAppointmentCard extends Component {
         })
     }
 
+    @boundMethod
+    onJoinSessionPress() {
+        Actions.push("videoSession", {
+            appointmentUUID: this.state.appointment.uuid
+        })
+    }
+
     render() {
         return (
             <View>
-                {this.props.provider &&
+                {(this.props.provider || this.props.accountType === AccountType.Provider) &&
                     <Card
                         title={strings.pages.appointmentCard.titleText}
                         titleStyle={{alignSelf: "flex-start"}}
@@ -115,11 +123,13 @@ class NextAppointmentCard extends Component {
                                 // Either we don't have a confirmed appointment or our appointment has ended
                                 <View>
                                     <Text style={{marginBottom: 20}}>{strings.pages.appointmentCard.noAppointment}</Text>
-                                    <Button
-                                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                                        title={strings.pages.appointmentCard.scheduleOneNow}
-                                        onPress={Actions.appointmentScheduler}
-                                    />
+                                    {this.props.accountType === AccountType.User &&
+                                        <Button
+                                            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                                            title={strings.pages.appointmentCard.scheduleOneNow}
+                                            onPress={Actions.appointmentScheduler}
+                                        />
+                                    }
                                 </View>
                                 :
                                 <View>
@@ -146,6 +156,7 @@ class NextAppointmentCard extends Component {
                                         <Button
                                             title={strings.pages.appointmentCard.joinSession}
                                             disabled={this.state.appointment.startTime > moment.utc()}
+                                            onPress={this.onJoinSessionPress}
                                         />
                                         <Button
                                             title={strings.pages.appointmentCard.changeOrCancel}
@@ -163,7 +174,8 @@ class NextAppointmentCard extends Component {
 
 function mapStateToProps(state) {
     return {
-        provider: state.provider
+        provider: state.provider,
+        accountType: state.accountType
     };
 }
 

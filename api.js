@@ -1,7 +1,6 @@
 import Config from "react-native-config";
 import axios from "axios";
 import buildUrl from "build-url";
-import moment from "moment";
 
 const partial = (func, ...args) => (...rest) => func(...args, ...rest);
 

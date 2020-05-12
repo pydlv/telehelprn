@@ -59,7 +59,7 @@ const providerProfile = {
 
 const appointmentCard = {
     titleText: "Your Next Appointment",
-    noAppointment: "You do not have an appointment.",
+    noAppointment: "You do not have any appointments.",
     scheduleOneNow: "Schedule Now",
     joinSession: "Join Session",
     changeOrCancel: "Cancel Appointment",

@@ -2,16 +2,19 @@
 // and https://www.scaledrone.com/blog/webrtc-tutorial-simple-video-chat
 
 import React, {Component} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, Dimensions} from 'react-native';
 
 import {mediaDevices, RTCIceCandidate, RTCPeerConnection, RTCSessionDescription, RTCView} from 'react-native-webrtc';
-import {uuidv4} from '../util';
+import PropTypes from "prop-types";
+
+import {Button, Text} from "react-native-elements";
 
 import Scaledrone from 'scaledrone-react-native';
+import {Actions} from "react-native-router-flux";
+import {boundMethod} from "autobind-decorator";
 
 const isFront = true; // Use Front camera?
-
-const clientId = uuidv4();
+const dimensions = Dimensions.get('window');
 
 const configuration = {
     iceServers: [
@@ -30,9 +33,13 @@ function onError(error) {
     console.error(error);
 }
 
-export default class VideoSession extends Component {
+class VideoSession extends Component {
     constructor(props) {
         super(props);
+
+        if (!this.props.appointmentUUID) {
+            throw new Error("Invalid appointment UUID");
+        }
 
         // Method bindings
         this.setupRoom = this.setupRoom.bind(this);
@@ -44,6 +51,8 @@ export default class VideoSession extends Component {
         this.processCandidatesQueueIfReady = this.processCandidatesQueueIfReady.bind(this);
         this.setupLocalVideo = this.setupLocalVideo.bind(this);
         this.handleDisconnectPress = this.handleDisconnectPress.bind(this);
+
+        this.alreadyPerformedDisconnectSteps = false;
 
         this.localStream = null;
         this.setupLocalVideo().then(() => {
@@ -60,6 +69,7 @@ export default class VideoSession extends Component {
             connected: false,
             localStreamURL: null,
             remoteStreamURL: null,
+            partnerWaitingMessage: "Waiting for your video partner to connect."
         };
     }
 
@@ -80,8 +90,7 @@ export default class VideoSession extends Component {
     }
 
     setupRoom() {
-        this.roomHash = uuidv4();
-        this.roomName = 'observable-123456';
+        this.roomName = `observable-${this.props.appointmentUUID}`;
 
         this.room = this.drone.subscribe(this.roomName);
 
@@ -176,8 +185,8 @@ export default class VideoSession extends Component {
 
     startListeningToSignals() {
         this.room.on('data', (message, client) => {
-            // We sent the message
             if (!client || client.id === this.drone.clientId) {
+                // We are the sender
                 return;
             }
 
@@ -220,6 +229,13 @@ export default class VideoSession extends Component {
                 }
             } else if (message === "is offerer") {
                 console.log("Peer is claiming offerer role.");
+            } else if (message === "disconnecting") {
+                this.setState({
+                    partnerWaitingMessage: "Your partner has disconnected.",
+                    remoteStreamURL: null,
+                    connected: false
+                });
+                this.peer.close();
             } else {
                 console.log("Received unknown message:", message);
             }
@@ -248,31 +264,107 @@ export default class VideoSession extends Component {
     }
 
     componentWillUnmount() {
+        console.log("UNMOUNTING!!!");
         // Leave room and close connection to scaledrone
-        if (this.room) {
-            this.room.unsubscribe();
+        if (!this.alreadyPerformedDisconnectSteps) {
+            this.sendMessage("disconnecting");
+            // We want to wait for the message to finish sending before closing this stuff.
+            // Unfortunately there's not a nice way to do it.
+            setTimeout(() => {
+                if (this.room) {
+                    this.room.unsubscribe();
+                }
+                if (this.drone) {
+                    this.drone.close();
+                }
+            }, 2000);
+            this.peer.close();
+            this.alreadyPerformedDisconnectSteps = true;
         }
-        if (this.drone) {
-            this.drone.close();
+    }
+
+    @boundMethod
+    handleDisconnectPress() {
+        this.setState({
+            localStreamURL: null,
+            remoteStreamURL: null,
+            connected: false
+        });
+
+        if (!this.alreadyPerformedDisconnectSteps) {
+            this.sendMessage("disconnecting");
+            // We want to wait for the message to finish sending before closing this stuff.
+            // Unfortunately there's not a nice way to do it.
+            setTimeout(() => {
+                if (this.room) {
+                    this.room.unsubscribe();
+                }
+                if (this.drone) {
+                    this.drone.close();
+                }
+            }, 3000);
+            this.peer.close();
+            this.alreadyPerformedDisconnectSteps = true;
         }
+
+        Actions.pop({type: "reset"});
     }
 
     render() {
         return (
-            <View>
-                {/*<Text>{strings.appName}</Text>*/}
-                {/*<Text>{this.state.localStreamURL }</Text>*/}
-                { this.state.remoteStreamURL &&
-                <RTCView
-                    streamURL={this.state.remoteStreamURL}
-                    style={styles.remoteRtcView}/>
-                }
-                { this.state.localStreamURL &&
-                <RTCView
-                    streamURL={this.state.localStreamURL}
-                    style={styles.localRtcView}
-                />
-                }
+            <View style={styles2.container}>
+                {/*<Button*/}
+                {/*    title="Back"*/}
+                {/*    onPress={() => Actions.home({type: "reset"})}*/}
+                {/*/>*/}
+                {/*<View>*/}
+                {/*    {this.state.remoteStreamURL &&*/}
+                {/*        <RTCView*/}
+                {/*            streamURL={this.state.remoteStreamURL}*/}
+                {/*            style={StyleSheet.absoluteFillObject}*/}
+                {/*        />*/}
+                {/*    }*/}
+                {/*</View>*/}
+
+                <View style={styles2.video}>
+                    <View style={styles2.localVideo}>
+                        <View style={styles2.videoWidget}>
+                            {this.state.localStreamURL &&
+                                <RTCView
+                                    streamURL={this.state.localStreamURL}
+                                    style={styles2.rtcView}
+
+                                /> ||
+                                <Text>
+                                    Waiting for local stream.
+                                </Text>
+                            }
+                        </View>
+                    </View>
+                    <View style={styles2.remoteVideo}>
+                        <View style={styles2.videoWidget}>
+                            {this.state.remoteStreamURL &&
+                                <RTCView
+                                    streamURL={this.state.remoteStreamURL}
+                                    style={styles2.rtcView}
+                                /> ||
+                                <Text>
+                                    {this.state.partnerWaitingMessage}
+                                </Text>
+                            }
+                        </View>
+                    </View>
+                </View>
+
+                <View>
+                    <Button
+                        title="Disconnect"
+                        onPress={this.handleDisconnectPress}
+                    />
+                </View>
+
+                {/*asdf*/}
+
                 {/*<View>*/}
                 {/*    {this.peer &&*/}
                 {/*    <TouchableOpacity onPress={this.handleDisconnectPress}*/}
@@ -286,10 +378,10 @@ export default class VideoSession extends Component {
             </View>
         );
     }
+}
 
-    handleDisconnectPress() {
-
-    }
+VideoSession.propTypes = {
+    appointmentUUID: PropTypes.string
 }
 
 const styles = StyleSheet.create({
@@ -316,11 +408,12 @@ const styles = StyleSheet.create({
     },
 
     remoteRtcView: {
-        height: '100%',
-        width: '100%',
-        backgroundColor: '#f00',
-        borderColor: '#000',
-        zIndex: -1
+
+        // height: '90%',
+        // width: '100%',
+        // backgroundColor: '#f00',
+        // borderColor: '#000',
+        // zIndex: -1
     },
 
     localRtcView: {
@@ -334,3 +427,80 @@ const styles = StyleSheet.create({
         zIndex: 2
     }
 });
+
+const styles2 = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'flex-start'
+    },
+    bottomView: {
+        height: 20,
+        flex: 1,
+        bottom: 80,
+        position: 'absolute',
+        alignItems: 'center'
+    },
+    connect: {
+        fontSize: 30
+    },
+    video: {
+        flex: 1,
+        flexDirection: 'column',
+        position: 'relative',
+        backgroundColor: '#eee',
+        alignSelf: 'stretch'
+    },
+    onlineCircle: {
+        width: 20,
+        height: 20,
+        borderRadius: 10,
+        backgroundColor: '#1e1',
+        position: 'absolute',
+        top: 10,
+        left: 10
+    },
+    offlineCircle: {
+        width: 20,
+        height: 20,
+        borderRadius: 10,
+        backgroundColor: '#333'
+    },
+    remoteVideo: {
+        flex: 1,
+        backgroundColor: '#faa',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column'
+    },
+    localVideo: {
+        flex: 1,
+        backgroundColor: '#aaf',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column'
+    },
+    videoWidget: {
+        position: 'relative',
+        flex: 1,
+        backgroundColor: '#fff',
+        width: dimensions.width,
+        borderWidth: 1,
+        borderColor: '#eee'
+    },
+    rtcView: {
+        flex: 1,
+        // width: dimensions.width / 2,
+        backgroundColor: '#f00',
+        position: 'relative'
+    }
+});
+
+const styles3 = StyleSheet.create({
+    container: {
+
+    }
+});
+
+export default VideoSession;
