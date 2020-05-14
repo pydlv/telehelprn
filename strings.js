@@ -33,7 +33,8 @@ const editProfile = {
     submit: "Save",
     firstNameError: "Please enter a first name no longer than 30 characters.",
     lastNameError: "Please enter a last name no longer than 30 characters.",
-    profilePicture: "Profile Picture"
+    profilePicture: "Profile Picture",
+    profilePictureTooLarge: "Sorry, the size of that file is too large. Try a smaller one."
 }
 
 const home = {
@@ -91,7 +92,8 @@ const appointmentScheduler = {
     headerText: "Schedule Appointment",
     yourProvidersSchedule: "Your provider's schedule:",
     confirmAppointment: "Confirm Appointment",
-    confirmSubtitle: "Please confirm that you would like to schedule an appointment for %s."
+    confirmSubtitle: "Please confirm that you would like to schedule an appointment for %s.",
+    searchDatesTooFarApart: "The start and end dates must be within 7 days of each other."
 }
 
 export default {

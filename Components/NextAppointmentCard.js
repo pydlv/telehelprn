@@ -36,8 +36,8 @@ function pretty(days, hours, minutes) {
 class NextAppointmentCard extends Component {
     intervalID = 0;
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             appointment: undefined

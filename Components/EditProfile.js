@@ -30,8 +30,8 @@ function isBirthDateValid(text) {
 }
 
 class EditProfile extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             firstName: "",
@@ -43,7 +43,8 @@ class EditProfile extends Component {
             lastNameValid: false,
             birthDateValid: false,
             bio: "",
-            profileImageS3: null
+            profileImageS3: null,
+            profileImageError: null
         }
     }
 
@@ -125,7 +126,7 @@ class EditProfile extends Component {
 
             this.props.setProfile(profile);
 
-            Actions.home();
+            Actions.home({type: "replace"});
         });
     }
 
@@ -143,8 +144,21 @@ class EditProfile extends Component {
                 getAuthedAPI()
                     .uploadProfilePicture(source)
                     .then((response) => {
-                        Actions.refresh({key: Math.random()});
-                    });
+                        this.setState({
+                            profileImageS3: response.object,
+                            profileImageError: null
+                        });
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        if (error.response.status === 413) {
+                            this.setState({
+                                profileImageError: strings.pages.editProfile.profilePictureTooLarge
+                            });
+                        } else {
+                            return Promise.reject(error);
+                        }
+                    })
             }
         })
     }
@@ -210,6 +224,9 @@ class EditProfile extends Component {
                             onPress={this.onSelectProfilePicturePressed}
                         />
                     </View>
+                    {this.state.profileImageError &&
+                        <Text style={{color: "red"}}>{this.state.profileImageError}</Text>
+                    }
 
                     <Button
                         title={strings.pages.editProfile.submit}

@@ -8,26 +8,22 @@ export function setLogin(dispatch, token, accountType) {
     dispatch(createAction(ACTION_TYPES.SET_ACCOUNT_TYPE, accountType));
 }
 
-export function loadProfile(dispatch) {
+export async function loadProfile(dispatch) {
     const setProfile = profile => dispatch(createAction(ACTION_TYPES.SET_PROFILE, profile));
 
+    const response = await getAuthedAPI().getProfile();
 
-    return getAuthedAPI()
-        .getProfile()
-        .then((response) => {
-            const storeProfile = {
-                firstName: response.first_name,
-                lastName: response.last_name,
-                birthDate: response.birth_date,
-                bio: response.bio,
-                profileImageS3: response.profile_image_s3
-            };
+    const storeProfile = {
+        firstName: response.first_name,
+        lastName: response.last_name,
+        birthDate: response.birth_date,
+        bio: response.bio,
+        profileImageS3: response.profile_image_s3
+    };
 
-            setProfile(storeProfile);
-        })
-        .catch((error) => {
-            console.error(error);
-        })
+    setProfile(storeProfile);
+
+    return response ? storeProfile : null;
 }
 
 export function loadProvider(dispatch) {

@@ -31,7 +31,8 @@ class AppointmentScheduler extends Component {
             startDate: moment(),
             endDate: moment().add(7, "days"),
             startDatePickerVisible: false,
-            endDatePickerVisible: false
+            endDatePickerVisible: false,
+            searchDateValidationError: null
         };
     }
 
@@ -83,22 +84,40 @@ class AppointmentScheduler extends Component {
         })
     }
 
+    calcSearchDateValidationError(dateEnd, dateStart) {
+        let searchDateValidationError = null;
+        if (dateEnd.diff(dateStart, "days") > 7) {
+            searchDateValidationError = strings.pages.appointmentScheduler.searchDatesTooFarApart;
+        }
+        return searchDateValidationError;
+    }
+
     @boundMethod
     onSelectStartDate(date) {
+        const startMoment = moment(date);
+
+        const searchDateValidationError = this.calcSearchDateValidationError(this.state.endDate, startMoment);
+
         this.setState({
             possibleAppointments: undefined,
-            startDate: moment(date),
+            startDate: startMoment,
             startDatePickerVisible: false,
-        }, this.updateSearch);
+            searchDateValidationError
+        }, searchDateValidationError === null ? this.updateSearch : undefined);
     }
 
     @boundMethod
     onSelectEndDate(date) {
+        const endMoment = moment(date);
+
+        const searchDateValidationError = this.calcSearchDateValidationError(endMoment, this.state.startDate);
+
         this.setState({
             possibleAppointments: undefined,
-            endDate: moment(date),
-            endDatePickerVisible: false
-        }, this.updateSearch);
+            endDate: endMoment,
+            endDatePickerVisible: false,
+            searchDateValidationError
+        }, searchDateValidationError === null ? this.updateSearch : undefined);
     }
 
     @boundMethod
@@ -162,10 +181,9 @@ class AppointmentScheduler extends Component {
                                 onCancel={this.onDateSelectCancel}
                             />
                         </View>
-                        {/*<Button*/}
-                        {/*    title="Search"*/}
-                        {/*    containerStyle={{width: "25%"}}*/}
-                        {/*/>*/}
+                        {this.state.searchDateValidationError &&
+                            <Text style={{color: "red"}}>{this.state.searchDateValidationError}</Text>
+                        }
                     </View>
                 </View>
                 {this.state.possibleAppointments !== undefined &&
@@ -181,7 +199,7 @@ class AppointmentScheduler extends Component {
                         );
                     })
                     ||
-                    <ActivityIndicator />
+                    <ActivityIndicator style={{marginTop: 20}} />
                 }
             </ScrollView>
         );

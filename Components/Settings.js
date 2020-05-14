@@ -49,7 +49,10 @@ class Settings extends Component {
     render() {
         return (
             <ScrollView>
-                <HeaderWithBackButton headerText={strings.pages.settings.headerText} />
+                <HeaderWithBackButton
+                    headerText={strings.pages.settings.headerText}
+                    showBackButton={this.props.showBackButton}
+                />
 
                 {this.tabs.length > 1 &&
                     <View style={styles.tabContainer}>
@@ -77,7 +80,8 @@ class Settings extends Component {
 }
 
 Settings.defaultProps = {
-    tabIndex: 0
+    tabIndex: 0,
+    showBackButton: true
 }
 
 const styles = StyleSheet.create({

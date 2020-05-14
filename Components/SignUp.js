@@ -93,7 +93,7 @@ class SignUp extends Component {
 
         api.signUp(this.state.email, this.state.password)
             .then((response) => {
-                setLogin(this.props.dispatch, response.token, AccountType.user);
+                setLogin(this.props.dispatch, response.token, AccountType.User);
             })
             .catch((error) => {
                 const {response} = error;

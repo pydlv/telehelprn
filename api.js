@@ -2,12 +2,19 @@ import Config from "react-native-config";
 import axios from "axios";
 import buildUrl from "build-url";
 
+axios.interceptors.response.use(
+    response => response,
+    error => {
+        throw error
+    }
+);
+
 const partial = (func, ...args) => (...rest) => func(...args, ...rest);
 
 const API_HOST = Config.API_HOST;
 
 // Wrapper function so we don't have to manually provide the same host for every endpoint.
-const hostUrl = partial(buildUrl, "http://" + API_HOST);
+const hostUrl = partial(buildUrl, API_HOST);
 
 
 export async function login(email, password) {
@@ -59,10 +66,17 @@ class AuthenticatedAPI {
         this.instance = axios.create({
             headers: {
                 common: {
-                    session: this.token // todo: Make sure this is a secure place for it
+                    session: this.token
                 }
             }
         });
+
+        this.instance.interceptors.response.use(
+            response => response,
+            error => {
+                throw error
+            }
+        );
     }
 
     async signOut() {

@@ -7,7 +7,7 @@ const originalState = {
     token: null,
     profile: null,
     provider: null,
-    accountType: null
+    accountType: undefined
 };
 
 function myReducer(state = originalState, action) {

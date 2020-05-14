@@ -14,18 +14,21 @@ import {AccountType} from "../consts";
 import NextAppointmentCard from "./NextAppointmentCard";
 
 class Home extends Component {
+    constructor(props) {
+        super(props);
+    }
+
     componentDidMount(): void {
-        loadProfile(this.props.dispatch);
         loadProvider(this.props.dispatch);
 
-        const {profile} = this.props;
-        const isProfileComplete = profile && profile.firstName && profile.lastName && profile.birthDate;
-
-        if (profile !== null && !isProfileComplete) {
-            // Profile is loaded, but our profile is not complete. Redirect user to edit profile.
-            // Set timeout 0 due to this bug https://github.com/aksonov/react-native-router-flux/issues/1125
-            setTimeout(()=>Actions.settings(), 0);
-        }
+        loadProfile(this.props.dispatch)
+            .then((profile) => {
+                if (!profile.firstName || !profile.lastName || !profile.birthDate) {
+                    // Profile is loaded, but our profile is not complete. Redirect user to edit profile.
+                    // Set timeout 0 due to this bug https://github.com/aksonov/react-native-router-flux/issues/1125
+                    setTimeout(()=>Actions.settings({showBackButton: false, type: "replace"}), 0);
+                }
+            })
     }
 
     @boundMethod
