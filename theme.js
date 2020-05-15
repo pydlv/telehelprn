@@ -1,7 +1,7 @@
 export default {
     Text: {
         style: {
-            fontFamily: "Console",
+            fontFamily: "System",
             fontSize: 16
         }
     }
