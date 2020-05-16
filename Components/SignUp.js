@@ -145,6 +145,7 @@ class SignUp extends Component {
                     onChangeText={this.handleEmail}
                     errorMessage={this.state.emailValidationError}
                     onBlur={this.emailBlur}
+                    autoCapitalize="none"
                 />
 
                 <Input
@@ -163,6 +164,7 @@ class SignUp extends Component {
                     onChangeText={this.handlePassword}
                     errorMessage={this.state.passwordValidationError}
                     onBlur={this.onPasswordBlur}
+                    autoCapitalize="none"
                 />
 
                 <Input
@@ -181,6 +183,7 @@ class SignUp extends Component {
                     onChangeText={this.handlePasswordConfirm}
                     errorMessage={this.state.passwordConfirmValidationError}
                     onBlur={this.checkPasswordConfirm}
+                    autoCapitalize="none"
                 />
 
                 <Button

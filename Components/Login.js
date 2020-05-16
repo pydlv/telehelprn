@@ -110,6 +110,7 @@ class Login extends Component {
                         disabled={this.state.loading}
                         onChangeText={this.handleEmail}
                         errorMessage={this.state.emailValidationError}
+                        autoCapitalize="none"
                     />
 
                     <Input
@@ -128,6 +129,7 @@ class Login extends Component {
                         onChangeText={this.handlePassword}
                         errorMessage={this.state.passwordValidationError}
                         value={this.state.password}
+                        autoCapitalize="none"
                     />
 
                     <Button

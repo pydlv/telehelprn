@@ -61,6 +61,7 @@ class AppointmentScheduler extends Component {
                 getAuthedAPI()
                     .scheduleAppointment(appointment.moment)
                     .then(Actions.home)
+                    .catch((error) => console.log(error.response.data));
             },
             onCancel: () => {}
         });
