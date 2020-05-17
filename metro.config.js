@@ -6,6 +6,7 @@
  */
 
 module.exports = {
+  devtool: "source-map",
   transformer: {
     getTransformOptions: async () => ({
       transform: {
