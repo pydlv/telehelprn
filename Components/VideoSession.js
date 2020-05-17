@@ -12,6 +12,8 @@ import {Button, Text} from "react-native-elements";
 import Scaledrone from 'scaledrone-react-native';
 import {Actions} from "react-native-router-flux";
 import {boundMethod} from "autobind-decorator";
+import {AccountType} from "../consts";
+import {connect} from "react-redux";
 
 const isFront = true; // Use Front camera?
 const dimensions = Dimensions.get('window');
@@ -59,8 +61,7 @@ class VideoSession extends Component {
             this.drone = new Scaledrone('S2ktEkKPVRBiKCka');
             this.candidatesQueue = [];
 
-            this.alreadyDeferredOfferer = false;
-            this.isOfferer = false;
+            this.isOfferer = this.props.accountType !== AccountType.User;
 
             this.setupRoom();
         });
@@ -78,14 +79,13 @@ class VideoSession extends Component {
             console.log("Processing ICE candidates.");
             while (this.candidatesQueue.length > 0) {
                 const candidate = this.candidatesQueue.shift();
+                console.log(this.peer);
                 this.peer.addIceCandidate(
                     new RTCIceCandidate(candidate)
-                ).catch(onError)
+                ).catch(onError);
             }
         } else {
             console.log("Received candidate, but a description has not been set yet.");
-            // console.log("Local:", this.peer.localDescription);
-            // console.log("Remote:", this.peer.remoteDescription);
         }
     }
 
@@ -102,18 +102,6 @@ class VideoSession extends Component {
         });
 
         this.room.on('members', (members) => {
-            // if (members.length > 2) {
-            //     console.error("Room is full.");
-            //     this.room.unsubscribe();
-            // }
-
-            const membersWithoutDebugger = members.filter(el => el.authData === undefined || !el.authData.user_is_from_scaledrone_debugger);
-
-            if (membersWithoutDebugger.length > 1) {
-                this.sendMessage("don't want offerer");
-                this.alreadyDeferredOfferer = true;
-            }
-
             this.initializeRTCPeer();
             this.startListeningToSignals();
         });
@@ -126,7 +114,7 @@ class VideoSession extends Component {
         });
     }
 
-    initializeRTCPeer() {
+    initializeRTCPeer(sendRequestRestart=true) {
         const peer = new RTCPeerConnection(configuration);
 
         peer.onicecandidate = (event) => {
@@ -145,6 +133,12 @@ class VideoSession extends Component {
         };
 
         peer.addStream(this.localStream);
+
+        if (this.isOfferer) {
+            peer.onnegotiationneeded = this.negotiate;
+        } else if (sendRequestRestart) {
+            this.sendMessage("request restart");
+        }
 
         this.peer = peer;
     }
@@ -207,28 +201,10 @@ class VideoSession extends Component {
             } else if (message.candidate) {
                 this.candidatesQueue.push(message.candidate);
                 this.processCandidatesQueueIfReady();
-            } else if (message === "don't want offerer") {
-                // Basically if we said we don't want to be the offerer, and then our peer comes back to us
-                // and says that they also don't want to be the offerer, we will become the offerer.
-                if (this.peer.localDescription || this.peer.remoteDescription || this.isOfferer) {
-                    // We had already connected before so we need to restart
-                    console.log("Restarting ice.");
-                    this.peer.close();
-                    this.initializeRTCPeer();
-                    this.alreadyDeferredOfferer = true;
-                    this.isOfferer = false;
-                    this.sendMessage("don't want offerer");
-                } else if (this.alreadyDeferredOfferer) {
-                    this.sendMessage("is offerer");
-                    this.isOfferer = true;
-                    this.peer.onnegotiationneeded = this.negotiate;
-                    this.negotiate();
-                } else {
-                    this.sendMessage("don't want offerer");
-                    this.alreadyDeferredOfferer = true;
-                }
-            } else if (message === "is offerer") {
-                console.log("Peer is claiming offerer role.");
+            } else if (message === "request restart") {
+                console.log("Restarting WebRTC.");
+                this.peer.close();
+                this.initializeRTCPeer();
             } else if (message === "disconnecting") {
                 this.setState({
                     partnerWaitingMessage: "Your partner has disconnected.",
@@ -236,6 +212,7 @@ class VideoSession extends Component {
                     connected: false
                 });
                 this.peer.close();
+                this.initializeRTCPeer(false);
             } else {
                 console.log("Received unknown message:", message);
             }
@@ -277,7 +254,7 @@ class VideoSession extends Component {
                 if (this.drone) {
                     this.drone.close();
                 }
-            }, 2000);
+            }, 100);
             this.peer.close();
             this.alreadyPerformedDisconnectSteps = true;
         }
@@ -285,6 +262,8 @@ class VideoSession extends Component {
 
     @boundMethod
     handleDisconnectPress() {
+        console.log("Disconnecting");
+
         this.setState({
             localStreamURL: null,
             remoteStreamURL: null,
@@ -302,7 +281,7 @@ class VideoSession extends Component {
                 if (this.drone) {
                     this.drone.close();
                 }
-            }, 3000);
+            }, 100);
             this.peer.close();
             this.alreadyPerformedDisconnectSteps = true;
         }
@@ -312,27 +291,14 @@ class VideoSession extends Component {
 
     render() {
         return (
-            <View style={styles2.container}>
-                {/*<Button*/}
-                {/*    title="Back"*/}
-                {/*    onPress={() => Actions.home({type: "reset"})}*/}
-                {/*/>*/}
-                {/*<View>*/}
-                {/*    {this.state.remoteStreamURL &&*/}
-                {/*        <RTCView*/}
-                {/*            streamURL={this.state.remoteStreamURL}*/}
-                {/*            style={StyleSheet.absoluteFillObject}*/}
-                {/*        />*/}
-                {/*    }*/}
-                {/*</View>*/}
-
-                <View style={styles2.video}>
-                    <View style={styles2.localVideo}>
-                        <View style={styles2.videoWidget}>
+            <View style={style.container}>
+                <View style={style.video}>
+                    <View style={style.localVideo}>
+                        <View style={style.videoWidget}>
                             {this.state.localStreamURL &&
                                 <RTCView
                                     streamURL={this.state.localStreamURL}
-                                    style={styles2.rtcView}
+                                    style={style.rtcView}
 
                                 /> ||
                                 <Text>
@@ -341,12 +307,12 @@ class VideoSession extends Component {
                             }
                         </View>
                     </View>
-                    <View style={styles2.remoteVideo}>
-                        <View style={styles2.videoWidget}>
+                    <View style={style.remoteVideo}>
+                        <View style={style.videoWidget}>
                             {this.state.remoteStreamURL &&
                                 <RTCView
                                     streamURL={this.state.remoteStreamURL}
-                                    style={styles2.rtcView}
+                                    style={style.rtcView}
                                 /> ||
                                 <Text>
                                     {this.state.partnerWaitingMessage}
@@ -362,19 +328,6 @@ class VideoSession extends Component {
                         onPress={this.handleDisconnectPress}
                     />
                 </View>
-
-                {/*asdf*/}
-
-                {/*<View>*/}
-                {/*    {this.peer &&*/}
-                {/*    <TouchableOpacity onPress={this.handleDisconnectPress}*/}
-                {/*                      disabled={this.peer.connectionState === "connected"}>*/}
-                {/*        <Text>*/}
-                {/*            Disconnect*/}
-                {/*        </Text>*/}
-                {/*    </TouchableOpacity>*/}
-                {/*    }*/}
-                {/*</View>*/}
             </View>
         );
     }
@@ -384,51 +337,7 @@ VideoSession.propTypes = {
     appointmentUUID: PropTypes.string
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'flex-start'
-    },
-    onlineCircle: {
-        width: 20,
-        height: 20,
-        borderRadius: 10,
-        backgroundColor: '#1e1',
-        position: 'absolute',
-        top: 10,
-        left: 10
-    },
-    offlineCircle: {
-        width: 20,
-        height: 20,
-        borderRadius: 10,
-        backgroundColor: '#333'
-    },
-
-    remoteRtcView: {
-
-        // height: '90%',
-        // width: '100%',
-        // backgroundColor: '#f00',
-        // borderColor: '#000',
-        // zIndex: -1
-    },
-
-    localRtcView: {
-        position: "absolute",
-        top: 0,
-        left: "50%",
-        height: '50%',
-        width: '50%',
-        backgroundColor: '#001dff',
-        borderColor: '#000',
-        zIndex: 2
-    }
-});
-
-const styles2 = StyleSheet.create({
+const style = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
@@ -491,16 +400,15 @@ const styles2 = StyleSheet.create({
     },
     rtcView: {
         flex: 1,
-        // width: dimensions.width / 2,
         backgroundColor: '#f00',
         position: 'relative'
     }
 });
 
-const styles3 = StyleSheet.create({
-    container: {
-
+function mapStateToProps(state) {
+    return {
+        accountType: state.accountType
     }
-});
+}
 
-export default VideoSession;
+export default connect(mapStateToProps)(VideoSession);
