@@ -79,7 +79,6 @@ class VideoSession extends Component {
             console.log("Processing ICE candidates.");
             while (this.candidatesQueue.length > 0) {
                 const candidate = this.candidatesQueue.shift();
-                console.log(this.peer);
                 this.peer.addIceCandidate(
                     new RTCIceCandidate(candidate)
                 ).catch(onError);
