@@ -2,18 +2,19 @@
 // and https://www.scaledrone.com/blog/webrtc-tutorial-simple-video-chat
 
 import React, {Component} from 'react';
-import {StyleSheet, View, Dimensions} from 'react-native';
+import {Dimensions, StyleSheet, View} from 'react-native';
 
 import {mediaDevices, RTCIceCandidate, RTCPeerConnection, RTCSessionDescription, RTCView} from 'react-native-webrtc';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-import {Button, Text} from "react-native-elements";
+import {Button, Text} from 'react-native-elements';
 
 import Scaledrone from 'scaledrone-react-native';
-import {Actions} from "react-native-router-flux";
-import {boundMethod} from "autobind-decorator";
-import {AccountType} from "../consts";
-import {connect} from "react-redux";
+import {Actions} from 'react-native-router-flux';
+import {boundMethod} from 'autobind-decorator';
+import {AccountType} from '../consts';
+import {connect} from 'react-redux';
+import InCallManager from 'react-native-incall-manager';
 
 const isFront = true; // Use Front camera?
 const dimensions = Dimensions.get('window');
@@ -143,6 +144,8 @@ class VideoSession extends Component {
     }
 
     setupLocalVideo() {
+        InCallManager.start({media: "video"});
+
         // Setup Camera & Audio
         return mediaDevices.enumerateDevices().then(sourceInfos => {
             let videoSourceId;
@@ -256,6 +259,8 @@ class VideoSession extends Component {
             }, 100);
             this.peer.close();
             this.alreadyPerformedDisconnectSteps = true;
+
+            InCallManager.stop();
         }
     }
 

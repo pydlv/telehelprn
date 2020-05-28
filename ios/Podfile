@@ -21,6 +21,7 @@ target 'telehelprn' do
   pod 'React-RCTText', :path => '../node_modules/react-native/Libraries/Text'
   pod 'React-RCTVibration', :path => '../node_modules/react-native/Libraries/Vibration'
   pod 'React-Core/RCTWebSocket', :path => '../node_modules/react-native/'
+  pod 'ReactNativeIncallManager', :path => '../node_modules/react-native-incall-manager'
 
   use_frameworks!
   pod 'RNInputMask', :path => '../node_modules/react-native-text-input-mask/ios/InputMask'

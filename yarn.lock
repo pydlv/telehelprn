@@ -1962,6 +1962,22 @@ bugsnag-react-native@^2.23.7:
     promise "^7"
     prop-types "^15.6.0"
 
+bugsnag-sourcemaps@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/bugsnag-sourcemaps/-/bugsnag-sourcemaps-1.3.0.tgz#0b35582050b5cde4cf7a03033cec35279e54b775"
+  integrity sha512-YbZ52kr+Qnu0pRJ0LGa5QLjdDY14KG8UE9ESMHH+0A7w057PqRzkKnbSoFvo4d92VyzSzrQJnyMptyQAlZxBuw==
+  dependencies:
+    concat-stream "^2.0.0"
+    form-data "^2.3.3"
+    glob "^7.1.4"
+    graceful-fs "^4.1.11"
+    kleur "^3.0.3"
+    meow "^3.7.0"
+    once "^1.4.0"
+    rc "^1.2.8"
+    read-pkg-up "^2.0.0"
+    run-parallel-limit "^1.0.5"
+
 build-url@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/build-url/-/build-url-2.0.0.tgz#7bdd4045e51caa96c1586990e4ca514937598fc2"
@@ -2334,6 +2350,16 @@ concat-stream@^1.6.0, concat-stream@^1.6.2:
     buffer-from "^1.0.0"
     inherits "^2.0.3"
     readable-stream "^2.2.2"
+    typedarray "^0.0.6"
+
+concat-stream@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/concat-stream/-/concat-stream-2.0.0.tgz#414cf5af790a48c60ab9be4527d56d5e41133cb1"
+  integrity sha512-MWufYdFw53ccGjCA+Ol7XJYpAlW6/prSMzuPOTRnJGcGzuhLn4Scrz7qf6o8bROZ514ltazcIFJZevcfbo0x7A==
+  dependencies:
+    buffer-from "^1.0.0"
+    inherits "^2.0.3"
+    readable-stream "^3.0.2"
     typedarray "^0.0.6"
 
 config-chain@^1.1.12:
@@ -3410,6 +3436,15 @@ forever-agent@~0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/forever-agent/-/forever-agent-0.6.1.tgz#fbc71f0c41adeb37f96c577ad1ed42d8fdacca91"
   integrity sha1-+8cfDEGt6zf5bFd60e1C2P2sypE=
+
+form-data@^2.3.3:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/form-data/-/form-data-2.5.1.tgz#f2cbec57b5e59e23716e128fe44d4e5dd23895f4"
+  integrity sha512-m21N3WOmEEURgk6B9GLOE4RuWOFf28Lhh9qGYeNlGq4VDXUlJy2th2slBNU8Gp8EzloYZOibZJ7t5ecIrFSjVA==
+  dependencies:
+    asynckit "^0.4.0"
+    combined-stream "^1.0.6"
+    mime-types "^2.1.12"
 
 form-data@~2.3.2:
   version "2.3.3"
@@ -5150,7 +5185,7 @@ mem@^4.0.0:
     mimic-fn "^2.0.0"
     p-is-promise "^2.0.0"
 
-meow@^3.1.0:
+meow@^3.1.0, meow@^3.7.0:
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/meow/-/meow-3.7.0.tgz#72cb668b425228290abbfa856892587308a801fb"
   integrity sha1-cstmi0JSKCkKu/qFaJJYcwioAfs=
@@ -6419,7 +6454,7 @@ range-parser@~1.2.1:
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.1.tgz#3cf37023d199e1c24d1a55b84800c2f3e6468031"
   integrity sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==
 
-rc@^1.0.1, rc@^1.1.6, rc@^1.2.1:
+rc@^1.0.1, rc@^1.1.6, rc@^1.2.1, rc@^1.2.8:
   version "1.2.8"
   resolved "https://registry.yarnpkg.com/rc/-/rc-1.2.8.tgz#cd924bf5200a075b83c188cd6b9e211b7fc0d3ed"
   integrity sha512-y3bGgqKj3QBdxLbLkomlohkvsA8gdAiUQlSBJnBhfn+BPxg4bc62d8TcBW15wavDfgexCgccckhcZvywyQYPOw==
@@ -6505,6 +6540,11 @@ react-native-image-picker@^2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-2.3.1.tgz#1977b65e07793d2c0b2d1976fb675c5f75ad7f11"
   integrity sha512-c/a2h7/T7yBo5KlNQhcSn4xf4+6Li6LfJ59+GZT1ZzzWrj/6X8DiJ/TJBOlOZMC5tJriZKuRkWSsr74k6z+brw==
+
+react-native-incall-manager@^3.2.7:
+  version "3.2.7"
+  resolved "https://registry.yarnpkg.com/react-native-incall-manager/-/react-native-incall-manager-3.2.7.tgz#3a6f34bd4bb89ed4f0bcaa2ffc571e9b2f0c479b"
+  integrity sha512-qrWXISceKhXZL3F8FHKsrFSCrYgTmWpj1or7oV8+vKhYUJshKk8grMrMoZlF+xldTTFvOdYCEDEktSVWxYN4Dw==
 
 react-native-masked-text@^1.13.0:
   version "1.13.0"
@@ -6766,6 +6806,15 @@ readable-stream@^2.0.1, readable-stream@^2.2.2, readable-stream@~2.3.6:
     safe-buffer "~5.1.1"
     string_decoder "~1.1.1"
     util-deprecate "~1.0.1"
+
+readable-stream@^3.0.2:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-3.6.0.tgz#337bbda3adc0706bd3e024426a286d4b4b2c9198"
+  integrity sha512-BViHy7LKeTz4oNnkcLJ+lVSL6vpiFeX6/d3oSH8zCW7UxP2onchk+vTGB143xuFjHS3deTgkKoXXymXqymiIdA==
+  dependencies:
+    inherits "^2.0.3"
+    string_decoder "^1.1.1"
+    util-deprecate "^1.0.1"
 
 readable-stream@~1.1.9:
   version "1.1.14"
@@ -7083,6 +7132,11 @@ run-async@^2.2.0:
   dependencies:
     is-promise "^2.1.0"
 
+run-parallel-limit@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/run-parallel-limit/-/run-parallel-limit-1.0.5.tgz#c29a4fd17b4df358cb52a8a697811a63c984f1b7"
+  integrity sha512-NsY+oDngvrvMxKB3G8ijBzIema6aYbQMD2bHOamvN52BysbIGTnEY2xsNyfrcr9GhY995/t/0nQN3R3oZvaDlg==
+
 rx-lite-aggregates@^4.0.8:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/rx-lite-aggregates/-/rx-lite-aggregates-4.0.8.tgz#753b87a89a11c95467c4ac1626c4efc4e05c67be"
@@ -7123,6 +7177,11 @@ safe-buffer@^5.0.1, safe-buffer@^5.1.2:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.2.0.tgz#b74daec49b1148f88c64b68d49b1e815c1f2f519"
   integrity sha512-fZEwUGbVl7kouZs1jCdMLdt95hdIv0ZeHg6L7qPeciMZhZ+/gdesW4wgTARkrFWEpspjEATAzUGPG8N2jJiwbg==
+
+safe-buffer@~5.2.0:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.2.1.tgz#1eaf9fa9bdb1fdd4ec75f58f9cdb4e6b7827eec6"
+  integrity sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==
 
 safe-regex@^1.1.0:
   version "1.1.0"
@@ -7630,6 +7689,13 @@ string.prototype.trimright@^2.1.1:
   dependencies:
     define-properties "^1.1.3"
     function-bind "^1.1.1"
+
+string_decoder@^1.1.1:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.3.0.tgz#42f114594a46cf1a8e30b0a84f56c78c3edac21e"
+  integrity sha512-hkRX8U1WjJFd8LsDJ2yQ/wWWxaopEsABU1XfkM8A+j0+85JAGppt16cr1Whg6KIbb4okU6Mql6BOj+uup/wKeA==
+  dependencies:
+    safe-buffer "~5.2.0"
 
 string_decoder@~0.10.x:
   version "0.10.31"
@@ -8151,7 +8217,7 @@ use@^3.1.0:
   resolved "https://registry.yarnpkg.com/use/-/use-3.1.1.tgz#d50c8cac79a19fbc20f2911f56eb973f4e10070f"
   integrity sha512-cwESVXlO3url9YWlFW/TA9cshCEhtu7IKJ/p5soJ/gGpj7vbvFrAY/eIioQ6Dw23KjZhYgiIo8HOs1nQ2vr/oQ==
 
-util-deprecate@~1.0.1:
+util-deprecate@^1.0.1, util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=
