@@ -99,12 +99,13 @@ class VideoSession extends Component {
                 return onError(error);
             }
             console.info("Scaledrone ID:", this.drone.clientId);
-        });
 
-        this.room.on('members', (members) => {
             this.initializeRTCPeer();
             this.startListeningToSignals();
         });
+
+        // this.room.on('members', (members) => {
+        // });
     }
 
     sendMessage(message) {
@@ -242,9 +243,7 @@ class VideoSession extends Component {
         ).catch(onError);
     }
 
-    componentWillUnmount() {
-        console.log("UNMOUNTING!!!");
-        // Leave room and close connection to scaledrone
+    performDisconnectStepsIfNeeded() {
         if (!this.alreadyPerformedDisconnectSteps) {
             this.sendMessage("disconnecting");
             // We want to wait for the message to finish sending before closing this stuff.
@@ -257,11 +256,21 @@ class VideoSession extends Component {
                     this.drone.close();
                 }
             }, 100);
-            this.peer.close();
-            this.alreadyPerformedDisconnectSteps = true;
+
+            if (this.peer !== undefined) {
+                this.peer.close();
+            }
 
             InCallManager.stop();
+
+            this.alreadyPerformedDisconnectSteps = true;
         }
+    }
+
+    componentWillUnmount() {
+        console.log("UNMOUNTING!!!");
+        // Leave room and close connection to scaledrone
+        this.performDisconnectStepsIfNeeded();
     }
 
     @boundMethod
@@ -274,21 +283,7 @@ class VideoSession extends Component {
             connected: false
         });
 
-        if (!this.alreadyPerformedDisconnectSteps) {
-            this.sendMessage("disconnecting");
-            // We want to wait for the message to finish sending before closing this stuff.
-            // Unfortunately there's not a nice way to do it.
-            setTimeout(() => {
-                if (this.room) {
-                    this.room.unsubscribe();
-                }
-                if (this.drone) {
-                    this.drone.close();
-                }
-            }, 100);
-            this.peer.close();
-            this.alreadyPerformedDisconnectSteps = true;
-        }
+        this.performDisconnectStepsIfNeeded();
 
         Actions.pop({type: "reset"});
     }
