@@ -9,7 +9,8 @@
     "test": "jest",
     "lint": "eslint .",
     "uploadMapsAndroid": "python scripts/upload_source_maps.py android",
-    "uploadMapsIOS": "python scripts/upload_source_maps.py ios"
+    "uploadMapsIOS": "python scripts/upload_source_maps.py ios",
+    "postinstall" : "npx jetify"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.9.0",
@@ -20,8 +21,8 @@
     "build-url": "^2.0.0",
     "moment": "^2.25.1",
     "prop-types": "^15.7.2",
-    "react": "16.9.0",
-    "react-native": "0.61.5",
+    "react": "16.11.0",
+    "react-native": "0.62.2",
     "react-native-config": "^1.0.0",
     "react-native-elements": "^1.2.7",
     "react-native-gesture-handler": "^1.6.1",
@@ -53,7 +54,7 @@
     "metro-react-native-babel-preset": "^0.58.0",
     "react-devtools": "^4.6.0",
     "react-native-version": "^4.0.0",
-    "react-test-renderer": "16.9.0"
+    "react-test-renderer": "16.11.0"
   },
   "jest": {
     "preset": "react-native"
