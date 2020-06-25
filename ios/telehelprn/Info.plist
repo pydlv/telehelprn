@@ -76,5 +76,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false />
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Needed in order to select a profile picture for your account.</string>
 </dict>
 </plist>
