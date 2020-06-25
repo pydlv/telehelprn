@@ -8,33 +8,35 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* telehelprnTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* telehelprnTests.m */; };
-		0FDE48075A3B1A23DB541290 /* Pods_telehelprnTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8340EEDD29370207A7DCEA2C /* Pods_telehelprnTests.framework */; };
+		03EC3CAFEA97859E00801A2A /* libPods-telehelprn-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C7DA0EAFB7D88AEA0938066 /* libPods-telehelprn-tvOSTests.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		16BEDAEB48AB22B95E6B202A /* libPods-telehelprn-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6207E553007AE9C1A21BB0E2 /* libPods-telehelprn-tvOSTests.a */; };
+		261A09A7C4A567F5FD38B48D /* Pods_telehelprn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBEAB941D38683DD6DDBB590 /* Pods_telehelprn.framework */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* telehelprnTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* telehelprnTests.m */; };
-		629258508E284E01F561178A /* Pods_telehelprn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C30F7220CA7F63962B1197F /* Pods_telehelprn.framework */; };
-		8FD08C12246F3A0100741484 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FD08C11246F3A0100741484 /* AVFoundation.framework */; };
-		8FD08C14246F3A0500741484 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FD08C13246F3A0500741484 /* AudioToolbox.framework */; };
-		8FD08C16246F3A0A00741484 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FD08C15246F3A0A00741484 /* CoreGraphics.framework */; };
-		8FD08C18246F3A0E00741484 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FD08C17246F3A0E00741484 /* GLKit.framework */; };
-		8FD08C1A246F3A1300741484 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FD08C19246F3A1300741484 /* CoreAudio.framework */; };
-		8FD08C1C246F3A1800741484 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FD08C1B246F3A1800741484 /* CoreVideo.framework */; };
-		8FD08C1E246F3A1E00741484 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FD08C1D246F3A1E00741484 /* VideoToolbox.framework */; };
-		8FD08C20246F3A2200741484 /* libc.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FD08C1F246F3A2200741484 /* libc.tbd */; };
-		8FD08C22246F3A2700741484 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FD08C21246F3A2700741484 /* libc++.tbd */; };
-		8FD08C24246F3A2B00741484 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FD08C23246F3A2B00741484 /* libsqlite3.tbd */; };
-		8FD08C2F246F47C900741484 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FD08C2B246F47C900741484 /* FontAwesome5_Regular.ttf */; };
-		8FD08C30246F47C900741484 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FD08C2C246F47C900741484 /* FontAwesome.ttf */; };
-		8FD08C32246F47C900741484 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FD08C2E246F47C900741484 /* FontAwesome5_Solid.ttf */; };
-		8FD08C35246F53D400741484 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FD08C34246F53D300741484 /* Ionicons.ttf */; };
-		8FD08C37246F548A00741484 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 8FD08C36246F548A00741484 /* Fonts */; };
-		C5C391577D0ADAB995CAA985 /* libPods-telehelprn-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC51A94A45AC31C9D8ECA656 /* libPods-telehelprn-tvOS.a */; };
+		51F202ACED636E2EBAB9976E /* libPods-telehelprn-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 035C59129C46904EA8E22B29 /* libPods-telehelprn-tvOS.a */; };
+		6AB8E7F6294B01DE2BFF80EB /* Pods_telehelprn_telehelprnTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C18DEE97D4381A7206E833E4 /* Pods_telehelprn_telehelprnTests.framework */; };
+		8FB3350524A3F4E000D2C524 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FB3350424A3F4E000D2C524 /* WebRTC.framework */; };
+		8FF4FCC824A3041500DCD7B7 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FF4FCB824A3041500DCD7B7 /* Fontisto.ttf */; };
+		8FF4FCC924A3041500DCD7B7 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FF4FCB924A3041500DCD7B7 /* Octicons.ttf */; };
+		8FF4FCCA24A3041500DCD7B7 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FF4FCBA24A3041500DCD7B7 /* Feather.ttf */; };
+		8FF4FCCB24A3041500DCD7B7 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FF4FCBB24A3041500DCD7B7 /* Entypo.ttf */; };
+		8FF4FCCC24A3041500DCD7B7 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FF4FCBC24A3041500DCD7B7 /* FontAwesome5_Brands.ttf */; };
+		8FF4FCCD24A3041500DCD7B7 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FF4FCBD24A3041500DCD7B7 /* MaterialCommunityIcons.ttf */; };
+		8FF4FCCE24A3041500DCD7B7 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FF4FCBE24A3041500DCD7B7 /* AntDesign.ttf */; };
+		8FF4FCCF24A3041500DCD7B7 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FF4FCBF24A3041500DCD7B7 /* Foundation.ttf */; };
+		8FF4FCD024A3041500DCD7B7 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FF4FCC024A3041500DCD7B7 /* Ionicons.ttf */; };
+		8FF4FCD124A3041500DCD7B7 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FF4FCC124A3041500DCD7B7 /* FontAwesome5_Solid.ttf */; };
+		8FF4FCD224A3041500DCD7B7 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FF4FCC224A3041500DCD7B7 /* FontAwesome5_Regular.ttf */; };
+		8FF4FCD324A3041500DCD7B7 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FF4FCC324A3041500DCD7B7 /* FontAwesome.ttf */; };
+		8FF4FCD424A3041500DCD7B7 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FF4FCC424A3041500DCD7B7 /* Zocial.ttf */; };
+		8FF4FCD524A3041500DCD7B7 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FF4FCC524A3041500DCD7B7 /* EvilIcons.ttf */; };
+		8FF4FCD624A3041500DCD7B7 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FF4FCC624A3041500DCD7B7 /* SimpleLineIcons.ttf */; };
+		8FF4FCD724A3041500DCD7B7 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FF4FCC724A3041500DCD7B7 /* MaterialIcons.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,24 +56,14 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		8FD08C0F246F397600741484 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00E356EE1AD99517003FC87E /* telehelprnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = telehelprnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* telehelprnTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = telehelprnTests.m; sourceTree = "<group>"; };
+		035C59129C46904EA8E22B29 /* libPods-telehelprn-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-telehelprn-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		08F240E27706E39B30239B99 /* Pods-telehelprn-telehelprnTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-telehelprn-telehelprnTests.debug.xcconfig"; path = "Target Support Files/Pods-telehelprn-telehelprnTests/Pods-telehelprn-telehelprnTests.debug.xcconfig"; sourceTree = "<group>"; };
+		0C7DA0EAFB7D88AEA0938066 /* libPods-telehelprn-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-telehelprn-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07F961A680F5B00A75B9A /* telehelprn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = telehelprn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = telehelprn/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = telehelprn/AppDelegate.m; sourceTree = "<group>"; };
@@ -81,36 +73,34 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = telehelprn/main.m; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* telehelprn-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "telehelprn-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* telehelprn-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "telehelprn-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2DFE01D765C12C40E6F8CE69 /* Pods-telehelprnTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-telehelprnTests.debug.xcconfig"; path = "Target Support Files/Pods-telehelprnTests/Pods-telehelprnTests.debug.xcconfig"; sourceTree = "<group>"; };
-		2F9F97173D7F3FFBC9C9E9DF /* Pods-telehelprn-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-telehelprn-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-telehelprn-tvOSTests/Pods-telehelprn-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		3F3587A6D1A7B07B5F27168E /* Pods-telehelprn-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-telehelprn-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-telehelprn-tvOS/Pods-telehelprn-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		6207E553007AE9C1A21BB0E2 /* libPods-telehelprn-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-telehelprn-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7E1DC4A7F9A8D8A94BCDFD53 /* Pods-telehelprnTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-telehelprnTests.release.xcconfig"; path = "Target Support Files/Pods-telehelprnTests/Pods-telehelprnTests.release.xcconfig"; sourceTree = "<group>"; };
-		8340EEDD29370207A7DCEA2C /* Pods_telehelprnTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_telehelprnTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8FD08C11246F3A0100741484 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		8FD08C13246F3A0500741484 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		8FD08C15246F3A0A00741484 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		8FD08C17246F3A0E00741484 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
-		8FD08C19246F3A1300741484 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
-		8FD08C1B246F3A1800741484 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
-		8FD08C1D246F3A1E00741484 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
-		8FD08C1F246F3A2200741484 /* libc.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libc.tbd; path = usr/lib/libc.tbd; sourceTree = SDKROOT; };
-		8FD08C21246F3A2700741484 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
-		8FD08C23246F3A2B00741484 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		8FD08C2B246F47C900741484 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
-		8FD08C2C246F47C900741484 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
-		8FD08C2E246F47C900741484 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
-		8FD08C33246F4D6A00741484 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
-		8FD08C34246F53D300741484 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../../Library/Developer/Xcode/DerivedData/telehelprn-emahymgfeikarbbhearraiywkdjb/Build/Products/Debug-iphonesimulator/RNVectorIcons/RNVectorIcons.framework/Ionicons.ttf"; sourceTree = "<group>"; };
-		8FD08C36246F548A00741484 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = "../node_modules/react-native-vector-icons/Fonts"; sourceTree = "<group>"; };
-		9C30F7220CA7F63962B1197F /* Pods_telehelprn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_telehelprn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A16D3151B476851BAC7CB76A /* Pods-telehelprn-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-telehelprn-tvOS.release.xcconfig"; path = "Target Support Files/Pods-telehelprn-tvOS/Pods-telehelprn-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		D44B37DA1262CF7BB4CC4467 /* Pods-telehelprn-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-telehelprn-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-telehelprn-tvOSTests/Pods-telehelprn-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		EB89497BB4798A58D9E281B4 /* Pods-telehelprn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-telehelprn.release.xcconfig"; path = "Target Support Files/Pods-telehelprn/Pods-telehelprn.release.xcconfig"; sourceTree = "<group>"; };
+		30691C2D49E8D04C7AE577D0 /* Pods-telehelprn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-telehelprn.release.xcconfig"; path = "Target Support Files/Pods-telehelprn/Pods-telehelprn.release.xcconfig"; sourceTree = "<group>"; };
+		52FB4915A9F7E3B5AB1A848B /* Pods-telehelprn-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-telehelprn-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-telehelprn-tvOSTests/Pods-telehelprn-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		57BA883981BE231DDD5D7470 /* Pods-telehelprn-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-telehelprn-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-telehelprn-tvOSTests/Pods-telehelprn-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5FC6BE0086A7B326A8CBBA2C /* Pods-telehelprn-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-telehelprn-tvOS.release.xcconfig"; path = "Target Support Files/Pods-telehelprn-tvOS/Pods-telehelprn-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		6273001A8C3DBEDBDF26C1A0 /* Pods-telehelprn-telehelprnTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-telehelprn-telehelprnTests.release.xcconfig"; path = "Target Support Files/Pods-telehelprn-telehelprnTests/Pods-telehelprn-telehelprnTests.release.xcconfig"; sourceTree = "<group>"; };
+		8A1698848D376CA8B4900E97 /* Pods-telehelprn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-telehelprn.debug.xcconfig"; path = "Target Support Files/Pods-telehelprn/Pods-telehelprn.debug.xcconfig"; sourceTree = "<group>"; };
+		8FB3350424A3F4E000D2C524 /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebRTC.framework; path = "../node_modules/react-native-webrtc/ios/WebRTC.framework"; sourceTree = "<group>"; };
+		8FF4FCB824A3041500DCD7B7 /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fontisto.ttf; sourceTree = "<group>"; };
+		8FF4FCB924A3041500DCD7B7 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
+		8FF4FCBA24A3041500DCD7B7 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
+		8FF4FCBB24A3041500DCD7B7 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
+		8FF4FCBC24A3041500DCD7B7 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Brands.ttf; sourceTree = "<group>"; };
+		8FF4FCBD24A3041500DCD7B7 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
+		8FF4FCBE24A3041500DCD7B7 /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AntDesign.ttf; sourceTree = "<group>"; };
+		8FF4FCBF24A3041500DCD7B7 /* Foundation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Foundation.ttf; sourceTree = "<group>"; };
+		8FF4FCC024A3041500DCD7B7 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
+		8FF4FCC124A3041500DCD7B7 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Solid.ttf; sourceTree = "<group>"; };
+		8FF4FCC224A3041500DCD7B7 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Regular.ttf; sourceTree = "<group>"; };
+		8FF4FCC324A3041500DCD7B7 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		8FF4FCC424A3041500DCD7B7 /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
+		8FF4FCC524A3041500DCD7B7 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
+		8FF4FCC624A3041500DCD7B7 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
+		8FF4FCC724A3041500DCD7B7 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
+		97A17A31B2CEC74274E27885 /* Pods-telehelprn-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-telehelprn-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-telehelprn-tvOS/Pods-telehelprn-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		C18DEE97D4381A7206E833E4 /* Pods_telehelprn_telehelprnTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_telehelprn_telehelprnTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CBEAB941D38683DD6DDBB590 /* Pods_telehelprn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_telehelprn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		FC51A94A45AC31C9D8ECA656 /* libPods-telehelprn-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-telehelprn-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FE564EB8055A49ED539E8D80 /* Pods-telehelprn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-telehelprn.debug.xcconfig"; path = "Target Support Files/Pods-telehelprn/Pods-telehelprn.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,7 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0FDE48075A3B1A23DB541290 /* Pods_telehelprnTests.framework in Frameworks */,
+				6AB8E7F6294B01DE2BFF80EB /* Pods_telehelprn_telehelprnTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,17 +116,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8FD08C24246F3A2B00741484 /* libsqlite3.tbd in Frameworks */,
-				8FD08C22246F3A2700741484 /* libc++.tbd in Frameworks */,
-				8FD08C20246F3A2200741484 /* libc.tbd in Frameworks */,
-				8FD08C1E246F3A1E00741484 /* VideoToolbox.framework in Frameworks */,
-				8FD08C1C246F3A1800741484 /* CoreVideo.framework in Frameworks */,
-				8FD08C1A246F3A1300741484 /* CoreAudio.framework in Frameworks */,
-				8FD08C18246F3A0E00741484 /* GLKit.framework in Frameworks */,
-				8FD08C16246F3A0A00741484 /* CoreGraphics.framework in Frameworks */,
-				8FD08C14246F3A0500741484 /* AudioToolbox.framework in Frameworks */,
-				8FD08C12246F3A0100741484 /* AVFoundation.framework in Frameworks */,
-				629258508E284E01F561178A /* Pods_telehelprn.framework in Frameworks */,
+				261A09A7C4A567F5FD38B48D /* Pods_telehelprn.framework in Frameworks */,
+				8FB3350524A3F4E000D2C524 /* WebRTC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,7 +125,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5C391577D0ADAB995CAA985 /* libPods-telehelprn-tvOS.a in Frameworks */,
+				51F202ACED636E2EBAB9976E /* libPods-telehelprn-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,7 +133,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16BEDAEB48AB22B95E6B202A /* libPods-telehelprn-tvOSTests.a in Frameworks */,
+				03EC3CAFEA97859E00801A2A /* libPods-telehelprn-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,11 +160,7 @@
 		13B07FAE1A68108700A75B9A /* telehelprn */ = {
 			isa = PBXGroup;
 			children = (
-				8FD08C36246F548A00741484 /* Fonts */,
-				8FD08C34246F53D300741484 /* Ionicons.ttf */,
-				8FD08C2C246F47C900741484 /* FontAwesome.ttf */,
-				8FD08C2B246F47C900741484 /* FontAwesome5_Regular.ttf */,
-				8FD08C2E246F47C900741484 /* FontAwesome5_Solid.ttf */,
+				8FF4FCB724A3041500DCD7B7 /* Fonts */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -191,7 +168,6 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				8FD08C33246F4D6A00741484 /* Config.xcconfig */,
 			);
 			name = telehelprn;
 			sourceTree = "<group>";
@@ -199,39 +175,15 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8FD08C23246F3A2B00741484 /* libsqlite3.tbd */,
-				8FD08C21246F3A2700741484 /* libc++.tbd */,
-				8FD08C1F246F3A2200741484 /* libc.tbd */,
-				8FD08C1D246F3A1E00741484 /* VideoToolbox.framework */,
-				8FD08C1B246F3A1800741484 /* CoreVideo.framework */,
-				8FD08C19246F3A1300741484 /* CoreAudio.framework */,
-				8FD08C17246F3A0E00741484 /* GLKit.framework */,
-				8FD08C15246F3A0A00741484 /* CoreGraphics.framework */,
-				8FD08C13246F3A0500741484 /* AudioToolbox.framework */,
-				8FD08C11246F3A0100741484 /* AVFoundation.framework */,
+				8FB3350424A3F4E000D2C524 /* WebRTC.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				9C30F7220CA7F63962B1197F /* Pods_telehelprn.framework */,
-				FC51A94A45AC31C9D8ECA656 /* libPods-telehelprn-tvOS.a */,
-				6207E553007AE9C1A21BB0E2 /* libPods-telehelprn-tvOSTests.a */,
-				8340EEDD29370207A7DCEA2C /* Pods_telehelprnTests.framework */,
+				035C59129C46904EA8E22B29 /* libPods-telehelprn-tvOS.a */,
+				0C7DA0EAFB7D88AEA0938066 /* libPods-telehelprn-tvOSTests.a */,
+				CBEAB941D38683DD6DDBB590 /* Pods_telehelprn.framework */,
+				C18DEE97D4381A7206E833E4 /* Pods_telehelprn_telehelprnTests.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		5CEB352D595F086900F4F8F5 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				FE564EB8055A49ED539E8D80 /* Pods-telehelprn.debug.xcconfig */,
-				EB89497BB4798A58D9E281B4 /* Pods-telehelprn.release.xcconfig */,
-				3F3587A6D1A7B07B5F27168E /* Pods-telehelprn-tvOS.debug.xcconfig */,
-				A16D3151B476851BAC7CB76A /* Pods-telehelprn-tvOS.release.xcconfig */,
-				2F9F97173D7F3FFBC9C9E9DF /* Pods-telehelprn-tvOSTests.debug.xcconfig */,
-				D44B37DA1262CF7BB4CC4467 /* Pods-telehelprn-tvOSTests.release.xcconfig */,
-				2DFE01D765C12C40E6F8CE69 /* Pods-telehelprnTests.debug.xcconfig */,
-				7E1DC4A7F9A8D8A94BCDFD53 /* Pods-telehelprnTests.release.xcconfig */,
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -249,8 +201,7 @@
 				00E356EF1AD99517003FC87E /* telehelprnTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				5CEB352D595F086900F4F8F5 /* Pods */,
-				B3D99A53EEDE4FF99AA78AF8 /* Resources */,
+				A3F0D1F238BF56C7623CF8D8 /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -268,11 +219,43 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B3D99A53EEDE4FF99AA78AF8 /* Resources */ = {
+		8FF4FCB724A3041500DCD7B7 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				8FF4FCB824A3041500DCD7B7 /* Fontisto.ttf */,
+				8FF4FCB924A3041500DCD7B7 /* Octicons.ttf */,
+				8FF4FCBA24A3041500DCD7B7 /* Feather.ttf */,
+				8FF4FCBB24A3041500DCD7B7 /* Entypo.ttf */,
+				8FF4FCBC24A3041500DCD7B7 /* FontAwesome5_Brands.ttf */,
+				8FF4FCBD24A3041500DCD7B7 /* MaterialCommunityIcons.ttf */,
+				8FF4FCBE24A3041500DCD7B7 /* AntDesign.ttf */,
+				8FF4FCBF24A3041500DCD7B7 /* Foundation.ttf */,
+				8FF4FCC024A3041500DCD7B7 /* Ionicons.ttf */,
+				8FF4FCC124A3041500DCD7B7 /* FontAwesome5_Solid.ttf */,
+				8FF4FCC224A3041500DCD7B7 /* FontAwesome5_Regular.ttf */,
+				8FF4FCC324A3041500DCD7B7 /* FontAwesome.ttf */,
+				8FF4FCC424A3041500DCD7B7 /* Zocial.ttf */,
+				8FF4FCC524A3041500DCD7B7 /* EvilIcons.ttf */,
+				8FF4FCC624A3041500DCD7B7 /* SimpleLineIcons.ttf */,
+				8FF4FCC724A3041500DCD7B7 /* MaterialIcons.ttf */,
 			);
-			name = Resources;
+			name = Fonts;
+			path = "../node_modules/react-native-vector-icons/Fonts";
+			sourceTree = "<group>";
+		};
+		A3F0D1F238BF56C7623CF8D8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8A1698848D376CA8B4900E97 /* Pods-telehelprn.debug.xcconfig */,
+				30691C2D49E8D04C7AE577D0 /* Pods-telehelprn.release.xcconfig */,
+				08F240E27706E39B30239B99 /* Pods-telehelprn-telehelprnTests.debug.xcconfig */,
+				6273001A8C3DBEDBDF26C1A0 /* Pods-telehelprn-telehelprnTests.release.xcconfig */,
+				97A17A31B2CEC74274E27885 /* Pods-telehelprn-tvOS.debug.xcconfig */,
+				5FC6BE0086A7B326A8CBBA2C /* Pods-telehelprn-tvOS.release.xcconfig */,
+				57BA883981BE231DDD5D7470 /* Pods-telehelprn-tvOSTests.debug.xcconfig */,
+				52FB4915A9F7E3B5AB1A848B /* Pods-telehelprn-tvOSTests.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,10 +265,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "telehelprnTests" */;
 			buildPhases = (
-				3603E2E49998752596B88ABA /* [CP] Check Pods Manifest.lock */,
+				E77FEEEFC2CE15197130CE55 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				5C974BE69320CD922E2BD2DC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -301,14 +285,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "telehelprn" */;
 			buildPhases = (
-				C95F2F61BB493B27EE9CC7D0 /* [CP] Check Pods Manifest.lock */,
+				3602ADBFE1154DE4D190FFD2 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				8FD08C0F246F397600741484 /* Embed Frameworks */,
-				E863885914DD77B45941CFB5 /* [CP] Embed Pods Frameworks */,
+				2EFF3D07914B090A2A9A8AE8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -323,7 +306,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "telehelprn-tvOS" */;
 			buildPhases = (
-				6439E73AB1815B62B5069A7C /* [CP] Check Pods Manifest.lock */,
+				6ED611876B30DAB26D6CA2A4 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
 				2D02E4771E0B4A5D006451C7 /* Sources */,
 				2D02E4781E0B4A5D006451C7 /* Frameworks */,
@@ -343,7 +326,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "telehelprn-tvOSTests" */;
 			buildPhases = (
-				30A96F5C9A021D106741F532 /* [CP] Check Pods Manifest.lock */,
+				A99E101A0C2774EA4D224E16 /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
 				2D02E48E1E0B4A5D006451C7 /* Resources */,
@@ -364,12 +347,16 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 940;
-				ORGANIZATIONNAME = Facebook;
+				LastUpgradeCheck = 1130;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = 75MXUKCN88;
+						LastSwiftMigration = 1120;
+						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -384,10 +371,9 @@
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "telehelprn" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -416,13 +402,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8FD08C2F246F47C900741484 /* FontAwesome5_Regular.ttf in Resources */,
+				8FF4FCC824A3041500DCD7B7 /* Fontisto.ttf in Resources */,
+				8FF4FCD324A3041500DCD7B7 /* FontAwesome.ttf in Resources */,
+				8FF4FCCF24A3041500DCD7B7 /* Foundation.ttf in Resources */,
+				8FF4FCD224A3041500DCD7B7 /* FontAwesome5_Regular.ttf in Resources */,
+				8FF4FCD024A3041500DCD7B7 /* Ionicons.ttf in Resources */,
+				8FF4FCD524A3041500DCD7B7 /* EvilIcons.ttf in Resources */,
+				8FF4FCCB24A3041500DCD7B7 /* Entypo.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				8FD08C35246F53D400741484 /* Ionicons.ttf in Resources */,
+				8FF4FCD424A3041500DCD7B7 /* Zocial.ttf in Resources */,
+				8FF4FCD624A3041500DCD7B7 /* SimpleLineIcons.ttf in Resources */,
+				8FF4FCCA24A3041500DCD7B7 /* Feather.ttf in Resources */,
+				8FF4FCC924A3041500DCD7B7 /* Octicons.ttf in Resources */,
+				8FF4FCCC24A3041500DCD7B7 /* FontAwesome5_Brands.ttf in Resources */,
+				8FF4FCCE24A3041500DCD7B7 /* AntDesign.ttf in Resources */,
+				8FF4FCD724A3041500DCD7B7 /* MaterialIcons.ttf in Resources */,
+				8FF4FCD124A3041500DCD7B7 /* FontAwesome5_Solid.ttf in Resources */,
+				8FF4FCCD24A3041500DCD7B7 /* MaterialCommunityIcons.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				8FD08C32246F47C900741484 /* FontAwesome5_Solid.ttf in Resources */,
-				8FD08C37246F548A00741484 /* Fonts in Resources */,
-				8FD08C30246F47C900741484 /* FontAwesome.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,7 +453,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -472,95 +469,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		30A96F5C9A021D106741F532 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-telehelprn-tvOSTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3603E2E49998752596B88ABA /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-telehelprnTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6439E73AB1815B62B5069A7C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-telehelprn-tvOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C95F2F61BB493B27EE9CC7D0 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-telehelprn-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E863885914DD77B45941CFB5 /* [CP] Embed Pods Frameworks */ = {
+		2EFF3D07914B090A2A9A8AE8 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -581,7 +490,6 @@
 				"${BUILT_PRODUCTS_DIR}/RNVectorIcons/RNVectorIcons.framework",
 				"${BUILT_PRODUCTS_DIR}/React-Core/React.framework",
 				"${BUILT_PRODUCTS_DIR}/React-CoreModules/CoreModules.framework",
-				"${BUILT_PRODUCTS_DIR}/React-RCTActionSheet/RCTActionSheet.framework",
 				"${BUILT_PRODUCTS_DIR}/React-RCTAnimation/RCTAnimation.framework",
 				"${BUILT_PRODUCTS_DIR}/React-RCTBlob/RCTBlob.framework",
 				"${BUILT_PRODUCTS_DIR}/React-RCTImage/RCTImage.framework",
@@ -595,6 +503,7 @@
 				"${BUILT_PRODUCTS_DIR}/React-jsiexecutor/jsireact.framework",
 				"${BUILT_PRODUCTS_DIR}/React-jsinspector/jsinspector.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactCommon/ReactCommon.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactNativeIncallManager/ReactNativeIncallManager.framework",
 				"${BUILT_PRODUCTS_DIR}/Yoga/yoga.framework",
 				"${BUILT_PRODUCTS_DIR}/glog/glog.framework",
 				"${BUILT_PRODUCTS_DIR}/react-native-config/react_native_config.framework",
@@ -619,7 +528,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNVectorIcons.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CoreModules.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTActionSheet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTAnimation.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTBlob.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTImage.framework",
@@ -633,6 +541,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/jsireact.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/jsinspector.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactCommon.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactNativeIncallManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/yoga.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/glog.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_config.framework",
@@ -644,6 +553,180 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-telehelprn/Pods-telehelprn-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3602ADBFE1154DE4D190FFD2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-telehelprn-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5C974BE69320CD922E2BD2DC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-telehelprn-telehelprnTests/Pods-telehelprn-telehelprnTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BugsnagReactNative/BugsnagReactNative.framework",
+				"${BUILT_PRODUCTS_DIR}/DoubleConversion/DoubleConversion.framework",
+				"${BUILT_PRODUCTS_DIR}/FBReactNativeSpec/FBReactNativeSpec.framework",
+				"${BUILT_PRODUCTS_DIR}/Folly/folly.framework",
+				"${BUILT_PRODUCTS_DIR}/RCTTypeSafety/RCTTypeSafety.framework",
+				"${BUILT_PRODUCTS_DIR}/RNCAsyncStorage/RNCAsyncStorage.framework",
+				"${BUILT_PRODUCTS_DIR}/RNDateTimePicker/RNDateTimePicker.framework",
+				"${BUILT_PRODUCTS_DIR}/RNGestureHandler/RNGestureHandler.framework",
+				"${BUILT_PRODUCTS_DIR}/RNInputMask/RNInputMask.framework",
+				"${BUILT_PRODUCTS_DIR}/RNReanimated/RNReanimated.framework",
+				"${BUILT_PRODUCTS_DIR}/RNScreens/RNScreens.framework",
+				"${BUILT_PRODUCTS_DIR}/RNVectorIcons/RNVectorIcons.framework",
+				"${BUILT_PRODUCTS_DIR}/React-Core/React.framework",
+				"${BUILT_PRODUCTS_DIR}/React-CoreModules/CoreModules.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTAnimation/RCTAnimation.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTBlob/RCTBlob.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTImage/RCTImage.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTLinking/RCTLinking.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTNetwork/RCTNetwork.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTSettings/RCTSettings.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTText/RCTText.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTVibration/RCTVibration.framework",
+				"${BUILT_PRODUCTS_DIR}/React-cxxreact/cxxreact.framework",
+				"${BUILT_PRODUCTS_DIR}/React-jsi/jsi.framework",
+				"${BUILT_PRODUCTS_DIR}/React-jsiexecutor/jsireact.framework",
+				"${BUILT_PRODUCTS_DIR}/React-jsinspector/jsinspector.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactCommon/ReactCommon.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactNativeIncallManager/ReactNativeIncallManager.framework",
+				"${BUILT_PRODUCTS_DIR}/Yoga/yoga.framework",
+				"${BUILT_PRODUCTS_DIR}/glog/glog.framework",
+				"${BUILT_PRODUCTS_DIR}/react-native-config/react_native_config.framework",
+				"${BUILT_PRODUCTS_DIR}/react-native-image-picker/react_native_image_picker.framework",
+				"${BUILT_PRODUCTS_DIR}/react-native-text-input-mask/react_native_text_input_mask.framework",
+				"${PODS_ROOT}/../../node_modules/react-native-webrtc/ios/WebRTC.framework",
+				"${BUILT_PRODUCTS_DIR}/react-native-webrtc/react_native_webrtc.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BugsnagReactNative.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DoubleConversion.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBReactNativeSpec.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/folly.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTTypeSafety.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNCAsyncStorage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNDateTimePicker.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNGestureHandler.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNInputMask.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNReanimated.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNScreens.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNVectorIcons.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CoreModules.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTAnimation.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTBlob.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTLinking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTNetwork.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTSettings.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTText.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTVibration.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/cxxreact.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/jsi.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/jsireact.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/jsinspector.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactCommon.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactNativeIncallManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/yoga.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/glog.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_config.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_image_picker.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_text_input_mask.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WebRTC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_webrtc.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-telehelprn-telehelprnTests/Pods-telehelprn-telehelprnTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6ED611876B30DAB26D6CA2A4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-telehelprn-tvOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A99E101A0C2774EA4D224E16 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-telehelprn-tvOSTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E77FEEEFC2CE15197130CE55 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-telehelprn-telehelprnTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -751,7 +834,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2DFE01D765C12C40E6F8CE69 /* Pods-telehelprnTests.debug.xcconfig */;
+			baseConfigurationReference = 08F240E27706E39B30239B99 /* Pods-telehelprn-telehelprnTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -775,7 +858,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7E1DC4A7F9A8D8A94BCDFD53 /* Pods-telehelprnTests.release.xcconfig */;
+			baseConfigurationReference = 6273001A8C3DBEDBDF26C1A0 /* Pods-telehelprn-telehelprnTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -796,73 +879,158 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FE564EB8055A49ED539E8D80 /* Pods-telehelprn.debug.xcconfig */;
+			baseConfigurationReference = 8A1698848D376CA8B4900E97 /* Pods-telehelprn.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 8;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = 75MXUKCN88;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/BugsnagReactNative\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/DoubleConversion\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBReactNativeSpec\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Folly\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RCTTypeSafety\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNCAsyncStorage\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNDateTimePicker\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNGestureHandler\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNInputMask\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNReanimated\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNScreens\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNVectorIcons\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-Core\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-CoreModules\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTAnimation\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTBlob\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTImage\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTLinking\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTNetwork\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTSettings\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTText\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTVibration\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-cxxreact\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-jsi\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-jsiexecutor\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-jsinspector\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ReactNativeIncallManager\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Yoga\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/glog\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-config\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-image-picker\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-text-input-mask\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-webrtc\"",
+					"\"${PODS_ROOT}/../../node_modules/react-native-webrtc/ios\"",
 					"$(SRCROOT)/../node_modules/react-native-webrtc/ios/**",
-					"$(inherited)",
 				);
-				HEADER_SEARCH_PATHS = (
+				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native/**",
+					"FB_SONARKIT_ENABLED=1",
 				);
-				"HEADER_SEARCH_PATHS[arch=*]" = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native",
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = telehelprn/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-webrtc/ios/**";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)\"",
+					"\"$(inherited)\"",
+					"$(SRCROOT)/../node_modules/react-native-webrtc/ios/**",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.teletherapy.teletherapy;
 				PRODUCT_NAME = telehelprn;
+				PROVISIONING_PROFILE_SPECIFIER = "Teletherapy Distribution Profile";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EB89497BB4798A58D9E281B4 /* Pods-telehelprn.release.xcconfig */;
+			baseConfigurationReference = 30691C2D49E8D04C7AE577D0 /* Pods-telehelprn.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 8;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = 75MXUKCN88;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/BugsnagReactNative\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/DoubleConversion\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBReactNativeSpec\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Folly\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RCTTypeSafety\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNCAsyncStorage\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNDateTimePicker\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNGestureHandler\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNInputMask\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNReanimated\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNScreens\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RNVectorIcons\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-Core\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-CoreModules\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTAnimation\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTBlob\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTImage\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTLinking\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTNetwork\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTSettings\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTText\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTVibration\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-cxxreact\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-jsi\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-jsiexecutor\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/React-jsinspector\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ReactNativeIncallManager\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Yoga\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/glog\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-config\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-image-picker\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-text-input-mask\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/react-native-webrtc\"",
+					"\"${PODS_ROOT}/../../node_modules/react-native-webrtc/ios\"",
 					"$(SRCROOT)/../node_modules/react-native-webrtc/ios/**",
-					"$(inherited)",
 				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native",
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = telehelprn/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-webrtc/ios/**";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)\"",
+					"\"$(inherited)\"",
+					"$(SRCROOT)/../node_modules/react-native-webrtc/ios/**",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.teletherapy.teletherapy;
 				PRODUCT_NAME = telehelprn;
+				PROVISIONING_PROFILE_SPECIFIER = "Teletherapy Distribution Profile";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3F3587A6D1A7B07B5F27168E /* Pods-telehelprn-tvOS.debug.xcconfig */;
+			baseConfigurationReference = 97A17A31B2CEC74274E27885 /* Pods-telehelprn-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -881,7 +1049,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.telehelprn-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.telehelprn-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -891,7 +1059,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A16D3151B476851BAC7CB76A /* Pods-telehelprn-tvOS.release.xcconfig */;
+			baseConfigurationReference = 5FC6BE0086A7B326A8CBBA2C /* Pods-telehelprn-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -910,7 +1078,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.telehelprn-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.telehelprn-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -920,7 +1088,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2F9F97173D7F3FFBC9C9E9DF /* Pods-telehelprn-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = 57BA883981BE231DDD5D7470 /* Pods-telehelprn-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -938,7 +1106,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.telehelprn-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.telehelprn-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/telehelprn-tvOS.app/telehelprn-tvOS";
@@ -948,7 +1116,7 @@
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D44B37DA1262CF7BB4CC4467 /* Pods-telehelprn-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = 52FB4915A9F7E3B5AB1A848B /* Pods-telehelprn-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -966,7 +1134,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.telehelprn-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.telehelprn-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/telehelprn-tvOS.app/telehelprn-tvOS";
@@ -976,9 +1144,9 @@
 		};
 		83CBBA201A601CBA00E9B192 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8FD08C33246F4D6A00741484 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1021,11 +1189,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/Pods/Headers/Public/React-Core/**",
-					"$(SRCROOT)/Pods/Headers/Public/**",
-				);
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)\"",
+					"\"$(inherited)\"",
+				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1036,6 +1206,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1071,11 +1242,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/Pods/Headers/Public/React-Core/**",
-					"$(SRCROOT)/Pods/Headers/Public/**",
-				);
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)\"",
+					"\"$(inherited)\"",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
