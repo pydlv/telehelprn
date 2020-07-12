@@ -60,3 +60,4 @@ buck-out/
 .env*
 *.hprof
 screenshots/
+certs/
