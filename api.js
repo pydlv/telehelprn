@@ -2,14 +2,19 @@ import Config from "react-native-config";
 import axios from "axios";
 import buildUrl from "build-url";
 
-axios.interceptors.response.use(
-    response => response,
-    error => {
-        throw error
-    }
-);
+axios.interceptors.response.use(function (response) {
+    // Do something with response data
+    return response;
+}, function (error) {
+    // Do something with response error
+    alert(error);
+    console.log("Intercepted error: ", error);
+    return Promise.reject(error);
+});
 
 const partial = (func, ...args) => (...rest) => func(...args, ...rest);
+
+console.log("API Host:", Config.API_HOST);
 
 const API_HOST = Config.API_HOST;
 
