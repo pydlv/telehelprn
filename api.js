@@ -14,8 +14,6 @@ axios.interceptors.response.use(function (response) {
 
 const partial = (func, ...args) => (...rest) => func(...args, ...rest);
 
-console.log("API Host:", Config.API_HOST);
-
 const API_HOST = Config.API_HOST;
 
 // Wrapper function so we don't have to manually provide the same host for every endpoint.
