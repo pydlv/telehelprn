@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-  devtool: "source-map",
+  // devtool:  // "source-map", this doesn't do anything, I dont' think :(
   transformer: {
     getTransformOptions: async () => ({
       transform: {
