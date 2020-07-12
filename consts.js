@@ -17,3 +17,5 @@ export const DayOfWeek = Object.freeze({
 });
 
 export const S3_HOST = Config.S3_HOST;
+
+export const DEBUG = Config.ENV === "development";  // Are we debugging?
