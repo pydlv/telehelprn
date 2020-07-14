@@ -259,6 +259,16 @@ class AuthenticatedAPI {
 
         return result.data;
     }
+
+    async getOTSessionIdAndToken(appointmentUUID) {
+        const url = hostUrl({
+            path: `/get-ot-token/${appointmentUUID}`
+        });
+
+        const result = await this.instance.get(url);
+
+        return result.data;
+    }
 }
 
 let authedAPI = null;
