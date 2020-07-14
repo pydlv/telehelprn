@@ -52,7 +52,7 @@ class Login extends Component {
         });
 
         api.login(this.state.email, this.state.password).then((response) => {
-            setLogin(this.props.dispatch, response.token, response.account_type);
+            setLogin(this.props.dispatch, response.uuid, response.token, response.account_type);
         }).catch((error) => {
             const {response} = error;
 

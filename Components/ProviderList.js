@@ -8,7 +8,6 @@ import PropTypes from "prop-types";
 import Icon from "react-native-vector-icons/FontAwesome";
 import {boundMethod} from "autobind-decorator";
 import {Actions} from "react-native-router-flux";
-import {sprintf} from "sprintf-js";
 
 
 class ProviderListItem extends Component {

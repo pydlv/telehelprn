@@ -4,6 +4,7 @@ import {persistReducer, persistStore} from 'redux-persist';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const originalState = {
+    userUUID: null,
     token: null,
     profile: null,
     provider: null,
@@ -12,6 +13,12 @@ const originalState = {
 
 function myReducer(state = originalState, action) {
     switch (action.type) {
+        case ACTION_TYPES.SET_USER_UUID:
+            return {
+                ...state,
+                userUUID: action.payload
+            }
+
         case ACTION_TYPES.SET_TOKEN:
             return {
                 ...state,

@@ -1,9 +1,10 @@
 import {createAuthedAPI, getAuthedAPI} from "./api";
 import {ACTION_TYPES, createAction} from "./redux/actions";
 
-export function setLogin(dispatch, token, accountType) {
+export function setLogin(dispatch, userUUID, token, accountType) {
     createAuthedAPI(token);
 
+    dispatch(createAction(ACTION_TYPES.SET_USER_UUID, userUUID));
     dispatch(createAction(ACTION_TYPES.SET_TOKEN, token));
     dispatch(createAction(ACTION_TYPES.SET_ACCOUNT_TYPE, accountType));
 }
