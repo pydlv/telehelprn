@@ -158,6 +158,7 @@ class VideoSession extends Component {
                                     <Text>
                                         {this.state.localMessage}
                                     </Text>
+                                    || <Text></Text>
                                 }
                             </View>
                             <View style={style.remoteVideo}>
@@ -165,11 +166,11 @@ class VideoSession extends Component {
                                         style={style.rtcView}
                                         eventHandlers={this.subscriberEventHandlers}
                                     />
-                                    {!this.state.hasRemoteStream &&
-                                        <Text>
-                                            {this.state.remoteMessage}
-                                        </Text>
-                                    }
+                                    {/*{!this.state.hasRemoteStream &&*/}
+                                    {/*    <Text>*/}
+                                    {/*        {this.state.remoteMessage}*/}
+                                    {/*    </Text>*/}
+                                    {/*}*/}
                             </View>
                         </View>
                     </OTSession>
