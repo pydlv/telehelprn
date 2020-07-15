@@ -8,5 +8,24 @@
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
 # Add any project specific keep options here:
+-keep class com.telehelprn.BuildConfig { *; }
+
+-keep class com.opentok.android.** {*;}
+-keep class com.opentok.android.v3.** {*;}
+-keep class com.opentok.android.v3.$ {*;}
+-keep class org.otwebrtc.** {*;}
+-keep public class * extends com.opentok.android.v3.OpentokException
+-keep class org.webrtc.** {*;}
+-keep class org.webrtc.. {*;}
+-keep @androidx.annotation.Keep class *
+-keep @androidx.annotation.Keep class $
+-keepclassmembers class * {
+    @androidx.annotation.Keep *;
+}
+-keep class org.java_websocket.** { *; }
+-keep class androidx.** { *; }
+
 -keep class com.facebook.hermes.unicode.** { *; }
 -keep class com.facebook.jni.** { *; }
+
+-dontwarn **

@@ -8,8 +8,8 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "uploadMapsAndroid": "python scripts/upload_source_maps.py android",
-    "uploadMapsIOS": "python scripts/upload_source_maps.py ios",
+    "uploadMapsAndroid": "python37 scripts/upload_source_maps.py android",
+    "uploadMapsIOS": "python37 scripts/upload_source_maps.py ios",
     "postinstall": "npx jetify"
   },
   "dependencies": {
