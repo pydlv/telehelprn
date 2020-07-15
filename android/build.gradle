@@ -4,8 +4,8 @@ buildscript {
     ext {
         buildToolsVersion = "29.0.2"
         minSdkVersion = 24
-        compileSdkVersion = 28
-        targetSdkVersion = 28
+        compileSdkVersion = 29
+        targetSdkVersion = 29
     }
     repositories {
         google()
@@ -35,7 +35,7 @@ allprojects {
         configurations.all {
           resolutionStrategy {
             // START: RN version lockdown
-            force 'com.facebook.react:react-native:0.62.2'   //Your RN version should go here
+            force 'com.facebook.react:react-native:0.63.1'   //Your RN version should go here
             // END: RN version lockdown
           }
         }

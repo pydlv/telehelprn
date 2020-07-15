@@ -1,9 +1,12 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
-import {Dimensions, StyleSheet, View} from "react-native";
-import {Text} from "react-native-elements";
+import {Dimensions, StatusBar, StyleSheet, View} from "react-native";
+import {Button, Text} from "react-native-elements";
 import {getAuthedAPI} from "../api";
 import {OTPublisher, OTSession, OTSubscriber} from "opentok-react-native";
+import InCallManager from 'react-native-incall-manager';
+import {boundMethod} from "autobind-decorator";
+import {Actions} from "react-native-router-flux";
 
 
 const dimensions = Dimensions.get('window');
@@ -99,6 +102,7 @@ class VideoSession extends Component {
                 console.log("Partner disconnected.");
                 this.setState({
                     partnerConnected: false,
+                    hasRemoteStream: false,
                     remoteMessage: "Your partner has disconnected."
                 });
             },
@@ -140,12 +144,14 @@ class VideoSession extends Component {
     render() {
         return (
             <View>
+                <StatusBar hidden />
                 { this.state.sessionId && this.state.token ?
                     <OTSession
                         apiKey={TokBoxAPIKey}
                         sessionId={this.state.sessionId}
                         token={this.state.token}
                         eventHandlers={this.sessionEventHandlers}
+                        style={{width: dimensions.width, height: dimensions.height}}
                     >
                         <View style={style.container}>
                             <View style={style.localVideo}>
@@ -158,7 +164,6 @@ class VideoSession extends Component {
                                     <Text>
                                         {this.state.localMessage}
                                     </Text>
-                                    || <Text></Text>
                                 }
                             </View>
                             <View style={style.remoteVideo}>
@@ -166,11 +171,18 @@ class VideoSession extends Component {
                                         style={style.rtcView}
                                         eventHandlers={this.subscriberEventHandlers}
                                     />
-                                    {/*{!this.state.hasRemoteStream &&*/}
-                                    {/*    <Text>*/}
-                                    {/*        {this.state.remoteMessage}*/}
-                                    {/*    </Text>*/}
-                                    {/*}*/}
+                                    {!this.state.hasRemoteStream &&
+                                        <Text>
+                                            {this.state.remoteMessage}
+                                        </Text>
+                                    }
+                            </View>
+                            <View>
+                                <Button
+                                    style={style.disconnectButton}
+                                    title="Disconnect"
+                                    onPress={this.handleDisconnectPress}
+                                />
                             </View>
                         </View>
                     </OTSession>
@@ -182,6 +194,19 @@ class VideoSession extends Component {
             </View>
         );
     }
+
+    @boundMethod
+    handleDisconnectPress() {
+        Actions.pop({type: "reset"});
+    }
+
+    componentDidMount() {
+        InCallManager.start({media: "video"});
+    }
+
+    componentWillUnmount() {
+        InCallManager.stop();
+    }
 }
 
 VideoSession.propTypes = {
@@ -191,22 +216,30 @@ VideoSession.propTypes = {
 const style = StyleSheet.create({
     container: {
         backgroundColor: '#fff',
+        flex: 1,
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between"
     },
     localVideo: {
         backgroundColor: '#aaf',
+        flex: 1,
         display: "flex",
         flexDirection: "column"
     },
     remoteVideo: {
         backgroundColor: '#faa',
+        flex: 1,
+        display: "flex",
+        flexDirection: "column"
     },
     rtcView: {
-        width: dimensions.width,
-        height: dimensions.height/2,
         backgroundColor: '#f00',
+        width: "100%",
+        height: "100%"
+    },
+    disconnectButton: {
+
     }
 });
 

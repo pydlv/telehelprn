@@ -28,7 +28,7 @@ const Routes = () => {
                     <Scene key="login" component={Login} initial={true} init={true}/>
                     <Scene key="signUp" component={SignUp}/>
                 </Scene>
-                <Scene key="postAuth" initial={!needsLogin} >
+                <Scene key="postAuth" initial={!needsLogin}>
                     <Scene key="home" component={Home} initial={true} />
                     <Scene key="settings" component={Settings} />
                     <Scene key="providerList" component={ProviderList} />
