@@ -4,12 +4,15 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 platform :ios, '10.0'
 
 target 'telehelprn' do
+  #pre_install do |installer|
+  #   Pod::Installer::Xcode::TargetValidator.send(:define_method, :verify_no_static_framework_transitive_dependencies) {}
+  #end
+
   config = use_native_modules!
 
   use_react_native!(:path => config["reactNativePath"])
 
-  use_frameworks!
-    pod 'RNInputMask', :path => '../node_modules/react-native-text-input-mask/ios/InputMask'
+  pod 'RNInputMask', :path => '../node_modules/react-native-text-input-mask/ios/InputMask'
 
   target 'telehelprnTests' do
     inherit! :complete
@@ -23,6 +26,24 @@ target 'telehelprn' do
   use_flipper!
   post_install do |installer|
     flipper_post_install(installer)
+  end
+
+  # Post Install processing for Flipper
+  def flipper_post_install(installer)
+    installer.pods_project.targets.each do |target|
+      if target.name == 'YogaKit'
+        target.build_configurations.each do |config|
+          config.build_settings['SWIFT_VERSION'] = '4.1'
+        end
+      end
+
+      # Enable Flipper for simulators only
+      if target.name.start_with?('Flipper')
+        target.build_configurations.each do |config|
+          config.build_settings['VALID_ARCHS'] = 'arm64 arm64e'
+        end
+      end
+    end
   end
 end
 
