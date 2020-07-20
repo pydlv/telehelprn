@@ -9,13 +9,15 @@ import {Actions} from "react-native-router-flux";
 import {boundMethod} from "autobind-decorator";
 import {connect} from "react-redux";
 import {AccountType} from "../consts";
+import Security from "./Security";
 
 class Settings extends Component {
     constructor(props) {
         super(props);
 
         this.tabs = [
-            {title: strings.pages.settings.profileSettings}
+            {title: strings.pages.settings.profileSettings},
+            {title: strings.pages.settings.securitySettings}
         ];
 
         if (this.props.accountType === AccountType.Provider) {
@@ -34,6 +36,8 @@ class Settings extends Component {
             case 0:
                 return (<EditProfile />);
             case 1:
+                return (<Security />)
+            case 2:
                 return (<ProviderSettings />);
         }
     }

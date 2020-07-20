@@ -22,7 +22,8 @@ const signUp = {
 const settings = {
     headerText: "Settings",
     profileSettings: "Profile",
-    providerSettings: "Provider Settings"
+    providerSettings: "Provider Settings",
+    securitySettings: "Security"
 };
 
 const editProfile = {

@@ -269,6 +269,22 @@ class AuthenticatedAPI {
 
         return result.data;
     }
+
+    async changePassword(oldPassword, newPassword) {
+        const url = hostUrl({
+            path: '/change-password'
+        });
+
+        const result = await this.instance.post(
+            url,
+            {
+                old_password: oldPassword,
+                new_password: newPassword
+            }
+        );
+
+        return result.data;
+    }
 }
 
 let authedAPI = null;
