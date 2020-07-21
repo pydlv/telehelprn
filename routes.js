@@ -11,6 +11,7 @@ import ProviderProfile from "./Components/ProviderProfile";
 import Settings from "./Components/Settings";
 import AppointmentScheduler from "./Components/AppointmentScheduler";
 import VideoSession from "./Components/VideoSession";
+import About from "./Components/About";
 
 const Routes = () => {
     const token = useSelector(state => state.token);
@@ -31,6 +32,7 @@ const Routes = () => {
                 <Scene key="postAuth" initial={!needsLogin}>
                     <Scene key="home" component={Home} initial={true} />
                     <Scene key="settings" component={Settings} />
+                    <Scene key="about" component={About} />
                     <Scene key="providerList" component={ProviderList} />
                     <Scene key="confirmPrompt" component={ConfirmPrompt} />
                     <Scene key="viewProvider" component={ProviderProfile} />

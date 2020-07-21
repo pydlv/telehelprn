@@ -10,6 +10,7 @@ import {boundMethod} from "autobind-decorator";
 import {connect} from "react-redux";
 import {AccountType} from "../consts";
 import Security from "./Security";
+import Icon from "react-native-vector-icons/FontAwesome5";
 
 class Settings extends Component {
     constructor(props) {
@@ -56,6 +57,15 @@ class Settings extends Component {
                 <HeaderWithBackButton
                     headerText={strings.pages.settings.headerText}
                     showBackButton={this.props.showBackButton}
+                    rightComponent={
+                        <Icon
+                            name='info-circle'
+                            size={24}
+                            color='white'
+                            style={{marginRight: 15, marginBottom: 0}}
+                            onPress={() => Actions.push("about")}
+                        />
+                    }
                 />
 
                 {this.tabs.length > 1 &&

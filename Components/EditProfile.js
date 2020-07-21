@@ -1,4 +1,4 @@
-import {StyleSheet, TextInput, View} from "react-native";
+import {ActivityIndicator, StyleSheet, TextInput, View} from "react-native";
 import React, {Component} from "react";
 import {Button, Input, Text} from "react-native-elements";
 import {TextInputMask} from "react-native-masked-text";
@@ -44,7 +44,8 @@ class EditProfile extends Component {
             birthDateValid: false,
             bio: "",
             profileImageS3: null,
-            profileImageError: null
+            profileImageError: null,
+            profileImageUploading: false
         }
     }
 
@@ -132,35 +133,50 @@ class EditProfile extends Component {
 
     @boundMethod
     onSelectProfilePicturePressed() {
-        ImagePicker.showImagePicker((response) => {
-            if (response.didCancel) {
-                // console.log('User cancelled image picker');
-            } else if (response.error) {
-                console.error('ImagePicker Error: ', response.error);
-            } else if (response.customButton) {
-                // console.log('User tapped custom button: ', response.customButton);
-            } else {
-                const source = {uri: response.uri};
-                getAuthedAPI()
-                    .uploadProfilePicture(source)
-                    .then((response) => {
-                        this.setState({
-                            profileImageS3: response.object,
-                            profileImageError: null
-                        });
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                        if (error.response.status === 413) {
+        ImagePicker.showImagePicker(
+            {
+                cameraType: "front"
+            },
+            (response) => {
+                if (response.didCancel) {
+                    // console.log('User cancelled image picker');
+                } else if (response.error) {
+                    console.error('ImagePicker Error: ', response.error);
+                } else if (response.customButton) {
+                    // console.log('User tapped custom button: ', response.customButton);
+                } else {
+                    const source = {uri: response.uri};
+
+                    this.setState({
+                        profileImageUploading: true
+                    });
+
+                    getAuthedAPI()
+                        .uploadProfilePicture(source)
+                        .then((response) => {
                             this.setState({
-                                profileImageError: strings.pages.editProfile.profilePictureTooLarge
+                                profileImageS3: response.object,
+                                profileImageError: null
                             });
-                        } else {
-                            return Promise.reject(error);
-                        }
-                    })
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                            if (error.response.status === 413) {
+                                this.setState({
+                                    profileImageError: strings.pages.editProfile.profilePictureTooLarge
+                                });
+                            } else {
+                                return Promise.reject(error);
+                            }
+                        })
+                        .finally(() => {
+                            this.setState({
+                                profileImageUploading: false
+                            });
+                        })
+                }
             }
-        })
+        )
     }
 
     render() {
@@ -215,9 +231,13 @@ class EditProfile extends Component {
                         {strings.pages.editProfile.profilePicture}
                     </Text>
                     <View style={{display: "flex", flexDirection: "row"}}>
-                        <ProfilePicture
-                            imageURL={this.state.profileImageS3}
-                        />
+                        {!this.state.profileImageUploading ?
+                            <ProfilePicture
+                                imageURL={this.state.profileImageS3}
+                            />
+                            :
+                            <ActivityIndicator style={{width: 150, height: 150}} />
+                        }
                         <Button
                             title="Choose Picture"
                             containerStyle={styles.choosePictureButton}
@@ -225,7 +245,7 @@ class EditProfile extends Component {
                         />
                     </View>
                     {this.state.profileImageError &&
-                        <Text style={{color: "red"}}>{this.state.profileImageError}</Text>
+                    <Text style={{color: "red"}}>{this.state.profileImageError}</Text>
                     }
 
                     <Button

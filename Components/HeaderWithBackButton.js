@@ -22,6 +22,7 @@ class HeaderWithBackButton extends Component {
                     />
                 }
                 centerComponent={<Text h4 h4Style={{color: "white"}}>{this.props.headerText}</Text>}
+                rightComponent={this.props.rightComponent}
             />
         );
     }
@@ -29,7 +30,8 @@ class HeaderWithBackButton extends Component {
 
 HeaderWithBackButton.defaultProps = {
     showBackButton: true,
-    headerText: null
+    headerText: null,
+    rightComponent: null
 }
 
 

@@ -18,7 +18,9 @@
             android:icon="@mipmap/ic_launcher"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:allowBackup="false"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:requestLegacyExternalStorage="true"
+    >
         <meta-data
                 android:name="com.bugsnag.android.API_KEY"
                 android:value="d6d84807bf87e7f452415373ff2070ed"
