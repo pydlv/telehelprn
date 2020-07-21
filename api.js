@@ -260,6 +260,16 @@ class AuthenticatedAPI {
         return result.data;
     }
 
+    async endAppointmentEarly(uuid) {
+        const url = hostUrl({
+            path: `/end-appointment/${uuid}`
+        });
+
+        const result = await this.instance.post(url);
+
+        return result.data;
+    }
+
     async getOTSessionIdAndToken(appointmentUUID) {
         const url = hostUrl({
             path: `/get-ot-token/${appointmentUUID}`

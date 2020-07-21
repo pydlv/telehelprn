@@ -102,6 +102,28 @@ class NextAppointmentCard extends Component {
     }
 
     @boundMethod
+    onEndEarlyConfirm() {
+        getAuthedAPI()
+            .endAppointmentEarly(this.state.appointment.uuid)
+            .then(() => {
+                Actions.refresh({key: Math.random()});
+            })
+            .catch(() => {
+                alert("Failed to end appointment.");
+                Actions.refresh({key: Math.random()});
+            });
+    }
+
+    @boundMethod
+    onEndEarly() {
+        Actions.push("confirmPrompt", {
+            title: "Are you sure you want to end your appointment early?",
+            subtitle: "If you choose to end your appointment then you will be unable to join it again.",
+            onConfirm: this.onEndEarlyConfirm
+        })
+    }
+
+    @boundMethod
     onJoinSessionPress() {
         Actions.push("videoSession", {
             appointmentUUID: this.state.appointment.uuid
@@ -158,10 +180,17 @@ class NextAppointmentCard extends Component {
                                             disabled={this.state.appointment.startTime > moment.utc()}
                                             onPress={this.onJoinSessionPress}
                                         />
-                                        <Button
-                                            title={strings.pages.appointmentCard.changeOrCancel}
-                                            onPress={this.onCancelPress}
-                                        />
+                                        {this.state.appointment.startTime > moment.utc() ?
+                                            <Button
+                                                title={strings.pages.appointmentCard.changeOrCancel}
+                                                onPress={this.onCancelPress}
+                                            />
+                                            :
+                                            <Button
+                                                title="End Early"
+                                                onPress={this.onEndEarly}
+                                            />
+                                        }
                                     </View>
                                 </View>
                         }
