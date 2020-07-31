@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Dimensions, ImageBackground, StyleSheet, View} from "react-native";
+import {Dimensions, ImageBackground, ScrollView, StyleSheet, View} from "react-native";
 import {Button, Image, Input, Text} from "react-native-elements";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import strings from "../strings";
@@ -14,7 +14,7 @@ import {setLogin} from "../common";
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const backgroundImage = require("../assets/AFFORDABLE.png");
+const backgroundImage = require("../assets/AFFORDABLE_notitle.png");
 
 class Login extends Component {
     constructor(props) {
@@ -94,59 +94,63 @@ class Login extends Component {
             <View style={globalStyles.container}>
                 {/*<ImageBackground source={backgroundImage} style={styles.imageBackground}>*/}
                 {/*    <Image source={backgroundImage} style={{width: windowWidth * .75, height: windowWidth * .75, resizeMode: "stretch"}}/>*/}
-                    <Text h1>{strings.appName}</Text>
+                <Image
+                    source={backgroundImage}
+                    style={{width: windowWidth * .5, height: windowWidth * .5, resizeMode: "stretch"}}
+                />
+                <Text h2 style={{marginTop: 20, marginBottom: 20}}>Teletherapy Login</Text>
 
-                    <Input
-                        placeholder={strings.pages.login.email}
-                        leftIcon={
-                            <Icon
-                                name='user'
-                                size={24}
-                                color='black'
-                                style={{marginRight: 8}}
-                            />
-                        }
-                        containerStyle={styles.smallMargin}
-                        disabled={this.state.loading}
-                        onChangeText={this.handleEmail}
-                        errorMessage={this.state.emailValidationError}
-                        autoCapitalize="none"
-                    />
+                <Input
+                    placeholder={strings.pages.login.email}
+                    leftIcon={
+                        <Icon
+                            name='user'
+                            size={24}
+                            color='black'
+                            style={{marginRight: 8}}
+                        />
+                    }
+                    containerStyle={styles.smallMargin}
+                    disabled={this.state.loading}
+                    onChangeText={this.handleEmail}
+                    errorMessage={this.state.emailValidationError}
+                    autoCapitalize="none"
+                />
 
-                    <Input
-                        placeholder={strings.pages.login.password}
-                        secureTextEntry={true}
-                        leftIcon={
-                            <Icon
-                                name='lock'
-                                size={24}
-                                color='black'
-                                style={{marginRight: 10}}
-                            />
-                        }
-                        containerStyle={styles.smallMargin}
-                        disabled={this.state.loading}
-                        onChangeText={this.handlePassword}
-                        errorMessage={this.state.passwordValidationError}
-                        value={this.state.password}
-                        autoCapitalize="none"
-                    />
+                <Input
+                    placeholder={strings.pages.login.password}
+                    secureTextEntry={true}
+                    leftIcon={
+                        <Icon
+                            name='lock'
+                            size={24}
+                            color='black'
+                            style={{marginRight: 10}}
+                        />
+                    }
+                    containerStyle={styles.smallMargin}
+                    disabled={this.state.loading}
+                    onChangeText={this.handlePassword}
+                    errorMessage={this.state.passwordValidationError}
+                    value={this.state.password}
+                    autoCapitalize="none"
+                />
 
-                    <Button
-                        title={strings.pages.login.login.toUpperCase()}
-                        containerStyle={styles.loginButton}
-                        disabled={this.state.loading || !this.state.email || !this.state.password}
-                        onPress={this.tryLogin}
-                    />
+                <Button
+                    title={strings.pages.login.login.toUpperCase()}
+                    containerStyle={styles.loginButton}
+                    disabled={this.state.loading || !this.state.email || !this.state.password}
+                    onPress={this.tryLogin}
+                />
 
-                    <Text style={styles.orDivider}>{ strings.pages.login.or.toUpperCase() }</Text>
+                <Text style={styles.orDivider}>{ strings.pages.login.or.toUpperCase() }</Text>
 
-                    <Button
-                        title={strings.pages.login.signup.toUpperCase()}
-                        containerStyle={styles.signupButton}
-                        disabled={this.state.loading}
-                        onPress={Actions.signUp}
-                    />
+                <Button
+                    title={strings.pages.login.signup.toUpperCase()}
+                    containerStyle={styles.signupButton}
+                    disabled={this.state.loading}
+                    onPress={Actions.signUp}
+                />
                 {/*</ImageBackground>*/}
             </View>
         );
