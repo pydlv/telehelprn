@@ -318,6 +318,8 @@ PODS:
     - React
   - RNDateTimePicker (2.3.2):
     - React
+  - RNDeviceInfo (5.6.2):
+    - React
   - RNGestureHandler (1.6.1):
     - React
   - RNInputMask (4.1.0)
@@ -386,6 +388,7 @@ DEPENDENCIES:
   - ReactNativeIncallManager (from `../node_modules/react-native-incall-manager`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
+  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNInputMask (from `../node_modules/react-native-text-input-mask/ios/InputMask`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
@@ -476,6 +479,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/async-storage"
   RNDateTimePicker:
     :path: "../node_modules/@react-native-community/datetimepicker"
+  RNDeviceInfo:
+    :path: "../node_modules/react-native-device-info"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNInputMask:
@@ -535,6 +540,7 @@ SPEC CHECKSUMS:
   ReactNativeIncallManager: 352f4a3cbe9385edf7eff57be3fe6bd1ab64fe7f
   RNCAsyncStorage: 453cd7c335ec9ba3b877e27d02238956b76f3268
   RNDateTimePicker: 4bd49e09f91ca73d69119a9e1173b0d43b82f5e5
+  RNDeviceInfo: ed8557a8bd6443cbc0ab5d375e6808a38a279744
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNInputMask: 815461ebdf396beb62cf58916c35cf6930adb991
   RNReanimated: b5ccb50650ba06f6e749c7c329a1bc3ae0c88b43
