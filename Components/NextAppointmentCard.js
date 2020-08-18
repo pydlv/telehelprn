@@ -131,6 +131,80 @@ class NextAppointmentCard extends Component {
     }
 
     render() {
+        let cardContent;
+
+        if (!this.state.appointment || this.state.appointment.endTime.clone().add(30, "minutes") < moment.utc()) {
+            // The appointment is over and we're not within 30 minutes of it ending.
+            cardContent = (
+                <View>
+                    <Text style={{marginBottom: 20}}>{strings.pages.appointmentCard.noAppointment}</Text>
+                    {this.props.accountType === AccountType.User &&
+                    <Button
+                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                        title={strings.pages.appointmentCard.scheduleOneNow}
+                        onPress={Actions.appointmentScheduler}
+                    />
+                    }
+                </View>
+            )
+        } else if (this.state.appointment.endTime < moment.utc() && this.state.appointment.endTime.clone().add(30, "minutes") >= moment.utc()) {
+            // The appointment has ended, and we are within 30 minutes of it ending.
+            cardContent = (
+                <View>
+                    <Text style={{marginBottom: 20}}>Your appointment has ended!</Text>
+                    {this.props.accountType === AccountType.User &&
+                    <Button
+                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                        title="Schedule Another Appointment"
+                        onPress={Actions.appointmentScheduler}
+                    />
+                    }
+                </View>
+            )
+        } else {
+            cardContent = (
+                <View>
+                    {/*<Text>{strings.pages.appointmentCard.youHaveAnAppointment}</Text>*/}
+                    <View style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 3}}>
+                        <Text>
+                            {strings.pages.appointmentCard.startTime}
+                        </Text>
+                        <Text>{this.state.appointment.startTime.local().format(APPOINTMENT_TIME_FORMAT)}</Text>
+                    </View>
+                    <View style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 3}}>
+                        <Text>
+                            {strings.pages.appointmentCard.endTime}
+                        </Text>
+                        <Text>{this.state.appointment.endTime.local().format(APPOINTMENT_TIME_FORMAT)}</Text>
+                    </View>
+                    <Divider style={{marginTop: 10, marginBottom: 10}} />
+                    {this.state.appointment.startTime > moment.utc() &&
+                    <Text style={{marginBottom: 10}}>
+                        {sprintf(strings.pages.appointmentCard.youWillBeAbleToJoinIn, this.timeUntilAbleToJoin())}
+                    </Text>
+                    }
+                    <View style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                        <Button
+                            title={strings.pages.appointmentCard.joinSession}
+                            disabled={this.state.appointment.startTime > moment.utc()}
+                            onPress={this.onJoinSessionPress}
+                        />
+                        {this.state.appointment.startTime > moment.utc() ?
+                            <Button
+                                title={strings.pages.appointmentCard.changeOrCancel}
+                                onPress={this.onCancelPress}
+                            />
+                            :
+                            <Button
+                                title="End Early"
+                                onPress={this.onEndEarly}
+                            />
+                        }
+                    </View>
+                </View>
+            )
+        }
+
         return (
             <View>
                 {(this.props.provider || this.props.accountType === AccountType.Provider) &&
@@ -141,58 +215,7 @@ class NextAppointmentCard extends Component {
                         {this.state.appointment === undefined ?
                             <ActivityIndicator />
                             :
-                            this.state.appointment === null || this.state.appointment.endTime <= moment.utc() ?
-                                // Either we don't have a confirmed appointment or our appointment has ended
-                                <View>
-                                    <Text style={{marginBottom: 20}}>{strings.pages.appointmentCard.noAppointment}</Text>
-                                    {this.props.accountType === AccountType.User &&
-                                        <Button
-                                            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                                            title={strings.pages.appointmentCard.scheduleOneNow}
-                                            onPress={Actions.appointmentScheduler}
-                                        />
-                                    }
-                                </View>
-                                :
-                                <View>
-                                    {/*<Text>{strings.pages.appointmentCard.youHaveAnAppointment}</Text>*/}
-                                    <View style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 3}}>
-                                        <Text>
-                                            {strings.pages.appointmentCard.startTime}
-                                        </Text>
-                                        <Text>{this.state.appointment.startTime.local().format(APPOINTMENT_TIME_FORMAT)}</Text>
-                                    </View>
-                                    <View style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 3}}>
-                                        <Text>
-                                            {strings.pages.appointmentCard.endTime}
-                                        </Text>
-                                        <Text>{this.state.appointment.endTime.local().format(APPOINTMENT_TIME_FORMAT)}</Text>
-                                    </View>
-                                    <Divider style={{marginTop: 10, marginBottom: 10}} />
-                                    {this.state.appointment.startTime > moment.utc() &&
-                                        <Text style={{marginBottom: 10}}>
-                                            {sprintf(strings.pages.appointmentCard.youWillBeAbleToJoinIn, this.timeUntilAbleToJoin())}
-                                        </Text>
-                                    }
-                                    <View style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                                        <Button
-                                            title={strings.pages.appointmentCard.joinSession}
-                                            disabled={this.state.appointment.startTime > moment.utc()}
-                                            onPress={this.onJoinSessionPress}
-                                        />
-                                        {this.state.appointment.startTime > moment.utc() ?
-                                            <Button
-                                                title={strings.pages.appointmentCard.changeOrCancel}
-                                                onPress={this.onCancelPress}
-                                            />
-                                            :
-                                            <Button
-                                                title="End Early"
-                                                onPress={this.onEndEarly}
-                                            />
-                                        }
-                                    </View>
-                                </View>
+                            cardContent
                         }
                     </Card>
                 }

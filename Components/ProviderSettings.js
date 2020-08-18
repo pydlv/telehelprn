@@ -50,7 +50,7 @@ class ProviderSettings extends Component {
         getAuthedAPI()
             .deleteScheduleByUUID(uuid)
             .then(() => {
-                Actions.refresh({tabIndex: 1, key: Math.random()});
+                Actions.refresh({tabIndex: 2, key: Math.random()});
             })
     }
 
@@ -123,7 +123,7 @@ class ProviderSettings extends Component {
         getAuthedAPI()
             .createAvailabilitySchedule(daysOfWeekUTC, startTimeUTC.format("HH:mm"), endTimeUTC.format("HH:mm"))
             .then((response) => {
-                Actions.refresh({tabIndex: 1, key: Math.random()});
+                Actions.refresh({tabIndex: 2, key: Math.random()});
             })
     }
 

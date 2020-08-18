@@ -22,7 +22,10 @@ class Settings extends Component {
         ];
 
         if (this.props.accountType === AccountType.Provider) {
+            this.isProvider = true;
             this.tabs.push({title: strings.pages.settings.providerSettings});
+        } else {
+            this.isProvider = false;
         }
 
         const initialIndex = this.props.tabIndex !== undefined ? this.props.tabIndex : 0;
@@ -76,7 +79,14 @@ class Settings extends Component {
                                 return (
                                     <TouchableOpacity
                                         key={i}
-                                        style={i === this.state.activeTabIndex ? {...styles.tab, ...styles.activeTab} : styles.tab}
+                                        style={i === this.state.activeTabIndex ? {
+                                            'width': (100 / this.tabs.length).toString() + "%",
+                                            ...styles.tab,
+                                            ...styles.activeTab
+                                        } : {
+                                            'width': (100 / this.tabs.length).toString() + "%",
+                                            ...styles.tab
+                                        }}
                                         onPress={() => this.onTabPress(i)}
                                     >
                                         <Text style={styles.tabText}>{title}</Text>
@@ -106,7 +116,7 @@ const styles = StyleSheet.create({
     },
 
     tab: {
-        width: "50%",
+        // width: "50%",
         minHeight: 40,
         display: "flex",
         alignItems: "center",
