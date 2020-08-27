@@ -295,6 +295,26 @@ class AuthenticatedAPI {
 
         return result.data;
     }
+
+    async getEmailVerificationStatus() {
+        const url = hostUrl({
+            path: '/verify/status'
+        });
+
+        const result = await this.instance.get(url);
+
+        return result.data.result;
+    }
+
+    async resendVerificationEmail() {
+        const url = hostUrl({
+            path: '/verify/resend'
+        });
+
+        const result = await this.instance.post(url);
+
+        return result.data.message;
+    }
 }
 
 let authedAPI = null;
