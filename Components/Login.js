@@ -136,6 +136,13 @@ class Login extends Component {
                     autoCapitalize="none"
                 />
 
+                <Text
+                    style={{alignSelf: "flex-start", marginLeft: 20, marginBottom: 5}}
+                    onPress={() => Actions.push("passwordReset")}
+                >
+                    Forgot password?
+                </Text>
+
                 <Button
                     title={strings.pages.login.login.toUpperCase()}
                     containerStyle={styles.loginButton}

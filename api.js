@@ -7,8 +7,10 @@ axios.interceptors.response.use(function (response) {
     return response;
 }, function (error) {
     // Do something with response error
-    alert(error);
-    console.log("Intercepted error: ", error);
+    if (error.response && error.response.status !== 403) {
+        alert(error);
+        console.log("Intercepted error: ", error);
+    }
     return Promise.reject(error);
 });
 
@@ -45,6 +47,19 @@ export async function signUp(email, password) {
     });
 
     return result.data;
+}
+
+export async function requestPasswordReset(email) {
+    const url = hostUrl({
+        path: "/request-password-reset"
+    });
+
+    const result = await axios.post(
+        url,
+        {email}
+    );
+
+    return result.status >= 200 && result.status < 300;
 }
 
 const createFormData = (photo, body={}) => {
