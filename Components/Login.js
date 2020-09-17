@@ -98,7 +98,7 @@ class Login extends Component {
                     source={backgroundImage}
                     style={{width: windowWidth * .5, height: windowWidth * .5, resizeMode: "stretch"}}
                 />
-                <Text h2 style={{marginTop: 20, marginBottom: 20}}>Teletherapy Login</Text>
+                <Text h2 style={{marginTop: 20, marginBottom: 20}}>Telemental Health</Text>
 
                 <Input
                     placeholder={strings.pages.login.email}
