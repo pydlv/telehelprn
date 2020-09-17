@@ -1,9 +1,8 @@
 import Config from "react-native-config";
 
 export const AccountType = Object.freeze({
-    User: 1,
-    Provider: 2,
-    Admin: 3
+    User: "u",
+    Provider: "p"
 });
 
 export const DayOfWeek = Object.freeze({

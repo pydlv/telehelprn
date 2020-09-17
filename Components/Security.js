@@ -4,6 +4,8 @@ import {Button, Input, Text} from "react-native-elements";
 import strings from "../strings";
 import {boundMethod} from "autobind-decorator";
 import {getAuthedAPI} from "../api";
+import {ACTION_TYPES, createAction} from '../redux/actions';
+import {connect} from 'react-redux';
 
 const initialPasswordFieldsState = {
     oldPassword: null,
@@ -14,7 +16,7 @@ const initialPasswordFieldsState = {
     confirmPasswordValidationError: null
 }
 
-export default class Security extends Component {
+class Security extends Component {
     constructor(props) {
         super(props);
 
@@ -90,6 +92,11 @@ export default class Security extends Component {
     }
 
     @boundMethod
+    logout() {
+        this.props.resetStore();
+    }
+
+    @boundMethod
     requestResendVerification() {
         getAuthedAPI().resendVerificationEmail().then(() => {
             this.setState({emailSent: true});
@@ -144,6 +151,13 @@ export default class Security extends Component {
                     />
                 </View>
                 <View style={{marginTop: 10}}>
+                    <Text h4>Logout</Text>
+                    <Button
+                        title="Logout"
+                        onPress={this.logout}
+                    />
+                </View>
+                <View style={{marginTop: 10}}>
                     <Text h4>Email Verification</Text>
                     {this.state.verificationStatus ?
                         <Text>Your email is verified!</Text>
@@ -174,3 +188,11 @@ const styles = StyleSheet.create({
         margin: 5
     },
 });
+
+function mapDispatchToProps(dispatch) {
+    return {
+        resetStore: () => dispatch(createAction(ACTION_TYPES.RESET_STORE))
+    };
+}
+
+export default connect(null, mapDispatchToProps)(Security);

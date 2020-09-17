@@ -47,7 +47,8 @@ class NextAppointmentCard extends Component {
     componentDidMount() {
         getAuthedAPI()
             .getMyAppointments()
-            .then((appointments) => {
+            .then((response) => {
+                const appointments = response.result;
                 if (appointments.length === 0) {
                     this.setState({
                         appointment: null

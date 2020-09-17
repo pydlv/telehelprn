@@ -93,36 +93,50 @@ class SignUp extends Component {
 
         api.signUp(this.state.email, this.state.password)
             .then((response) => {
-                setLogin(this.props.dispatch, response.uuid, response.token, AccountType.User);
-            })
-            .catch((error) => {
-                const {response} = error;
-
-                if (response !== undefined) {
-                    if (response.status === 400) {
-                        if (response.data.error === "User already exists.") {
-                            this.setState({
-                                emailValidationError: strings.pages.signUp.userAlreadyExists
-                            });
-                            return;
-                        } else if ("email" in response.data.errors) {
-                            this.setState({
-                                emailValidationError: strings.pages.signUp.invalidEmail
-                            });
-                            return;
-                        } else if ("password" in response.data.errors) {
-                            this.setState({
-                                passwordValidationError: strings.pages.signUp.doesNotMeetPasswordRequirements
-                            })
-                            return;
-                        }
-
-                        console.log("Got unknown 400:", response.data.error, response.data.errors);
-                    }
+                if ("email" in response) {
+                    this.setState({
+                        emailValidationError: response.email[0]
+                    });
+                    return;
                 }
 
-                return Promise.reject(error);
+                if ("password" in response) {
+                    this.setState({
+                        passwordValidationError: response.password[0]
+                    });
+                    return;
+                }
+
+                setLogin(this.props.dispatch, response.uuid, response.token, AccountType.User);
             })
+            // .catch((error) => {
+            //     const {response} = error;
+            //
+            //     if (response !== undefined) {
+            //         if (response.status === 400) {
+            //             if (response.data.error === "User already exists.") {
+            //                 this.setState({
+            //                     emailValidationError: strings.pages.signUp.userAlreadyExists
+            //                 });
+            //                 return;
+            //             } else if ("email" in response.data.errors) {
+            //                 this.setState({
+            //                     emailValidationError: strings.pages.signUp.invalidEmail
+            //                 });
+            //                 return;
+            //             } else if ("password" in response.data.errors) {
+            //                 this.setState({
+            //                     passwordValidationError: strings.pages.signUp.doesNotMeetPasswordRequirements
+            //                 })
+            //                 return;
+            //             }
+            //
+            //             console.log("Got unknown 400:", response.data.error, response.data.errors);
+            //         }
+            //     }
+            //
+            //     return Promise.reject(error);
+            // })
     }
 
     render() {
@@ -193,6 +207,9 @@ class SignUp extends Component {
                         !this.state.email ||
                         !this.state.password ||
                         !this.state.passwordConfirm ||
+                        !!this.state.emailValidationError ||
+                        !!this.state.passwordValidationError ||
+                        !!this.state.passwordConfirmValidationError ||
                         this.state.password !== this.state.passwordConfirm ||
                         !isValidEmail(this.state.email)
                     }

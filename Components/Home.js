@@ -33,9 +33,7 @@ class Home extends Component {
 
     @boundMethod
     signOut() {
-        getAuthedAPI().signOut().finally(() => {
-            this.props.resetStore();
-        });
+        this.props.resetStore();
     }
 
     render() {

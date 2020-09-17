@@ -38,7 +38,7 @@ class ProviderSettings extends Component {
         getAuthedAPI()
             .getAvailabilitySchedules()
             .then((response) => {
-                const schedules = response.map((serverObj) => AvailabilitySchedule.fromServerObject(serverObj));
+                const schedules = response.result.map((serverObj) => AvailabilitySchedule.fromServerObject(serverObj));
                 this.setState({
                     schedules
                 })
@@ -124,6 +124,9 @@ class ProviderSettings extends Component {
             .createAvailabilitySchedule(daysOfWeekUTC, startTimeUTC.format("HH:mm"), endTimeUTC.format("HH:mm"))
             .then((response) => {
                 Actions.refresh({tabIndex: 2, key: Math.random()});
+            })
+            .catch(() => {
+                alert("Failed to create schedule. Please make sure that it doesn't overlap with any existing schedule.");
             })
     }
 

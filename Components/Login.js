@@ -61,23 +61,20 @@ class Login extends Component {
             }
 
             if (response.status === 400) {
-                if ("errors" in response.data) {
-                    const {errors} = response.data;
-                    if ("email" in errors) {
-                        this.setState({emailValidationError: strings.pages.login.invalidEmailFormat});
-                    } else if ("password" in errors) {
-                        this.setState({passwordValidationError: strings.pages.login.passwordIsIncorrect});
+                if ("non_field_errors" in response.data) {
+                    for (const message of response.data["non_field_errors"]) {
+                        alert(message);
                     }
                 }
-            } else if (response.status === 403) {
-                if ("error" in response.data) {
-                    const {error} = response.data;
-                    if (error === "User does not exist.") {
-                        this.setState({emailValidationError: strings.pages.login.userDoesNotExist});
-                    } else if (error === "Login is invalid.") {
-                        this.setState({passwordValidationError: strings.pages.login.passwordIsIncorrect});
-                    }
-                }
+            // } else if (response.status === 403) {
+            //     if ("error" in response.data) {
+            //         const {error} = response.data;
+            //         if (error === "User does not exist.") {
+            //             this.setState({emailValidationError: strings.pages.login.userDoesNotExist});
+            //         } else if (error === "Login is invalid.") {
+            //             this.setState({passwordValidationError: strings.pages.login.passwordIsIncorrect});
+            //         }
+            //     }
             } else {
                 console.error(error);
             }

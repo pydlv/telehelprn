@@ -1,18 +1,20 @@
 import Config from "react-native-config";
 import axios from "axios";
 import buildUrl from "build-url";
+import moment from 'moment';
+
+const handleError = (error) => {
+    // Do something with response error
+    if (error.response && error.response.data && error.response.data.error) {
+        alert(error.response.data.error);
+    }
+    return Promise.reject(error);
+}
 
 axios.interceptors.response.use(function (response) {
     // Do something with response data
     return response;
-}, function (error) {
-    // Do something with response error
-    if (error.response && error.response.status !== 403) {
-        alert(error);
-        console.log("Intercepted error: ", error);
-    }
-    return Promise.reject(error);
-});
+}, handleError);
 
 const partial = (func, ...args) => (...rest) => func(...args, ...rest);
 
@@ -24,11 +26,11 @@ const hostUrl = partial(buildUrl, API_HOST);
 
 export async function login(email, password) {
     const url = hostUrl({
-        path: '/login'
+        path: '/api-token-auth/'
     });
 
     const result = await axios.post(url, {
-        email,
+        username: email,
         password
     });
 
@@ -38,20 +40,22 @@ export async function login(email, password) {
 
 export async function signUp(email, password) {
     const url = hostUrl({
-        path: "/signup"
+        path: "/signup/"
     });
 
     const result = await axios.post(url, {
         email,
-        password
+        password,
+        confirm_password: password
     });
 
     return result.data;
 }
 
+
 export async function requestPasswordReset(email) {
     const url = hostUrl({
-        path: "/request-password-reset"
+        path: "/request-password-reset/"
     });
 
     const result = await axios.post(
@@ -84,27 +88,15 @@ class AuthenticatedAPI {
         this.instance = axios.create({
             headers: {
                 common: {
-                    session: this.token
+                    Authorization: `Token ${this.token}`
                 }
             }
         });
 
         this.instance.interceptors.response.use(
             response => response,
-            error => {
-                throw error
-            }
+            handleError
         );
-    }
-
-    async signOut() {
-        const url = hostUrl({
-            path: "/signout"
-        });
-
-        const result = await this.instance.post(url);
-
-        return result.data;
     }
 
     async editProfile(firstName, lastName, birthDate, bio) {
@@ -115,7 +107,7 @@ class AuthenticatedAPI {
         const result = await this.instance.post(url, {
             first_name: firstName,
             last_name: lastName,
-            birthday: birthDate,
+            birthday: moment(birthDate).format("YYYY-MM-DD"),
             bio
         });
 
@@ -124,7 +116,7 @@ class AuthenticatedAPI {
 
     async getProfile() {
         const url = hostUrl({
-            path: "/getprofile"
+            path: "/profile/"
         });
 
         const result = await this.instance.get(url);
@@ -134,7 +126,7 @@ class AuthenticatedAPI {
 
     async getAssignedProvider() {
         const url = hostUrl({
-            path: "/getassignedprovider"
+            path: "/getassignedprovider/"
         });
 
         const result = await this.instance.get(url);
@@ -181,9 +173,10 @@ class AuthenticatedAPI {
             path: "/upload-profile-picture"
         });
 
-        const result = await this.instance.post(url, formData, {
+        const result = await this.instance.put(url, formData, {
             headers: {
-                "Content-Type": "multipart/form-data"
+                "Content-Type": "multipart/form-data",
+                // "Content-Disposition": "attachment; filename=file.jpg"
             }
         });
 
@@ -297,14 +290,15 @@ class AuthenticatedAPI {
 
     async changePassword(oldPassword, newPassword) {
         const url = hostUrl({
-            path: '/change-password'
+            path: '/change-password/'
         });
 
         const result = await this.instance.post(
             url,
             {
                 old_password: oldPassword,
-                new_password: newPassword
+                new_password: newPassword,
+                confirm_password: newPassword
             }
         );
 
@@ -313,7 +307,7 @@ class AuthenticatedAPI {
 
     async getEmailVerificationStatus() {
         const url = hostUrl({
-            path: '/verify/status'
+            path: '/verify/status/'
         });
 
         const result = await this.instance.get(url);
@@ -323,7 +317,7 @@ class AuthenticatedAPI {
 
     async resendVerificationEmail() {
         const url = hostUrl({
-            path: '/verify/resend'
+            path: '/verify/resend/'
         });
 
         const result = await this.instance.post(url);

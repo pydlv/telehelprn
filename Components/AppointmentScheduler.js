@@ -40,7 +40,7 @@ class AppointmentScheduler extends Component {
         getAuthedAPI()
             .getAvailabilitySchedules(this.props.provider.uuid)
             .then((response) => {
-                const schedules = response.map((serverObj) => AvailabilitySchedule.fromServerObject(serverObj));
+                const schedules = response.result.map((serverObj) => AvailabilitySchedule.fromServerObject(serverObj));
                 this.setState({
                     schedules
                 })
@@ -61,7 +61,6 @@ class AppointmentScheduler extends Component {
                 getAuthedAPI()
                     .scheduleAppointment(appointment.moment)
                     .then(Actions.home)
-                    .catch((error) => console.log(error.response.data));
             },
             onCancel: () => {}
         });
@@ -133,7 +132,8 @@ class AppointmentScheduler extends Component {
     updateSearch() {
         getAuthedAPI()
             .getAvailableAppointments(this.state.startDate, this.state.endDate)
-            .then((times) => {
+            .then((response) => {
+                const times = response.result;
                 const possibleAppointments = [];
                 times.forEach((time) => {
                     possibleAppointments.push(new PossibleAppointment(moment.utc(time).local()))
