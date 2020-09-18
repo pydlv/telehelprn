@@ -4,9 +4,22 @@ import buildUrl from "build-url";
 import moment from 'moment';
 
 const handleError = (error) => {
+    console.log(error.response.data);
     // Do something with response error
-    if (error.response && error.response.data && error.response.data.error) {
-        alert(error.response.data.error);
+    if (error.response && error.response.data) {
+        if (error.response.data.error) {
+            alert(error.response.data.error);
+        } else if (error.response.status >= 400 && error.response.status < 500 && typeof(error.response.data) === "object") {
+            console.log("hit");
+            const keys = Object.keys(error.response.data);
+            for (const key of keys) {
+                const value = error.response.data[key];
+
+                if (value) {
+                    alert(value);
+                }
+            }
+        }
     }
     return Promise.reject(error);
 }
@@ -18,7 +31,7 @@ axios.interceptors.response.use(function (response) {
 
 const partial = (func, ...args) => (...rest) => func(...args, ...rest);
 
-const API_HOST = Config.API_HOST;
+const API_HOST = Config.API_HOST + "/api";
 
 // Wrapper function so we don't have to manually provide the same host for every endpoint.
 const hostUrl = partial(buildUrl, API_HOST);
