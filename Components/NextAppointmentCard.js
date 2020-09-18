@@ -7,9 +7,7 @@ import {getAuthedAPI} from "../api";
 import {Actions} from "react-native-router-flux";
 import moment from "moment";
 import {boundMethod} from "autobind-decorator";
-import {AccountType} from "../consts";
-
-const APPOINTMENT_TIME_FORMAT = "dddd, MMMM Do, LT";
+import {AccountType, APPOINTMENT_TIME_FORMAT} from "../consts";
 
 function pretty(days, hours, minutes) {
     const plurality = (s, v) => v === 1 ? s : s + "s";

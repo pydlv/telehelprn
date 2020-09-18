@@ -13,6 +13,7 @@ import AppointmentScheduler from "./Components/AppointmentScheduler";
 import VideoSession from "./Components/VideoSession";
 import About from "./Components/About";
 import PasswordReset from './Components/PasswordReset';
+import UpcomingAppointments from './Components/UpcomingAppointments';
 
 const Routes = () => {
     const token = useSelector(state => state.token);
@@ -39,6 +40,7 @@ const Routes = () => {
                     <Scene key="confirmPrompt" component={ConfirmPrompt} />
                     <Scene key="viewProvider" component={ProviderProfile} />
                     <Scene key="appointmentScheduler" component={AppointmentScheduler} />
+                    <Scene key="upcomingAppointments" component={UpcomingAppointments} />
                     <Scene key="videoSession" component={VideoSession} type="reset" />
                 </Scene>
             </Scene>

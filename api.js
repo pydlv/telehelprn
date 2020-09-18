@@ -4,7 +4,6 @@ import buildUrl from "build-url";
 import moment from 'moment';
 
 const handleError = (error) => {
-    console.log(error.response.data);
     // Do something with response error
     if (error.response && error.response.data) {
         if (error.response.data.error) {

@@ -1,17 +1,16 @@
-import React, {Component} from "react";
-import {ScrollView, View} from "react-native";
-import {Button, Card, Header, Text} from "react-native-elements";
-import {connect} from "react-redux";
-import {ACTION_TYPES, createAction} from "../redux/actions";
-import {boundMethod} from "autobind-decorator";
-import {getAuthedAPI} from "../api";
-import Icon from "react-native-vector-icons/FontAwesome";
-import strings from "../strings";
-import {sprintf} from "sprintf-js";
-import {loadProfile, loadProvider} from "../common";
-import {Actions} from "react-native-router-flux";
-import {AccountType} from "../consts";
-import NextAppointmentCard from "./NextAppointmentCard";
+import React, {Component} from 'react';
+import {ScrollView, View} from 'react-native';
+import {Button, Card, Header, Text} from 'react-native-elements';
+import {connect} from 'react-redux';
+import {ACTION_TYPES, createAction} from '../redux/actions';
+import {boundMethod} from 'autobind-decorator';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import strings from '../strings';
+import {sprintf} from 'sprintf-js';
+import {loadProfile, loadProvider} from '../common';
+import {Actions} from 'react-native-router-flux';
+import {AccountType} from '../consts';
+import NextAppointmentCard from './NextAppointmentCard';
 
 class Home extends Component {
     constructor(props) {
@@ -100,6 +99,17 @@ class Home extends Component {
                     }
                     {(this.props.provider || this.props.accountType === AccountType.Provider) &&
                         <NextAppointmentCard />
+                    }
+                    {this.props.accountType === AccountType.Provider &&
+                        <Card
+                            title="Upcoming Appointments"
+                            titleStyle={{alignSelf: "flex-start"}}
+                        >
+                            <Button
+                                title="View Upcoming Appointments"
+                                onPress={() => Actions.push("upcomingAppointments")}
+                            />
+                        </Card>
                     }
                 </View>
             </ScrollView>
