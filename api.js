@@ -10,7 +10,6 @@ const handleError = (error) => {
         if (error.response.data.error) {
             alert(error.response.data.error);
         } else if (error.response.status >= 400 && error.response.status < 500 && typeof(error.response.data) === "object") {
-            console.log("hit");
             const keys = Object.keys(error.response.data);
             for (const key of keys) {
                 const value = error.response.data[key];
