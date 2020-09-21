@@ -40,7 +40,7 @@ const editProfile = {
 
 const home = {
     greetingText: "Hello, %s!",
-    yourProviderCardHeader: "Your Therapist",
+    yourProviderCardHeader: "Your Coach",
     noProviderSelected: "You have not selected a provider yet.",
     selectProviderButton: "Select Provider",
     changeProviderButton: "Change Provider",

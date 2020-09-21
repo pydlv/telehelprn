@@ -65,7 +65,7 @@ class ProviderProfile extends Component {
                     <View style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                         <View>
                             <Text style={styles.providerName} h4>{this.state.fullName}</Text>
-                            <Text>Therapist</Text>
+                            <Text>Coach</Text>
                         </View>
                         <ProfilePicture
                             imageURL={this.state.profileImageS3}

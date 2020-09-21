@@ -17,7 +17,7 @@ class HeaderWithBackButton extends Component {
                                 color="white"
                             />
                         }
-                        onPress={Actions.pop}
+                        onPress={() => Actions.pop({type: this.props.backType})}
                         containerStyle={{marginRight:10}}
                     />
                 }
@@ -31,7 +31,8 @@ class HeaderWithBackButton extends Component {
 HeaderWithBackButton.defaultProps = {
     showBackButton: true,
     headerText: null,
-    rightComponent: null
+    rightComponent: null,
+    backType: undefined
 }
 
 

@@ -207,10 +207,10 @@ class NextAppointmentCard extends Component {
         return (
             <View>
                 {(this.props.provider || this.props.accountType === AccountType.Provider) &&
-                    <Card
-                        title={strings.pages.appointmentCard.titleText}
-                        titleStyle={{alignSelf: "flex-start"}}
-                    >
+                    <Card>
+                        <Card.Title style={{alignSelf: "flex-start"}}>
+                            {strings.pages.appointmentCard.titleText}
+                        </Card.Title>
                         {this.state.appointment === undefined ?
                             <ActivityIndicator />
                             :

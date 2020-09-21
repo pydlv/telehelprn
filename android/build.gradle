@@ -35,7 +35,7 @@ allprojects {
         configurations.all {
           resolutionStrategy {
             // START: RN version lockdown
-            force 'com.facebook.react:react-native:0.63.1'   //Your RN version should go here
+            force 'com.facebook.react:react-native:0.63.2'   //Your RN version should go here
             // END: RN version lockdown
           }
         }

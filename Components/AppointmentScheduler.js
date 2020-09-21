@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {ActivityIndicator, ScrollView, View} from "react-native";
+import {ActivityIndicator, ScrollView, View, StyleSheet} from "react-native";
 import {getAuthedAPI} from "../api";
 import {connect} from "react-redux";
 import {ListItem, Text, Button} from "react-native-elements";
@@ -32,17 +32,28 @@ class AppointmentScheduler extends Component {
             endDate: moment().add(7, "days"),
             startDatePickerVisible: false,
             endDatePickerVisible: false,
-            searchDateValidationError: null
+            searchDateValidationError: null,
+            appointmentRequests: null
         };
     }
 
     componentDidMount() {
+        // Fetch availability schedules
         getAuthedAPI()
             .getAvailabilitySchedules(this.props.provider.uuid)
             .then((response) => {
                 const schedules = response.result.map((serverObj) => AvailabilitySchedule.fromServerObject(serverObj));
                 this.setState({
                     schedules
+                })
+            });
+
+        // Fetch appointment requests
+        getAuthedAPI()
+            .getAppointmentRequests()
+            .then((requests) => {
+                this.setState({
+                    appointmentRequests: requests
                 })
             });
 
@@ -59,8 +70,11 @@ class AppointmentScheduler extends Component {
             ),
             onConfirm: () => {
                 getAuthedAPI()
-                    .scheduleAppointment(appointment.moment)
-                    .then(Actions.home)
+                    .requestAppointment(appointment.moment)
+                    .then(() => {
+                        alert("Appointment requested successfully. You will be notified when your provider accepts the request.");
+                        Actions.refresh({key: Math.random()})
+                    })
             },
             onCancel: () => {}
         });
@@ -145,12 +159,41 @@ class AppointmentScheduler extends Component {
             })
     }
 
+    @boundMethod
+    cancelRequest(uuid) {
+        getAuthedAPI()
+            .declineAppointmentRequest(uuid)
+            .then(() => {
+                alert("Appointment request canceled successfully.");
+                Actions.refresh({key: Math.random()});
+            })
+    }
+
     render() {
         return (
             <ScrollView>
                 <HeaderWithBackButton headerText={strings.pages.appointmentScheduler.headerText} />
                 <View style={{margin: 20, marginBottom: 0}}>
-                    <Text h4>{strings.pages.appointmentScheduler.yourProvidersSchedule}</Text>
+                    <Text h4>Your appointment requests:</Text>
+                    {this.state.appointmentRequests === null &&
+                        <Text>Loading</Text> ||
+                        <View>
+                            {this.state.appointmentRequests.length &&
+                                this.state.appointmentRequests.map(request =>
+                                    <View style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: 10}}>
+                                        <Text style={style.appointmentRequest}>{moment.utc(request.start_time).local().format("ddd, MM/DD @ h:mma")}</Text>
+                                        <Button
+                                            title="Cancel"
+                                            buttonStyle={{backgroundColor: "red"}}
+                                            onPress={() => this.cancelRequest(request.uuid)}
+                                        />
+                                    </View>
+                                ) ||
+                                <Text>You do not have any pending appointment requests. You can create one by selecting a time below.</Text>
+                            }
+                        </View>
+                    }
+                    <Text h4 style={{marginTop: 10}}>{strings.pages.appointmentScheduler.yourProvidersSchedule}</Text>
                     <ScheduleViewer
                         schedules={this.state.schedules}
                     />
@@ -192,11 +235,16 @@ class AppointmentScheduler extends Component {
                         return (
                             <ListItem
                                 key={i}
-                                title={appointment.moment.format(APPOINTMENT_TIME_FORMAT)}
                                 bottomDivider
-                                chevron
                                 onPress={() => this.onAppointmentSelect(appointment)}
-                            />
+                            >
+                                <ListItem.Content>
+                                    <ListItem.Title>
+                                        {appointment.moment.format(APPOINTMENT_TIME_FORMAT)}
+                                    </ListItem.Title>
+                                </ListItem.Content>
+                                <ListItem.Chevron />
+                            </ListItem>
                         );
                     })
                     ||
@@ -206,6 +254,16 @@ class AppointmentScheduler extends Component {
         );
     }
 }
+
+
+const style = StyleSheet.create({
+    appointmentRequest: {
+        marginTop: 10,
+        marginBottom: 10,
+        fontSize: 18
+    }
+});
+
 
 function mapStateToProps(state) {
     return {

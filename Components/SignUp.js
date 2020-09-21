@@ -35,7 +35,7 @@ class SignUp extends Component {
 
     @boundMethod
     handleEmail(text) {
-        this.setState({email: text});
+        this.setState({email: text}, this.validateEmail);
     }
 
     @boundMethod

@@ -14,6 +14,8 @@ import VideoSession from "./Components/VideoSession";
 import About from "./Components/About";
 import PasswordReset from './Components/PasswordReset';
 import UpcomingAppointments from './Components/UpcomingAppointments';
+import PendingRequests from './Components/PendingRequests';
+import AcceptDeclinePrompt from './Components/AcceptDeclinePrompt';
 
 const Routes = () => {
     const token = useSelector(state => state.token);
@@ -38,6 +40,8 @@ const Routes = () => {
                     <Scene key="about" component={About} />
                     <Scene key="providerList" component={ProviderList} />
                     <Scene key="confirmPrompt" component={ConfirmPrompt} />
+                    <Scene key="acceptDeclinePrompt" component={AcceptDeclinePrompt} />
+                    <Scene key="pendingRequests" component={PendingRequests} />
                     <Scene key="viewProvider" component={ProviderProfile} />
                     <Scene key="appointmentScheduler" component={AppointmentScheduler} />
                     <Scene key="upcomingAppointments" component={UpcomingAppointments} />

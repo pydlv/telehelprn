@@ -14,9 +14,11 @@ const handleError = (error) => {
                 const value = error.response.data[key];
 
                 if (value) {
-                    alert(value);
+                    alert(key + ": " + value);
                 }
             }
+        } else if (error.response.status === 500) {
+            alert("Something unexpected went wrong. Please try again and report this problem if it persists.");
         }
     }
     return Promise.reject(error);
@@ -118,7 +120,7 @@ class AuthenticatedAPI {
         const result = await this.instance.post(url, {
             first_name: firstName,
             last_name: lastName,
-            birthday: moment(birthDate).format("YYYY-MM-DD"),
+            birthday: moment(birthDate, "MM-DD-YYYY").format("YYYY-MM-DD"),
             bio
         });
 
@@ -255,14 +257,56 @@ class AuthenticatedAPI {
         return result.data;
     }
 
-    async scheduleAppointment(time) {
+    async requestAppointment(time) {
         const url = hostUrl({
-            path: "/schedule-appointment"
+            path: "/appointments/create-request/"
         });
 
         const result = await this.instance.post(url, {
             time: time.toISOString()
         });
+
+        return result.data;
+    }
+
+
+    async getNumPendingAppointmentRequests() {
+        const url = hostUrl({
+            path: "/appointments/num-pending-requests/"
+        });
+
+        const result = await this.instance.get(url);
+
+        return result.data;
+    }
+
+
+    async getAppointmentRequests() {
+        const url = hostUrl({
+            path: "/appointments/get-my-requests/"
+        });
+
+        const result = await this.instance.get(url);
+
+        return result.data;
+    }
+
+    async declineAppointmentRequest(uuid) {
+        const url = hostUrl({
+            path: `/appointments/decline-request/${uuid}`
+        });
+
+        const result = await this.instance.post(url);
+
+        return result.data;
+    }
+
+    async acceptAppointmentRequest(uuid) {
+        const url = hostUrl({
+            path: `/appointments/accept-request/${uuid}`
+        });
+
+        const result = await this.instance.post(url);
 
         return result.data;
     }
