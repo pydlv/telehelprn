@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "229037702513",
+    "firebase_url": "https://telehelp-3ff9a.firebaseio.com",
+    "project_id": "telehelp-3ff9a",
+    "storage_bucket": "telehelp-3ff9a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:229037702513:android:58a9ead3d85b8e4b45cad0",
+        "android_client_info": {
+          "package_name": "com.telehelprn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "229037702513-j18eke36u5v3l664h44vbjf9o4ndpeto.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgoFqK_34BTaIZH-RTyJnsY0o2g_9IVWc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "229037702513-j18eke36u5v3l664h44vbjf9o4ndpeto.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
