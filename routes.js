@@ -35,7 +35,7 @@ const Routes = () => {
                     <Scene key="passwordReset" component={PasswordReset} />
                 </Scene>
                 <Scene key="postAuth" initial={!needsLogin}>
-                    <Scene key="home" component={Home} initial={true} />
+                    <Scene key="home" component={Home} initial={true} type="reset" />
                     <Scene key="settings" component={Settings} />
                     <Scene key="about" component={About} />
                     <Scene key="providerList" component={ProviderList} />

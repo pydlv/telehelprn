@@ -2,6 +2,7 @@ import Config from "react-native-config";
 import axios from "axios";
 import buildUrl from "build-url";
 import moment from 'moment';
+import * as notifications from './notifications';
 
 const handleError = (error) => {
     // Do something with response error
@@ -379,12 +380,29 @@ class AuthenticatedAPI {
 
         return result.data.message;
     }
+
+    async registerDevice(token) {
+        const url = hostUrl({
+            path: "/device/gcm/"
+        });
+
+        const result = await this.instance.post(url, {
+            registration_id: token,
+            cloud_message_type: "FCM",
+            application_id: "telehelp_push_fcm"
+        });
+
+        return result.data;
+    }
 }
 
 let authedAPI = null;
 
 export function createAuthedAPI(token): AuthenticatedAPI {
     authedAPI = new AuthenticatedAPI(token);
+
+    // Setup push notifications
+    notifications.setup(authedAPI);
 
     return authedAPI;
 }

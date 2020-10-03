@@ -179,8 +179,8 @@ class AppointmentScheduler extends Component {
                         <Text>Loading</Text> ||
                         <View>
                             {this.state.appointmentRequests.length &&
-                                this.state.appointmentRequests.map(request =>
-                                    <View style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: 10}}>
+                                this.state.appointmentRequests.map((request, i) =>
+                                    <View style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: 10}} key={i}>
                                         <Text style={style.appointmentRequest}>{moment.utc(request.start_time).local().format("ddd, MM/DD @ h:mma")}</Text>
                                         <Button
                                             title="Cancel"
