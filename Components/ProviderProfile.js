@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
-import {StyleSheet, View} from "react-native";
+import {StyleSheet, View, Dimensions} from "react-native";
 import {Button, Text} from "react-native-elements";
 import {getAuthedAPI} from "../api";
 import HeaderWithBackButton from "./HeaderWithBackButton";
@@ -9,6 +9,8 @@ import {Actions} from "react-native-router-flux";
 import {sprintf} from "sprintf-js";
 import {boundMethod} from "autobind-decorator";
 import ProfilePicture from "./ProfilePicture";
+
+const dimensions = Dimensions.get("window");
 
 class ProviderProfile extends Component {
     constructor(props) {
@@ -63,7 +65,7 @@ class ProviderProfile extends Component {
                 <HeaderWithBackButton />
                 <View style={styles.containerStyle}>
                     <View style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                        <View>
+                        <View style={{maxWidth: dimensions.width - 200}}>
                             <Text style={styles.providerName} h4>{this.state.fullName}</Text>
                             <Text>Coach</Text>
                         </View>
