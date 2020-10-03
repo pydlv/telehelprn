@@ -401,8 +401,23 @@ let authedAPI = null;
 export function createAuthedAPI(token): AuthenticatedAPI {
     authedAPI = new AuthenticatedAPI(token);
 
-    // Setup push notifications
-    notifications.setup(authedAPI);
+    const registerCallback = (token) => {
+        authedAPI
+            .registerDevice(token)
+            .catch((error) => {
+                const data = error.response.data;
+                if (error.response.status === 400 && data.registration_id) {
+                    console.log("Device already registered!");
+                }
+            })
+    }
+
+    if (global.deviceToken) {
+        registerCallback(global.deviceToken);
+    } else {
+        global.registerCallback = registerCallback;
+    }
+
 
     return authedAPI;
 }

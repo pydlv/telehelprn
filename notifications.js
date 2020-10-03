@@ -2,19 +2,16 @@ import PushNotificationIOS from "@react-native-community/push-notification-ios";
 var PushNotification = require("react-native-push-notification");
 
 // Push notifications
-export function setup(authedAPI) {
+export function setup() {
     // Must be outside of any component LifeCycle (such as `componentDidMount`).
     PushNotification.configure({
         // (optional) Called when Token is generated (iOS and Android)
         onRegister: function (token) {
-            authedAPI
-                .registerDevice(token.token)
-                .catch((error) => {
-                    const data = error.response.data;
-                    if (error.response.status === 400 && data.registration_id) {
-                        console.log("Device already registered!");
-                    }
-                })
+            global.deviceToken = token.token;
+
+            if (global.registerCallback) {
+                global.registerCallback(token.token);
+            }
         },
 
         // (required) Called when a remote is received or opened, or local notification is opened
