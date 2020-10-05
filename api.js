@@ -388,7 +388,7 @@ class AuthenticatedAPI {
 
         const result = await this.instance.post(url, {
             registration_id: token,
-            cloud_message_type: "FCM",
+            cloud_message_type: "FCM", // TODO: Is this iPhone or Android?
             application_id: "telehelp_push_fcm"
         });
 
