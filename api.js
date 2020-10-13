@@ -1,8 +1,8 @@
-import Config from "react-native-config";
-import axios from "axios";
-import buildUrl from "build-url";
+import Config from 'react-native-config';
+import axios from 'axios';
+import buildUrl from 'build-url';
 import moment from 'moment';
-import * as notifications from './notifications';
+import DeviceInfo from 'react-native-device-info';
 
 const handleError = (error) => {
     // Do something with response error
@@ -382,14 +382,16 @@ class AuthenticatedAPI {
     }
 
     async registerDevice(token) {
+        const isAndroid = DeviceInfo.getSystemName() === "Android";
+
         const url = hostUrl({
-            path: "/device/gcm/"
+            path: isAndroid ? "/device/gcm/" : "/device/apns/"
         });
 
         const result = await this.instance.post(url, {
             registration_id: token,
-            cloud_message_type: "FCM", // TODO: Is this iPhone or Android?
-            application_id: "telehelp_push_fcm"
+            cloud_message_type: isAndroid ? "FCM" : "APNS",
+            application_id: isAndroid ? "telehelp_push_fcm" : "telehelp_push_apns"
         });
 
         return result.data;
