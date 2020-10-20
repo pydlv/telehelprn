@@ -13,6 +13,7 @@ import {Actions} from 'react-native-router-flux';
 import {AccountType} from '../consts';
 import NextAppointmentCard from './NextAppointmentCard';
 import {getAuthedAPI} from '../api';
+import MessagesCard from './HomeCards/MessagesCard';
 
 class Home extends Component {
     constructor(props) {
@@ -98,6 +99,7 @@ class Home extends Component {
                     }
                 />
                 <View>
+                    {/*<MessagesCard />*/}
                     {this.state.numPendingAppointmentRequests !== null && this.state.numPendingAppointmentRequests > 0 &&
                         <Card>
                             <Card.Title style={{alignSelf: "flex-start"}}>
