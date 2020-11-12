@@ -6,7 +6,7 @@ import {ListItem, Text, Button} from "react-native-elements";
 import HeaderWithBackButton from "./HeaderWithBackButton";
 import {AvailabilitySchedule} from "../util";
 import ScheduleViewer from "./ScheduleViewer";
-import moment from "moment";
+import moment from "moment-timezone";
 import {boundMethod} from "autobind-decorator";
 import {Actions} from "react-native-router-flux";
 import strings from "../strings";
@@ -194,6 +194,7 @@ class AppointmentScheduler extends Component {
                         </View>
                     }
                     <Text h4 style={{marginTop: 10}}>{strings.pages.appointmentScheduler.yourProvidersSchedule}</Text>
+                    <Text>All times are displayed in {moment().tz(moment.tz.guess()).format('z')}.</Text>
                     <ScheduleViewer
                         schedules={this.state.schedules}
                     />
