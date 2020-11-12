@@ -2,8 +2,6 @@ import React from "react";
 import {Button, Card, Text} from "react-native-elements";
 import {View} from "react-native";
 
-const test: number = 5;
-
 const MessagesCard = () => {
     return (
         <Card>

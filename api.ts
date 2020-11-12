@@ -1,10 +1,11 @@
 import Config from 'react-native-config';
-import axios from 'axios';
+import axios, {AxiosError, AxiosInstance} from 'axios';
 import buildUrl from 'build-url';
 import moment from 'moment';
 import DeviceInfo from 'react-native-device-info';
+import {Platform} from "react-native";
 
-const handleError = (error) => {
+const handleError = (error: AxiosError) => {
     // Do something with response error
     if (error.response && error.response.data) {
         if (error.response.data.error) {
@@ -30,7 +31,7 @@ axios.interceptors.response.use(function (response) {
     return response;
 }, handleError);
 
-const partial = (func, ...args) => (...rest) => func(...args, ...rest);
+const partial = (func: Function, ...args: any[]) => (...rest: any[]) => func(...args, ...rest);
 
 const API_HOST = Config.API_HOST + "/api";
 
@@ -38,13 +39,13 @@ const API_HOST = Config.API_HOST + "/api";
 const hostUrl = partial(buildUrl, API_HOST);
 
 
-export async function login(email, password) {
+export async function login(email: string, password: string) {
     const url = hostUrl({
         path: '/api-token-auth/'
     });
 
     const result = await axios.post(url, {
-        username: email,
+        username: email.toLowerCase(),
         password
     });
 
@@ -52,7 +53,7 @@ export async function login(email, password) {
 }
 
 
-export async function signUp(email, password) {
+export async function signUp(email: string, password: string) {
     const url = hostUrl({
         path: "/signup/"
     });
@@ -67,28 +68,33 @@ export async function signUp(email, password) {
 }
 
 
-export async function requestPasswordReset(email) {
+export async function requestPasswordReset(email: string) {
     const url = hostUrl({
         path: "/request-password-reset/"
     });
 
     const result = await axios.post(
         url,
-        {email}
+        {
+            email: email.toLowerCase()
+        }
     );
 
     return result.status >= 200 && result.status < 300;
 }
 
-const createFormData = (photo, body={}) => {
+const createFormData = (photo: any, body={}) => {
     const data = new FormData();
+    // @ts-ignore
     data.append("file", {
+        // @ts-ignore
         name: photo.filename !== undefined ? photo.filename : "file",
         uri: Platform.OS === 'android' ? photo.uri : photo.uri.replace('file://', ''),
         type: "image/jpeg"
     });
 
     Object.keys(body).forEach(key => {
+        // @ts-ignore
         data.append(key, body[key]);
     });
 
@@ -96,7 +102,10 @@ const createFormData = (photo, body={}) => {
 };
 
 class AuthenticatedAPI {
-    constructor(token) {
+    private readonly token: string;
+    private instance: AxiosInstance;
+
+    constructor(token: string) {
         this.token = token;
 
         this.instance = axios.create({
@@ -113,7 +122,7 @@ class AuthenticatedAPI {
         );
     }
 
-    async editProfile(firstName, lastName, birthDate, bio) {
+    async editProfile(firstName: string, lastName: string, birthDate: string, bio: string) {
         const url = hostUrl({
             path: "/editprofile"
         });
@@ -140,7 +149,7 @@ class AuthenticatedAPI {
 
     async getAssignedProvider() {
         const url = hostUrl({
-            path: "/getassignedprovider/"
+            path: "/providers/getassignedprovider/"
         });
 
         const result = await this.instance.get(url);
@@ -148,9 +157,9 @@ class AuthenticatedAPI {
         return result.data;
     }
 
-    async assignProvider(uuid) {
+    async assignProvider(uuid: string) {
         const url = hostUrl({
-            path: "/assignprovider"
+            path: "/providers/assignprovider"
         });
 
         const result = await this.instance.post(url, {
@@ -162,7 +171,7 @@ class AuthenticatedAPI {
 
     async listProviders() {
         const url = hostUrl({
-            path: "/listproviders"
+            path: "/providers/listproviders"
         });
 
         const result = await this.instance.get(url);
@@ -170,9 +179,9 @@ class AuthenticatedAPI {
         return result.data;
     }
 
-    async getProvider(uuid) {
+    async getProvider(uuid: string) {
         const url = hostUrl({
-            path: `/getprovider/${uuid}`,
+            path: `/providers/getprovider/${uuid}`,
         });
 
         const result = await this.instance.get(url);
@@ -180,7 +189,7 @@ class AuthenticatedAPI {
         return result.data;
     }
 
-    async uploadProfilePicture(photo) {
+    async uploadProfilePicture(photo: any) {
         const formData = createFormData(photo);
 
         const url = hostUrl({
@@ -207,7 +216,7 @@ class AuthenticatedAPI {
         return result.data;
     }
 
-    async deleteScheduleByUUID(uuid) {
+    async deleteScheduleByUUID(uuid: string) {
         const url = hostUrl({
             path: "/availability-schedules/delete"
         });
@@ -219,7 +228,7 @@ class AuthenticatedAPI {
         return result.data;
     }
 
-    async createAvailabilitySchedule(daysOfWeek, startTime, endTime) {
+    async createAvailabilitySchedule(daysOfWeek: number, startTime: string, endTime: string) {
         const url = hostUrl({
             path: "/availability-schedules/create"
         });
@@ -245,7 +254,7 @@ class AuthenticatedAPI {
         return result.data;
     }
 
-    async getAvailableAppointments(startDate, endDate) {
+    async getAvailableAppointments(startDate: moment.Moment, endDate: moment.Moment) {
         const url = hostUrl({
             path: "/get-available-appointments"
         });
@@ -258,7 +267,7 @@ class AuthenticatedAPI {
         return result.data;
     }
 
-    async requestAppointment(time) {
+    async requestAppointment(time: moment.Moment) {
         const url = hostUrl({
             path: "/appointments/create-request/"
         });
@@ -292,7 +301,7 @@ class AuthenticatedAPI {
         return result.data;
     }
 
-    async declineAppointmentRequest(uuid) {
+    async declineAppointmentRequest(uuid: string) {
         const url = hostUrl({
             path: `/appointments/decline-request/${uuid}`
         });
@@ -302,7 +311,7 @@ class AuthenticatedAPI {
         return result.data;
     }
 
-    async acceptAppointmentRequest(uuid) {
+    async acceptAppointmentRequest(uuid: string) {
         const url = hostUrl({
             path: `/appointments/accept-request/${uuid}`
         });
@@ -312,7 +321,7 @@ class AuthenticatedAPI {
         return result.data;
     }
 
-    async cancelAppointment(uuid) {
+    async cancelAppointment(uuid: string) {
         const url = hostUrl({
             path: "/cancel-appointment"
         });
@@ -324,7 +333,7 @@ class AuthenticatedAPI {
         return result.data;
     }
 
-    async endAppointmentEarly(uuid) {
+    async endAppointmentEarly(uuid: string) {
         const url = hostUrl({
             path: `/end-appointment/${uuid}`
         });
@@ -334,7 +343,7 @@ class AuthenticatedAPI {
         return result.data;
     }
 
-    async getOTSessionIdAndToken(appointmentUUID) {
+    async getOTSessionIdAndToken(appointmentUUID: string) {
         const url = hostUrl({
             path: `/get-ot-token/${appointmentUUID}`
         });
@@ -344,7 +353,7 @@ class AuthenticatedAPI {
         return result.data;
     }
 
-    async changePassword(oldPassword, newPassword) {
+    async changePassword(oldPassword: string, newPassword: string) {
         const url = hostUrl({
             path: '/change-password/'
         });
@@ -381,7 +390,7 @@ class AuthenticatedAPI {
         return result.data.message;
     }
 
-    async registerDevice(token) {
+    async registerDevice(token: string) {
         const isAndroid = DeviceInfo.getSystemName() === "Android";
 
         const url = hostUrl({
@@ -398,13 +407,16 @@ class AuthenticatedAPI {
     }
 }
 
-let authedAPI = null;
+// https://stackoverflow.com/a/42304473/2621270
+const globalAny: any = global;
 
-export function createAuthedAPI(token): AuthenticatedAPI {
+let authedAPI: AuthenticatedAPI | null = null;
+
+export function createAuthedAPI(token: string): AuthenticatedAPI {
     authedAPI = new AuthenticatedAPI(token);
 
-    const registerCallback = (token) => {
-        authedAPI
+    const registerCallback = (token: string) => {
+        authedAPI!
             .registerDevice(token)
             .catch((error) => {
                 const data = error.response.data;
@@ -414,16 +426,16 @@ export function createAuthedAPI(token): AuthenticatedAPI {
             })
     }
 
-    if (global.deviceToken) {
-        registerCallback(global.deviceToken);
+    if (globalAny.deviceToken) {
+        registerCallback(globalAny.deviceToken);
     } else {
-        global.registerCallback = registerCallback;
+        globalAny.registerCallback = registerCallback;
     }
 
 
     return authedAPI;
 }
 
-export function getAuthedAPI(): AuthenticatedAPI {
+export function getAuthedAPI(): AuthenticatedAPI | null {
     return authedAPI;
 }

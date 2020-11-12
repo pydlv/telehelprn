@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
-import {StyleSheet, View, Dimensions} from "react-native";
+import {StyleSheet, View, Dimensions, ScrollView} from 'react-native';
 import {Button, Text} from "react-native-elements";
 import {getAuthedAPI} from "../api";
 import HeaderWithBackButton from "./HeaderWithBackButton";
@@ -61,7 +61,7 @@ class ProviderProfile extends Component {
 
     render() {
         return (
-            <View style={{flex: 1}}>
+            <ScrollView style={{flex: 1}}>
                 <HeaderWithBackButton />
                 <View style={styles.containerStyle}>
                     <View style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
@@ -88,7 +88,7 @@ class ProviderProfile extends Component {
                         }
                     </View>
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 }

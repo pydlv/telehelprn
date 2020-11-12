@@ -185,7 +185,7 @@ class EditProfile extends Component {
                 <View style={{marginLeft: 10, marginRight: 10, marginTop: 10 }}>
                     {/* First name */}
                     <Input
-                        placeholder={strings.pages.editProfile.firstName}
+                        placeholder="First Name (required)"
                         value={this.state.firstName}
                         onChangeText={this.updateFirstName}
                         errorMessage={this.state.firstNameError}
@@ -193,7 +193,7 @@ class EditProfile extends Component {
 
                     {/* Last name */}
                     <Input
-                        placeholder={strings.pages.editProfile.lastName}
+                        placeholder="Last Name (required)"
                         value={this.state.lastName}
                         onChangeText={this.updateLastName}
                         errorMessage={this.state.lastNameError}
@@ -210,7 +210,7 @@ class EditProfile extends Component {
                         }}
                         value={this.state.birthDate}
                         onChangeText={this.updateBirthDate}
-                        placeholder={"MM/DD/YYYY"}
+                        placeholder={"MM/DD/YYYY (required)"}
                         style={styles.maskedDateInput}
                     />
 
