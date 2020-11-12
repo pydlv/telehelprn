@@ -42,7 +42,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00E356EE1AD99517003FC87E /* telehelprnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = telehelprnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* telehelprnTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = telehelprnTests.m; sourceTree = "<group>"; };
@@ -60,6 +59,7 @@
 		2898852F2536A1B9005028A7 /* telehelprn-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "telehelprn-Bridging-Header.h"; sourceTree = "<group>"; };
 		289885302536A1BA005028A7 /* telehelprn-tvOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "telehelprn-tvOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		289885312536A1BA005028A7 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		289885942536A8C1005028A7 /* telehelprn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = telehelprn.entitlements; path = telehelprn/telehelprn.entitlements; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* telehelprn-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "telehelprn-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* telehelprn-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "telehelprn-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30691C2D49E8D04C7AE577D0 /* Pods-telehelprn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-telehelprn.release.xcconfig"; path = "Target Support Files/Pods-telehelprn/Pods-telehelprn.release.xcconfig"; sourceTree = "<group>"; };
@@ -147,9 +147,9 @@
 		13B07FAE1A68108700A75B9A /* telehelprn */ = {
 			isa = PBXGroup;
 			children = (
+				289885942536A8C1005028A7 /* telehelprn.entitlements */,
 				2825435324BECBC000C6DE46 /* LaunchScreen.storyboard */,
 				8FF4FCB724A3041500DCD7B7 /* Fonts */,
-				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -789,6 +789,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = telehelprn/telehelprn.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 12;
@@ -857,6 +858,11 @@
 					"-ObjC",
 					"-lc++",
 				);
+				"OTHER_LDFLAGS[arch=*]" = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.teletherapy.teletherapy;
 				PRODUCT_NAME = telehelprn;
 				PROVISIONING_PROFILE_SPECIFIER = "Development Profile";
@@ -873,6 +879,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = telehelprn/telehelprn.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 12;

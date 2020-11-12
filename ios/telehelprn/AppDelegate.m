@@ -6,7 +6,7 @@
 #import <UserNotifications/UserNotifications.h>
 #import <RNCPushNotificationIOS.h>
 
-#ifdef FB_SONARKIT_ENABLED && TARGET_OS_SIMULATOR
+#if defined(FB_SONARKIT_ENABLED) && defined(TARGET_OS_SIMULATOR)
 #import <FlipperKit/FlipperClient.h>
 #import <FlipperKitLayoutPlugin/FlipperKitLayoutPlugin.h>
 #import <FlipperKitUserDefaultsPlugin/FKUserDefaultsPlugin.h>
@@ -31,7 +31,7 @@ static void InitializeFlipper(UIApplication *application) {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-#ifdef FB_SONARKIT_ENABLED && TARGET_OS_SIMULATOR
+#ifdef defined(FB_SONARKIT_ENABLED) && defined(TARGET_OS_SIMULATOR)
   InitializeFlipper(application);
 #endif
 
@@ -98,9 +98,9 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {
-#if FB_SONARKIT_ENABLED
+#ifdef DEBUG
   // Workaround for local IP:
-//  return [NSURL URLWithString:@"http://192.168.1.55:8081/index.bundle?platform=ios&dev=true&minify=false"];
+  //  return [NSURL URLWithString:@"http://192.168.1.55:8081/index.bundle?platform=ios&dev=true&minify=false"];
     return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
 #else
   return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
