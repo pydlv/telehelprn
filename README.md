@@ -2,6 +2,8 @@
 
 A React Native mobile application that connects patients with therapy providers, enabling appointment scheduling and live video sessions.
 
+**The backend API server is available by clicking [here](https://github.com/pydlv/telehelp_django)!**
+
 ## Features
 
 - **Two account types** — Patient (User) and Provider (Therapist)
